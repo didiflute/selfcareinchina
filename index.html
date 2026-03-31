@@ -174,12 +174,26 @@ body>*{position:relative;z-index:1}
 .panel-select{width:100%;padding:10px 12px;border:1px solid rgba(0,0,0,.08);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;color:var(--text);background:var(--bg);outline:none;appearance:none}
 .panel-row{display:flex;gap:10px}
 .panel-row .panel-field{flex:1}
-.panel-actions{display:flex;gap:10px;margin-top:18px}
+.panel-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
 .panel-btn{flex:1;padding:12px;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .15s}
 .panel-btn:active{transform:scale(.97)}
 .panel-btn.primary{background:var(--coral);color:white}
 .panel-btn.secondary{background:var(--bg-warm);color:var(--text-mid)}
-.panel-btn.danger{background:none;color:#d44;font-size:12px;font-weight:500;padding:8px;flex:0 0 auto}
+.panel-btn.danger{background:rgba(221,68,68,0.08);color:#d44;font-size:13px;font-weight:600;padding:10px 14px;flex:1 1 100%;border:1.5px solid rgba(221,68,68,0.25);border-radius:var(--radius-sm);text-align:center;order:3}
+
+/* Item panel cat buttons */
+.panel-cats{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.panel-cat-btn{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;border:1.5px solid var(--card-border);background:var(--bg);color:var(--text-dim);cursor:pointer;font-family:inherit;transition:all .15s}
+.panel-cat-btn:active{transform:scale(.95)}
+.panel-cat-btn.sel-body{background:var(--sage-soft);border-color:var(--sage);color:var(--sage)}
+.panel-cat-btn.sel-look{background:var(--coral-soft);border-color:var(--coral);color:var(--coral)}
+.panel-cat-btn.sel-exp{background:var(--plum-soft);border-color:var(--plum);color:var(--plum)}
+.panel-cat-btn.sel-kids{background:var(--sky-soft);border-color:var(--sky);color:var(--sky)}
+.panel-cat-btn.sel-food{background:var(--orange-soft);border-color:var(--orange);color:var(--orange)}
+
+/* Add item button */
+.add-item-btn{margin:16px 24px;padding:14px;border:1.5px dashed var(--text-light);border-radius:var(--radius);background:rgba(255,255,255,0.6);color:var(--text-dim);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .2s;text-align:center;width:calc(100% - 48px)}
+.add-item-btn:active{transform:scale(.98);border-color:var(--coral);color:var(--coral)}
 </style>
 </head>
 <body>
@@ -265,6 +279,51 @@ body>*{position:relative;z-index:1}
     <button class="panel-btn danger" id="pDel" onclick="delShop()" style="display:none">删除</button>
     <button class="panel-btn secondary" onclick="closePanel()">取消</button>
     <button class="panel-btn primary" onclick="savePanel()">保存</button>
+  </div>
+</div>
+
+<!-- Item Panel -->
+<div class="panel-overlay" id="itemPanelOverlay" onclick="closeItemPanel()"></div>
+<div class="panel" id="itemPanel">
+  <div class="panel-header">
+    <span class="panel-title" id="itemPanelTitle">添加项目</span>
+    <button class="panel-close" onclick="closeItemPanel()">✕</button>
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">项目名称 *</label>
+    <input class="panel-input" id="iName" placeholder="比如：瑜伽课">
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">分类</label>
+    <div class="panel-cats" id="iCatRow">
+      <button class="panel-cat-btn" data-cat="body" onclick="pickCat('body')">💪身体</button>
+      <button class="panel-cat-btn" data-cat="look" onclick="pickCat('look')">✨形象</button>
+      <button class="panel-cat-btn" data-cat="exp" onclick="pickCat('exp')">🎭体验</button>
+      <button class="panel-cat-btn" data-cat="kids" onclick="pickCat('kids')">👦带娃</button>
+      <button class="panel-cat-btn" data-cat="food" onclick="pickCat('food')">🍜美食</button>
+    </div>
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">打卡方式</label>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:4px">
+      <label style="display:flex;align-items:center;gap:4px;font-size:13px;color:var(--text-mid);cursor:pointer">
+        <input type="radio" name="iType" value="check" checked onchange="toggleTarget()"> 一次
+      </label>
+      <label style="display:flex;align-items:center;gap:4px;font-size:13px;color:var(--text-mid);cursor:pointer">
+        <input type="radio" name="iType" value="counter" onchange="toggleTarget()"> 多次
+      </label>
+      <input class="panel-input" id="iTarget" type="number" min="2" max="30" value="5" placeholder="次数" style="width:60px;display:none;padding:6px 8px;font-size:13px">
+    </div>
+  </div>
+  <div class="panel-field">
+    <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-mid);cursor:pointer">
+      <input type="checkbox" id="iAppt"> 🔖 需要提前预约
+    </label>
+  </div>
+  <div class="panel-actions">
+    <button class="panel-btn danger" id="iDel" onclick="delItem()" style="display:none">删除项目</button>
+    <button class="panel-btn secondary" onclick="closeItemPanel()">取消</button>
+    <button class="panel-btn primary" onclick="saveItem()">保存</button>
   </div>
 </div>
 
@@ -441,7 +500,7 @@ function render(){
     if(it.eventDate)tags+=`<span class="tag tag-date">📅${it.eventDate}</span>`;
     if(!it.appt&&!it.eventDate)tags+=`<span class="tag tag-walk">随时去</span>`;
 
-    let right=`<button class="g-plan-btn ${pl?'planned':''}" onclick="event.stopPropagation();togglePlan('${it.id}')">📋</button>`;
+    let right=`<button class="s-link-edit" onclick="event.stopPropagation();openEditItem('${it.id}')" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn ${pl?'planned':''}" onclick="event.stopPropagation();togglePlan('${it.id}')">📋</button>`;
     if(it.type==='counter')right=`<div class="g-counter"><button class="cnt-btn" onclick="event.stopPropagation();chgCnt('${it.id}',-1)">−</button><span class="cnt-num">${it.count}/${it.target}</span><button class="cnt-btn" onclick="event.stopPropagation();chgCnt('${it.id}',1)">+</button></div>`+right;
 
     // Sort shops by distance when kidsArea active
@@ -499,6 +558,11 @@ function render(){
     if(farAppt.length)h+=`<div class="sec-label">🔖 更远 · 需预约</div>${farAppt.map(i=>rg(i,false)).join('')}`;
   }else{if(un.length)h+=`<div class="sec-label">待打卡</div>${un.map(i=>rg(i,false)).join('')}`}
   if(dn.length)h+=`<div class="sec-label">已完成 ✨</div>${dn.map(i=>rg(i,false)).join('')}`;
+
+  // Add item button
+  const catLabels={all:'项目',body:'身体项目',look:'形象项目',exp:'体验项目',kids:'带娃项目',food:'美食项目'};
+  h+=`<button class="add-item-btn" onclick="openAddItem()">+ 添加${catLabels[catFilter]||'项目'}</button>`;
+
   el.innerHTML=h;updateE();
 }
 
@@ -595,6 +659,113 @@ function delShop(){
     if(it.shops.length===0)it.shops.push({name:'待找店',area:'待定',url:'',xhs:'',note:'',guide:'',done:false});
     save();closePanel();buildChips();render();
   }
+}
+
+// === ITEM PANEL (Add/Edit Item) ===
+let itemPanelMode='add',editItemId='',selectedCat='';
+const CAT_PTS={body:20,look:10,exp:15,kids:15,food:8};
+
+function pickCat(cat){
+  selectedCat=cat;
+  document.querySelectorAll('.panel-cat-btn').forEach(b=>{
+    b.className='panel-cat-btn';
+    if(b.dataset.cat===cat)b.classList.add('sel-'+cat);
+  });
+}
+
+function toggleTarget(){
+  const isCounter=document.querySelector('input[name="iType"]:checked').value==='counter';
+  document.getElementById('iTarget').style.display=isCounter?'block':'none';
+}
+
+function openAddItem(){
+  itemPanelMode='add';editItemId='';
+  document.getElementById('itemPanelTitle').textContent='添加项目';
+  document.getElementById('iName').value='';
+  document.querySelector('input[name="iType"][value="check"]').checked=true;
+  toggleTarget();
+  document.getElementById('iAppt').checked=false;
+  document.getElementById('iTarget').value='5';
+  document.getElementById('iDel').style.display='none';
+  // Pre-select category if on a specific tab
+  selectedCat=catFilter!=='all'?catFilter:'';
+  document.querySelectorAll('.panel-cat-btn').forEach(b=>{
+    b.className='panel-cat-btn';
+    if(selectedCat&&b.dataset.cat===selectedCat)b.classList.add('sel-'+selectedCat);
+  });
+  document.getElementById('itemPanelOverlay').classList.add('show');
+  document.getElementById('itemPanel').classList.add('show');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('iName').focus(),300);
+}
+
+function closeItemPanel(){
+  document.getElementById('itemPanelOverlay').classList.remove('show');
+  document.getElementById('itemPanel').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+function saveItem(){
+  const name=document.getElementById('iName').value.trim();
+  if(!name){document.getElementById('iName').style.borderColor='#d44';return}
+  if(!selectedCat){alert('请选择分类');return}
+  const isCounter=document.querySelector('input[name="iType"]:checked').value==='counter';
+  const target=isCounter?parseInt(document.getElementById('iTarget').value)||5:0;
+  const appt=document.getElementById('iAppt').checked;
+
+  if(itemPanelMode==='add'){
+    const id='custom_'+Date.now();
+    const newItem={
+      id,title:name,cat:selectedCat,appt,
+      type:isCounter?'counter':'check',
+      target:isCounter?target:0,count:0,
+      shops:[{name:'待找店',area:'待定',url:'',xhs:'',note:'',guide:'',done:false}],
+      note:'',pts:CAT_PTS[selectedCat]||10
+    };
+    if(isCounter) newItem.eventDate=undefined;
+    items.push(newItem);
+  } else {
+    const it=items.find(i=>i.id===editItemId);
+    if(it){
+      it.title=name;it.cat=selectedCat;it.appt=appt;
+      it.type=isCounter?'counter':'check';
+      if(isCounter){it.target=target;if(!it.count)it.count=0}
+      it.pts=CAT_PTS[selectedCat]||10;
+    }
+  }
+  save();closeItemPanel();render();
+}
+
+function openEditItem(id){
+  const it=items.find(i=>i.id===id);
+  if(!it)return;
+  itemPanelMode='edit';editItemId=id;
+  document.getElementById('itemPanelTitle').textContent='编辑项目';
+  document.getElementById('iName').value=it.title;
+  selectedCat=it.cat;
+  document.querySelectorAll('.panel-cat-btn').forEach(b=>{
+    b.className='panel-cat-btn';
+    if(b.dataset.cat===selectedCat)b.classList.add('sel-'+selectedCat);
+  });
+  if(it.type==='counter'){
+    document.querySelector('input[name="iType"][value="counter"]').checked=true;
+    document.getElementById('iTarget').value=it.target||5;
+  }else{
+    document.querySelector('input[name="iType"][value="check"]').checked=true;
+  }
+  toggleTarget();
+  document.getElementById('iAppt').checked=it.appt||false;
+  document.getElementById('iDel').style.display='block';
+  document.getElementById('itemPanelOverlay').classList.add('show');
+  document.getElementById('itemPanel').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function delItem(){
+  if(!confirm('确定删除这个项目？所有店铺和打卡记录都会丢失。'))return;
+  items=items.filter(i=>i.id!==editItemId);
+  planned=planned.filter(p=>p!==editItemId);
+  save();savePlan();closeItemPanel();renderTmrw();render();
 }
 
 // === FILTER EVENTS ===
