@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Recharge">
 <title>Recharge 自我充电</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#faf7f4;--bg-warm:#f5efe8;
@@ -25,19 +25,17 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:120px;overflow-x:hidden;background-image:url('bg.png');background-size:cover;background-position:center top;background-attachment:fixed;background-repeat:no-repeat;position:relative}
-body::before{content:'';position:fixed;inset:0;background:rgba(250,247,244,0.82);pointer-events:none;z-index:0}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(to bottom,rgba(250,247,244,0.88),rgba(250,247,244,0.75),rgba(250,247,244,0.55));pointer-events:none;z-index:0}
 body>*{position:relative;z-index:1}
 
-.header{padding:52px 24px 20px;position:relative;overflow:hidden;background:linear-gradient(165deg,rgba(253,246,240,0.92) 0%,rgba(252,238,228,0.88) 40%,rgba(249,228,216,0.85) 100%)}
-.header::before{content:'';position:absolute;top:-30px;right:-20px;width:180px;height:180px;background:radial-gradient(circle,var(--coral-glow) 0%,transparent 65%);border-radius:50%;pointer-events:none}
-.header::after{content:'';position:absolute;bottom:-40px;left:20px;width:120px;height:120px;background:radial-gradient(circle,rgba(212,148,58,.15) 0%,transparent 65%);border-radius:50%;pointer-events:none}
-.brand{display:flex;align-items:center;gap:10px;position:relative}
+.header{padding:52px 24px 24px;position:relative;overflow:hidden;background:transparent}
+.brand{display:flex;align-items:center;gap:12px;position:relative}
 .brand-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--coral),var(--amber));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 10px var(--coral-glow)}
-.brand h1{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;letter-spacing:-.3px}
-.brand h1 em{font-style:italic;color:var(--coral)}
-.header .sub{font-size:13px;color:var(--text-dim);margin-top:6px;font-weight:300;padding-left:52px}
+.brand h1{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:0.5px;color:var(--text-mid)}
+.brand h1 em{font-style:italic;color:var(--coral);font-weight:400}
+.header .sub{font-size:13px;color:var(--text-dim);margin-top:6px;font-weight:300;padding-left:54px}
 
-.energy{margin:-1px 0 0;background:linear-gradient(180deg,rgba(249,228,216,0.85) 0%,rgba(250,247,244,0.8) 100%);padding:16px 24px 20px}
+.energy{margin:0;background:transparent;padding:16px 24px 20px}
 .energy-card{background:rgba(255,255,255,0.93);border-radius:var(--radius);padding:18px;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
 .energy-card::after{content:'⚡';position:absolute;right:16px;top:14px;font-size:32px;opacity:.08}
 .energy-main{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
