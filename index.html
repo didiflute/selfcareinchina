@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0048)file:///C:/Users/zwd89/Downloads/recharge_1.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Recharge">
 <title>Recharge 自我充电</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./index_files/css2" rel="stylesheet">
 <style>
 :root{
   --bg:#faf7f4;--bg-warm:#f5efe8;
@@ -19,7 +19,7 @@
   --plum:#9474b4;--plum-soft:rgba(148,116,180,.10);
   --sky:#5b94c4;--sky-soft:rgba(91,148,196,.10);
   --orange:#e09850;--orange-soft:rgba(224,152,80,.10);
-  --text:#2c2420;--text-mid:#6b5e56;--text-dim:#9e9189;--text-light:#c4b8ae;
+  --text:#2c2420;--text-mid:#4a3f38;--text-dim:#6b5e56;--text-light:#8a7e74;
   --done-bg:#f0f7f2;--done-text:#9eb8a6;
   --radius:16px;--radius-sm:10px;
 }
@@ -33,15 +33,15 @@ body>*{position:relative;z-index:1}
 .brand-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--coral),var(--amber));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 10px var(--coral-glow)}
 .brand h1{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:0.5px;color:var(--text-mid)}
 .brand h1 em{font-style:italic;color:var(--coral);font-weight:400}
-.header .sub{font-size:13px;color:var(--text-dim);margin-top:6px;font-weight:300;padding-left:54px}
+.header .sub{font-size:14px;color:var(--text-dim);margin-top:6px;font-weight:400;padding-left:54px}
 
 .energy{margin:0;background:transparent;padding:16px 24px 20px}
 .energy-card{background:rgba(255,255,255,0.93);border-radius:var(--radius);padding:18px;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
 .energy-card::after{content:'⚡';position:absolute;right:16px;top:14px;font-size:32px;opacity:.08}
 .energy-main{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
-.energy-label{font-size:11px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;font-weight:500}
-.energy-pct{font-family:'DM Serif Display',serif;font-size:32px;color:var(--coral)}
-.energy-pct small{font-family:'Noto Sans SC';font-size:13px;font-weight:400;color:var(--text-dim)}
+.energy-label{font-size:13px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;font-weight:500}
+.energy-pct{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--coral)}
+.energy-pct small{font-family:'Noto Sans SC';font-size:14px;font-weight:400;color:var(--text-dim)}
 .bar-track{height:8px;background:var(--bg-warm);border-radius:4px;overflow:hidden}
 .bar-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.25,1,.5,1);position:relative}
 .bar-fill.main{background:linear-gradient(90deg,var(--coral),var(--amber))}
@@ -49,8 +49,8 @@ body>*{position:relative;z-index:1}
 .dims{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin-top:14px}
 .dim{display:flex;flex-direction:column;gap:4px}
 .dim-top{display:flex;justify-content:space-between;align-items:center}
-.dim-label{font-size:11px;color:var(--text-dim);font-weight:500}
-.dim-pct{font-size:11px;font-weight:600}
+.dim-label{font-size:13px;color:var(--text-dim);font-weight:500}
+.dim-pct{font-size:13px;font-weight:600}
 .dim-pct.body{color:var(--sage)}.dim-pct.look{color:var(--coral)}.dim-pct.exp{color:var(--plum)}.dim-pct.kids{color:var(--sky)}.dim-pct.food{color:var(--orange)}
 .dim-bar{height:5px;background:var(--bg-warm);border-radius:3px;overflow:hidden}
 .dim-fill{height:100%;border-radius:3px;transition:width .5s ease}
@@ -59,86 +59,98 @@ body>*{position:relative;z-index:1}
 .tomorrow{margin:0 24px 12px;background:linear-gradient(135deg,rgba(255,248,240,0.85),rgba(255,245,235,0.85));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(232,114,92,.12);border-radius:var(--radius);padding:14px 16px;display:none}
 .tomorrow.has-items{display:block}
 .tomorrow-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.tomorrow-title{font-size:13px;font-weight:600;color:var(--coral)}
-.tomorrow-clear{font-size:11px;color:var(--text-light);background:none;border:none;cursor:pointer;font-family:inherit}
+.tomorrow-title{font-size:14px;font-weight:600;color:var(--coral)}
+.tomorrow-clear{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit}
 .tomorrow-items{display:flex;flex-direction:column;gap:4px}
-.tomorrow-item{display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 10px;background:white;border-radius:8px;border:1px solid rgba(0,0,0,.04)}
-.t-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.tomorrow-item{display:flex;align-items:center;gap:8px;font-size:14px;padding:8px 12px;background:white;border-radius:8px;border:1px solid rgba(0,0,0,.04)}
+.t-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .t-dot.body{background:var(--sage)}.t-dot.look{background:var(--coral)}.t-dot.exp{background:var(--plum)}.t-dot.kids{background:var(--sky)}.t-dot.food{background:var(--orange)}
 .t-name{flex:1;color:var(--text-mid)}.t-remove{font-size:14px;color:var(--text-light);background:none;border:none;cursor:pointer;padding:0 2px}
 
-.kids-bar{margin:0 24px 12px;background:rgba(212,148,58,0.08);border:1px solid rgba(212,148,58,.15);border-radius:var(--radius-sm);padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-mid)}
-.kids-bar select{background:white;border:1px solid rgba(212,148,58,.25);color:var(--amber);border-radius:6px;padding:4px 8px;font-size:13px;font-family:inherit;font-weight:500;outline:none;max-width:180px}
-.kids-bar .hint{color:var(--amber);opacity:.6;font-size:11px;margin-left:auto}
+.kids-bar{margin:0 24px 12px;background:rgba(212,148,58,0.08);border:1px solid rgba(212,148,58,.15);border-radius:var(--radius-sm);padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-mid)}
+.kids-bar select{background:white;border:1px solid rgba(212,148,58,.25);color:var(--amber);border-radius:6px;padding:6px 10px;font-size:14px;font-family:inherit;font-weight:500;outline:none;max-width:200px}
+.kids-bar .hint{color:var(--amber);opacity:.7;font-size:12px;margin-left:auto}
 
 .tabs{display:flex;margin:0 24px 12px;background:rgba(255,255,255,0.9);border-radius:var(--radius-sm);border:1px solid var(--card-border);overflow-x:auto;-webkit-overflow-scrolling:touch}
-.tab{flex:0 0 auto;padding:10px 11px;font-size:11px;font-weight:500;text-align:center;color:var(--text-dim);cursor:pointer;border:none;background:none;font-family:inherit;white-space:nowrap;transition:all .2s}
+.tab{flex:0 0 auto;padding:10px 12px;font-size:13px;font-weight:500;text-align:center;color:var(--text-dim);cursor:pointer;border:none;background:none;font-family:inherit;white-space:nowrap;transition:all .2s}
 .tab.active{background:var(--coral);color:white;border-radius:var(--radius-sm)}
 
 .filters{padding:0 24px 8px;display:flex;flex-direction:column;gap:8px}
-.filter-row-label{font-size:10px;color:var(--text-light);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
-.filter-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px}
-.chip{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid var(--card-border);background:rgba(255,255,255,0.88);color:var(--text-dim);cursor:pointer;transition:all .2s;white-space:nowrap}
+.filter-row-label{font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.chip{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;border:1px solid var(--card-border);background:rgba(255,255,255,0.88);color:var(--text-dim);cursor:pointer;transition:all .2s;white-space:nowrap}
 .chip:active{transform:scale(.95)}
 .chip.a-all{background:var(--bg-warm);border-color:var(--text-light);color:var(--text-mid)}
 .chip.a-area{background:var(--amber-soft);border-color:var(--amber);color:var(--amber)}
 
-.sec-label{padding:14px 24px 4px;font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
+.sec-label{padding:16px 24px 6px;font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
 
-.group{margin:0 24px 10px;animation:fadeUp .25s ease both}
-.group-head{display:flex;align-items:center;gap:7px;padding:10px 0 4px;cursor:pointer}
-.g-exp{font-size:10px;color:var(--text-light);transition:transform .2s;display:inline-block}
+/* PROJECT CARD */
+.group{margin:0 24px 12px;animation:fadeUp .25s ease both;background:rgba(255,255,255,0.92);border-radius:var(--radius);box-shadow:var(--card-shadow);border:1px solid var(--card-border);overflow:hidden}
+.group.done-group{background:var(--done-bg);box-shadow:none;border-color:transparent;opacity:.7}
+.group-head{display:flex;align-items:center;gap:8px;padding:14px 16px;cursor:pointer}
+.g-exp{font-size:11px;color:var(--text-dim);transition:transform .2s;display:inline-block}
 .g-exp.open{transform:rotate(90deg)}
-.g-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.g-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .g-dot.body{background:var(--sage)}.g-dot.look{background:var(--coral)}.g-dot.exp{background:var(--plum)}.g-dot.kids{background:var(--sky)}.g-dot.food{background:var(--orange)}
-.g-title{font-size:14px;font-weight:600;color:var(--text-mid);flex:1}
+.g-title{font-size:16px;font-weight:600;color:var(--text-mid);flex:1}
 .g-title.done-t{color:var(--done-text);text-decoration:line-through}
-.g-count-label{font-size:11px;color:var(--text-light);font-weight:400}
-.g-tags{display:flex;gap:3px;flex-wrap:wrap}
-.tag{font-size:9px;padding:2px 7px;border-radius:10px;font-weight:500}
+.g-count-label{font-size:13px;color:var(--text-dim);font-weight:400}
+.g-tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500}
 .tag-appt{background:var(--coral-soft);color:var(--coral)}.tag-date{background:var(--plum-soft);color:var(--plum)}.tag-walk{background:var(--sage-soft);color:var(--sage)}.tag-nearby{background:var(--amber-soft);color:var(--amber)}
 .g-actions{display:flex;align-items:center;gap:5px}
-.g-plan-btn{width:24px;height:24px;border-radius:6px;border:1.5px solid var(--text-light);background:none;color:var(--text-light);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.g-plan-btn{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--text-light);background:none;color:var(--text-dim);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .g-plan-btn:active{transform:scale(.9)}
 .g-plan-btn.planned{background:var(--coral);border-color:var(--coral);color:white}
 .g-counter{display:flex;align-items:center;gap:2px}
-.cnt-btn{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--text-light);background:none;color:var(--text-dim);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cnt-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--text-light);background:none;color:var(--text-dim);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .cnt-btn:active{transform:scale(.88)}
-.cnt-num{font-size:12px;font-weight:600;min-width:32px;text-align:center;color:var(--coral)}
+.cnt-num{font-size:14px;font-weight:600;min-width:36px;text-align:center;color:var(--coral)}
 
-.shops-wrap{display:none;padding-left:16px;border-left:2px solid rgba(0,0,0,.04);margin-left:3px;margin-top:4px;flex-direction:column;gap:6px}
+/* SHOPS WRAP (inside card) */
+.shops-wrap{display:none;padding:0 16px 14px;flex-direction:column;gap:8px}
 .shops-wrap.open{display:flex}
 
-.sub-card{background:rgba(255,255,255,0.92);border-radius:12px;padding:12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.03);border:1px solid var(--card-border);transition:all .2s}
-.sub-card.done-c{background:var(--done-bg);box-shadow:none;border-color:transparent}
+/* SHOP SUB-CARD */
+.sub-card{background:var(--bg-warm);border-radius:12px;padding:12px 14px;border:1px solid rgba(0,0,0,.04);transition:all .2s}
+.sub-card.done-c{background:var(--done-bg);border-color:transparent}
 .sub-card.done-c .s-name{color:var(--done-text);text-decoration:line-through}
-.sub-card.nearby-highlight{border-color:var(--amber);border-width:1.5px}
+.sub-card.nearby-highlight{border-color:var(--amber);border-width:1.5px;background:rgba(212,148,58,.04)}
 .sub-top{display:flex;align-items:center;gap:10px}
 .sub-info{flex:1;min-width:0}
 .s-name-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.s-name{font-size:13px;font-weight:500}
+.s-name{font-size:15px;font-weight:500}
 .s-name a{color:var(--text);text-decoration:none;border-bottom:1px dashed var(--text-light)}
-.s-area{font-size:9px;padding:1px 6px;border-radius:8px;background:var(--amber-soft);color:var(--amber);font-weight:500}
-.s-note{font-size:11px;color:var(--text-dim);margin-top:2px;font-style:italic}
-.s-check{width:28px;height:28px;border-radius:50%;border:2px solid var(--text-light);background:none;color:var(--text-light);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.s-area{font-size:11px;padding:2px 7px;border-radius:8px;background:var(--amber-soft);color:var(--amber);font-weight:500}
+.s-note{font-size:13px;color:var(--text-dim);margin-top:3px;font-style:italic}
+.s-check{width:30px;height:30px;border-radius:50%;border:2px solid var(--text-light);background:none;color:var(--text-light);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
 .s-check:active{transform:scale(.9)}
 .s-check.checked{background:var(--sage);border-color:var(--sage);color:white}
 
-.s-expand-btn{font-size:11px;color:var(--text-light);background:none;border:none;cursor:pointer;font-family:inherit;margin-top:6px;padding:2px 0;display:flex;align-items:center;gap:3px}
-.s-expand-btn .arr{font-size:9px;display:inline-block;transition:transform .2s}
+.s-expand-btn{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit;margin-top:6px;padding:2px 0;display:flex;align-items:center;gap:3px}
+.s-expand-btn .arr{font-size:10px;display:inline-block;transition:transform .2s}
 .s-expand-btn.open .arr{transform:rotate(90deg)}
 .s-guide{display:none;margin-top:6px}
 .s-guide.show{display:block}
-.s-guide textarea{width:100%;background:var(--bg-warm);border:1px solid rgba(0,0,0,.06);border-radius:8px;padding:8px 10px;font-size:12px;color:var(--text);font-family:inherit;resize:vertical;outline:none;min-height:50px;line-height:1.6}
+.s-guide textarea{width:100%;background:white;border:1px solid rgba(0,0,0,.06);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--text);font-family:inherit;resize:vertical;outline:none;min-height:50px;line-height:1.6}
 .s-guide textarea:focus{border-color:var(--coral)}
-.s-guide-saved{font-size:12px;color:var(--text-dim);line-height:1.6;white-space:pre-wrap;padding:4px 0}
+.s-guide-saved{font-size:14px;color:var(--text-dim);line-height:1.6;white-space:pre-wrap;padding:4px 0}
 
-.g-note{margin:8px 0 0;padding-top:8px;border-top:1px solid rgba(0,0,0,.04)}
-.note-toggle{font-size:11px;color:var(--text-light);background:none;border:none;cursor:pointer;font-family:inherit;padding:3px 0}
-.note-input{width:100%;margin-top:4px;background:var(--bg-warm);border:1px solid rgba(0,0,0,.06);border-radius:8px;padding:8px 10px;font-size:12px;color:var(--text);font-family:inherit;resize:none;outline:none;display:none}
+.g-note{margin:0;padding:10px 0 0;border-top:1px solid rgba(0,0,0,.04)}
+.note-toggle{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit;padding:3px 0}
+.note-input{width:100%;margin-top:4px;background:white;border:1px solid rgba(0,0,0,.06);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--text);font-family:inherit;resize:none;outline:none;display:none}
 .note-input:focus{border-color:var(--coral)}
 .note-input.show{display:block}
-.note-saved{font-size:12px;color:var(--text-dim);margin-top:3px;font-style:italic}
+.note-saved{font-size:14px;color:var(--text-dim);margin-top:3px;font-style:italic}
+
+/* NAV BUTTON */
+.s-nav{display:inline-flex;align-items:center;gap:3px;font-size:12px;padding:4px 10px;border-radius:6px;background:#3385ff;color:white;text-decoration:none;font-weight:500}
+
+/* GEO BUTTON */
+.geo-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:8px;border:1.5px solid var(--sage);background:var(--sage-soft);color:var(--sage);font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s}
+.geo-btn:active{transform:scale(.95)}
+.geo-btn.loading{opacity:.6;pointer-events:none}
 
 .empty{text-align:center;padding:40px 20px;color:var(--text-dim)}
 .empty .emoji{font-size:32px;margin-bottom:10px}
@@ -147,13 +159,13 @@ body>*{position:relative;z-index:1}
 
 /* SHOP LINKS ROW */
 .s-links{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
-.s-link{font-size:11px;padding:3px 8px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:3px;font-weight:500}
+.s-link{font-size:12px;padding:4px 10px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:3px;font-weight:500}
 .s-link.dzdp{background:#ff6633;color:white}
 .s-link.xhs{background:#fe2c55;color:white}
-.s-link-edit{font-size:11px;color:var(--text-light);background:none;border:none;cursor:pointer;font-family:inherit;padding:3px 0;margin-left:2px}
+.s-link-edit{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit;padding:3px 2px;margin-left:2px}
 
 /* ADD SHOP BTN */
-.add-shop-btn{width:100%;padding:10px;border:1.5px dashed var(--text-light);border-radius:10px;background:none;color:var(--text-dim);font-size:12px;font-family:inherit;cursor:pointer;transition:all .2s;margin-top:2px}
+.add-shop-btn{width:100%;padding:12px;border:1.5px dashed var(--text-dim);border-radius:10px;background:none;color:var(--text-dim);font-size:14px;font-family:inherit;cursor:pointer;transition:all .2s;margin-top:2px}
 .add-shop-btn:active{transform:scale(.98);border-color:var(--coral);color:var(--coral)}
 
 /* PANEL OVERLAY */
@@ -192,7 +204,7 @@ body>*{position:relative;z-index:1}
 .panel-cat-btn.sel-food{background:var(--orange-soft);border-color:var(--orange);color:var(--orange)}
 
 /* Add item button */
-.add-item-btn{margin:16px 24px;padding:14px;border:1.5px dashed var(--text-light);border-radius:var(--radius);background:rgba(255,255,255,0.6);color:var(--text-dim);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .2s;text-align:center;width:calc(100% - 48px)}
+.add-item-btn{margin:16px 24px;padding:16px;border:1.5px dashed var(--text-dim);border-radius:var(--radius);background:rgba(255,255,255,0.6);color:var(--text-dim);font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .2s;text-align:center;width:calc(100% - 48px)}
 .add-item-btn:active{transform:scale(.98);border-color:var(--coral);color:var(--coral)}
 </style>
 </head>
@@ -224,24 +236,60 @@ body>*{position:relative;z-index:1}
   <select id="kidsAct">
     <option value="">不筛选</option>
     <option value="新光天地">跑酷（新光天地）</option>
-    <option value="龙湖花园">下棋（龙湖花园·家边上）</option>
-    <option value="placeholder_a">活动C（待填）</option>
-    <option value="placeholder_b">活动D（待填）</option>
+    <option value="龙湖花园">下棋（龙湖花园）</option>
+    <option value="龙湖花园">🏠 龙湖花园（家）</option>
+    <option value="新桥医院">🏠 新桥医院（家）</option>
   </select>
-  <span class="hint">📍 附近优先</span>
+  <button class="geo-btn" id="geoBtn" onclick="getMyLocation()">📍 我的位置</button>
 </div>
 
 <div class="tabs">
-  <button class="tab active" data-tab="all" onclick="setTab('all')">全部</button>
-  <button class="tab" data-tab="body" onclick="setTab('body')">💪身体</button>
-  <button class="tab" data-tab="look" onclick="setTab('look')">✨形象</button>
-  <button class="tab" data-tab="exp" onclick="setTab('exp')">🎭体验</button>
-  <button class="tab" data-tab="kids" onclick="setTab('kids')">👦带娃</button>
-  <button class="tab" data-tab="food" onclick="setTab('food')">🍜美食</button>
+  <button class="tab active" data-tab="all" onclick="setTab(&#39;all&#39;)">全部</button>
+  <button class="tab" data-tab="body" onclick="setTab(&#39;body&#39;)">💪身体</button>
+  <button class="tab" data-tab="look" onclick="setTab(&#39;look&#39;)">✨形象</button>
+  <button class="tab" data-tab="exp" onclick="setTab(&#39;exp&#39;)">🎭体验</button>
+  <button class="tab" data-tab="kids" onclick="setTab(&#39;kids&#39;)">👦带娃</button>
+  <button class="tab" data-tab="food" onclick="setTab(&#39;food&#39;)">🍜美食</button>
 </div>
 
-<div class="filters"><div><div class="filter-row-label">商圈</div><div class="filter-row" id="areaFilters"></div></div></div>
-<div id="content"></div>
+<div class="filters"><div><div class="filter-row-label">商圈</div><div class="filter-row" id="areaFilters"><div class="chip a-all" data-area="all">全部</div><div class="chip " data-area="江北">江北</div><div class="chip " data-area="渝中">渝中</div></div></div></div>
+<div id="content"><div class="sec-label">待打卡</div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">私教普拉提<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><div class="g-counter"><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;pilates&#39;,-1)">−</button><span class="cnt-num">0/6</span><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;pilates&#39;,1)">+</button></div><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;pilates&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;pilates&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找店</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;pilates&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%BA%97&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;pilates&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;pilates&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;pilates&#39;)">💭写感受</button><textarea class="note-input" id="n-pilates" rows="2" placeholder="感受…" onblur="saveN(&#39;pilates&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">私教课·健身房器械<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><div class="g-counter"><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;gym&#39;,-1)">−</button><span class="cnt-num">0/5</span><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;gym&#39;,1)">+</button></div><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;gym&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;gym&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找店</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;gym&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%BA%97&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;gym&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;gym&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;gym&#39;)">💭写感受</button><textarea class="note-input" id="n-gym" rows="2" placeholder="感受…" onblur="saveN(&#39;gym&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">胃肠镜检查<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;gastro&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;gastro&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找医院</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;gastro&#39;,0)">✏️</button></div><div class="s-note">需提前预约+禁食准备</div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%8C%BB%E9%99%A2&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;gastro&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;gastro&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;gastro&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;gastro&#39;)">💭写感受</button><textarea class="note-input" id="n-gastro" rows="2" placeholder="感受…" onblur="saveN(&#39;gastro&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">中药调理<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><div class="g-counter"><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;tcm&#39;,-1)">−</button><span class="cnt-num">0/3</span><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;tcm&#39;,1)">+</button></div><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;tcm&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;tcm&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找中医馆</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;tcm&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E4%B8%AD%E5%8C%BB%E9%A6%86&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;tcm&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;tcm&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;tcm&#39;)">💭写感受</button><textarea class="note-input" id="n-tcm" rows="2" placeholder="感受…" onblur="saveN(&#39;tcm&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">头疗<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;head&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;head&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找店</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;head&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%BA%97&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;head&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;head&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;head&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;head&#39;)">💭写感受</button><textarea class="note-input" id="n-head" rows="2" placeholder="感受…" onblur="saveN(&#39;head&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">足疗<span class="g-count-label"> · 2家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;foot&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;foot&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找店A</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;foot&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%BA%97A&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;foot&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;foot&#39;,0,this)"></textarea></div></div><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找店B</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;foot&#39;,1)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%BA%97B&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;foot&#39;,1)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;foot&#39;,1,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;foot&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;foot&#39;)">💭写感受</button><textarea class="note-input" id="n-foot" rows="2" placeholder="感受…" onblur="saveN(&#39;foot&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">针灸按摩<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;acup&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;acup&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找店</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;acup&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%BA%97&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;acup&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;acup&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;acup&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;acup&#39;)">💭写感受</button><textarea class="note-input" id="n-acup" rows="2" placeholder="感受…" onblur="saveN(&#39;acup&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">激光脱唇毛+光子嫩肤<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;laser&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;laser&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找医美</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;laser&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%8C%BB%E7%BE%8E&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;laser&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;laser&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;laser&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;laser&#39;)">💭写感受</button><textarea class="note-input" id="n-laser" rows="2" placeholder="感受…" onblur="saveN(&#39;laser&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">网球私教<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><div class="g-counter"><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;tennis&#39;,-1)">−</button><span class="cnt-num">0/3</span><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;tennis&#39;,1)">+</button></div><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;tennis&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;tennis&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找场地</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;tennis&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%9C%BA%E5%9C%B0&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;tennis&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;tennis&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;tennis&#39;)">💭写感受</button><textarea class="note-input" id="n-tennis" rows="2" placeholder="感受…" onblur="saveN(&#39;tennis&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot body"></div><div class="g-title ">拳击体验课<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;boxing&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;boxing&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找拳馆</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;boxing&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E6%8B%B3%E9%A6%86&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;boxing&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;boxing&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;boxing&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;boxing&#39;)">💭写感受</button><textarea class="note-input" id="n-boxing" rows="2" placeholder="感受…" onblur="saveN(&#39;boxing&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot look"></div><div class="g-title ">化妆课（日常妆）<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><div class="g-counter"><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;makeup&#39;,-1)">−</button><span class="cnt-num">0/4</span><button class="cnt-btn" onclick="event.stopPropagation();chgCnt(&#39;makeup&#39;,1)">+</button></div><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;makeup&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;makeup&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">范美妆</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;makeup&#39;,0)">✏️</button></div><div class="s-note">大众点评找到的</div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E8%8C%83%E7%BE%8E%E5%A6%86&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a><a class="s-link dzdp" href="https://m.dianping.com/" target="_blank">📍 大众点评</a></div></div></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;makeup&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;makeup&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;makeup&#39;)">💭写感受</button><textarea class="note-input" id="n-makeup" rows="2" placeholder="感受…" onblur="saveN(&#39;makeup&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot look"></div><div class="g-title ">做美睫<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;lash&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;lash&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找店</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;lash&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%BA%97&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;lash&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;lash&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;lash&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;lash&#39;)">💭写感受</button><textarea class="note-input" id="n-lash" rows="2" placeholder="感受…" onblur="saveN(&#39;lash&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot look"></div><div class="g-title ">配眼镜（超薄1.74镜片）<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;glasses&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;glasses&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找眼镜店</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;glasses&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E7%9C%BC%E9%95%9C%E5%BA%97&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;glasses&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;glasses&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;glasses&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;glasses&#39;)">💭写感受</button><textarea class="note-input" id="n-glasses" rows="2" placeholder="感受…" onblur="saveN(&#39;glasses&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot look"></div><div class="g-title ">全家福艺术照<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;photo&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;photo&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找摄影工作室</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;photo&#39;,0)">✏️</button></div><div class="s-note">提前预约</div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E6%91%84%E5%BD%B1%E5%B7%A5%E4%BD%9C%E5%AE%A4&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;photo&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;photo&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;photo&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;photo&#39;)">💭写感受</button><textarea class="note-input" id="n-photo" rows="2" placeholder="感受…" onblur="saveN(&#39;photo&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">街舞课<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;hiphop&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;hiphop&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找舞室</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;hiphop&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E8%88%9E%E5%AE%A4&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;hiphop&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;hiphop&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;hiphop&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;hiphop&#39;)">💭写感受</button><textarea class="note-input" id="n-hiphop" rows="2" placeholder="感受…" onblur="saveN(&#39;hiphop&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">攀岩<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;climb&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;climb&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">山石攀岩</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;climb&#39;,0)">✏️</button></div><div class="s-note">单人私教课</div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%B1%B1%E7%9F%B3%E6%94%80%E5%B2%A9&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a><a class="s-link dzdp" href="https://m.dianping.com/" target="_blank">📍 大众点评</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;climb&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;climb&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;climb&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;climb&#39;)">💭写感受</button><textarea class="note-input" id="n-climb" rows="2" placeholder="感受…" onblur="saveN(&#39;climb&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">架子鼓<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;drums&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;drums&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找琴行</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;drums&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E7%90%B4%E8%A1%8C&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;drums&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;drums&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;drums&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;drums&#39;)">💭写感受</button><textarea class="note-input" id="n-drums" rows="2" placeholder="感受…" onblur="saveN(&#39;drums&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">画室画画<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;paint&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;paint&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找画室</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;paint&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E7%94%BB%E5%AE%A4&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;paint&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;paint&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;paint&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;paint&#39;)">💭写感受</button><textarea class="note-input" id="n-paint" rows="2" placeholder="感受…" onblur="saveN(&#39;paint&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">咖啡拉花<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;latte&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;latte&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找店</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;latte&#39;,0)">✏️</button></div><div class="s-note">大众点评搜</div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%BA%97&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;latte&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;latte&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;latte&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;latte&#39;)">💭写感受</button><textarea class="note-input" id="n-latte" rows="2" placeholder="感受…" onblur="saveN(&#39;latte&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">脱口秀<span class="g-count-label"> · 2家</span></div><div class="g-tags"><span class="tag tag-date">📅查到后填入</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;comedy&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;comedy&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">拾楼小剧场</span><span class="s-area">渝中</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;comedy&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E6%8B%BE%E6%A5%BC%E5%B0%8F%E5%89%A7%E5%9C%BA&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;comedy&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;comedy&#39;,0,this)"></textarea></div></div><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">重演时代艺术中心</span><span class="s-area">渝中</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;comedy&#39;,1)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E9%87%8D%E6%BC%94%E6%97%B6%E4%BB%A3%E8%89%BA%E6%9C%AF%E4%B8%AD%E5%BF%83&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;comedy&#39;,1)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;comedy&#39;,1,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;comedy&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;comedy&#39;)">💭写感受</button><textarea class="note-input" id="n-comedy" rows="2" placeholder="感受…" onblur="saveN(&#39;comedy&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">做玻璃<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;glass&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;glass&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找工坊</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;glass&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%B7%A5%E5%9D%8A&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;glass&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;glass&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;glass&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;glass&#39;)">💭写感受</button><textarea class="note-input" id="n-glass" rows="2" placeholder="感受…" onblur="saveN(&#39;glass&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">西点培训<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;bake&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;bake&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找烘焙教室</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;bake&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E7%83%98%E7%84%99%E6%95%99%E5%AE%A4&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;bake&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;bake&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;bake&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;bake&#39;)">💭写感受</button><textarea class="note-input" id="n-bake" rows="2" placeholder="感受…" onblur="saveN(&#39;bake&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">演唱会<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-date">📅查到后填入</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;concert&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;concert&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待查演出</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;concert&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%9F%A5%E6%BC%94%E5%87%BA&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;concert&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;concert&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;concert&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;concert&#39;)">💭写感受</button><textarea class="note-input" id="n-concert" rows="2" placeholder="感受…" onblur="saveN(&#39;concert&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">音乐节<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-date">📅查到后填入</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;festival&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;festival&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待查演出</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;festival&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%9F%A5%E6%BC%94%E5%87%BA&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;festival&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;festival&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;festival&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;festival&#39;)">💭写感受</button><textarea class="note-input" id="n-festival" rows="2" placeholder="感受…" onblur="saveN(&#39;festival&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">Livehouse<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-date">📅查到后填入</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;livehouse&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;livehouse&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待查场地</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;livehouse&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%9F%A5%E5%9C%BA%E5%9C%B0&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;livehouse&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;livehouse&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;livehouse&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;livehouse&#39;)">💭写感受</button><textarea class="note-input" id="n-livehouse" rows="2" placeholder="感受…" onblur="saveN(&#39;livehouse&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">展览<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-date">📅查到后填入</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;exhibit&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;exhibit&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待查展览</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;exhibit&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%9F%A5%E5%B1%95%E8%A7%88&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;exhibit&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;exhibit&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;exhibit&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;exhibit&#39;)">💭写感受</button><textarea class="note-input" id="n-exhibit" rows="2" placeholder="感受…" onblur="saveN(&#39;exhibit&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">逛夜市<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;nightmkt&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;nightmkt&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待定夜市</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;nightmkt&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E5%AE%9A%E5%A4%9C%E5%B8%82&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;nightmkt&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;nightmkt&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;nightmkt&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;nightmkt&#39;)">💭写感受</button><textarea class="note-input" id="n-nightmkt" rows="2" placeholder="感受…" onblur="saveN(&#39;nightmkt&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">冲浪体验<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;surf&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;surf&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找冲浪馆</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;surf&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%86%B2%E6%B5%AA%E9%A6%86&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;surf&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;surf&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;surf&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;surf&#39;)">💭写感受</button><textarea class="note-input" id="n-surf" rows="2" placeholder="感受…" onblur="saveN(&#39;surf&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot exp"></div><div class="g-title ">去剧院<span class="g-count-label"> · 4家</span></div><div class="g-tags"><span class="tag tag-date">📅查到后填入</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;theater&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;theater&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">重庆大剧院</span><span class="s-area">江北</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;theater&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E9%87%8D%E5%BA%86%E5%A4%A7%E5%89%A7%E9%99%A2&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;theater&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;theater&#39;,0,this)"></textarea></div></div><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">国泰艺术中心</span><span class="s-area">渝中</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;theater&#39;,1)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%9B%BD%E6%B3%B0%E8%89%BA%E6%9C%AF%E4%B8%AD%E5%BF%83&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;theater&#39;,1)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;theater&#39;,1,this)"></textarea></div></div><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">拾楼小剧场</span><span class="s-area">渝中</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;theater&#39;,2)">✏️</button></div><div class="s-note">话剧/即兴喜剧</div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E6%8B%BE%E6%A5%BC%E5%B0%8F%E5%89%A7%E5%9C%BA&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;theater&#39;,2)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;theater&#39;,2,this)"></textarea></div></div><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">重演时代艺术中心</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;theater&#39;,3)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E9%87%8D%E6%BC%94%E6%97%B6%E4%BB%A3%E8%89%BA%E6%9C%AF%E4%B8%AD%E5%BF%83&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;theater&#39;,3)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;theater&#39;,3,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;theater&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;theater&#39;)">💭写感受</button><textarea class="note-input" id="n-theater" rows="2" placeholder="感受…" onblur="saveN(&#39;theater&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot kids"></div><div class="g-title ">船宴<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-appt">🔖预约</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;boat&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;boat&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">巴国城船宴</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;boat&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%B7%B4%E5%9B%BD%E5%9F%8E%E8%88%B9%E5%AE%B4&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;boat&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;boat&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;boat&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;boat&#39;)">💭写感受</button><textarea class="note-input" id="n-boat" rows="2" placeholder="感受…" onblur="saveN(&#39;boat&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot kids"></div><div class="g-title ">攀岩（带娃）<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;kclimb&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;kclimb&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">山石攀岩</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;kclimb&#39;,0)">✏️</button></div><div class="s-note">单人私教课</div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%B1%B1%E7%9F%B3%E6%94%80%E5%B2%A9&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a><a class="s-link dzdp" href="https://m.dianping.com/" target="_blank">📍 大众点评</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;kclimb&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;kclimb&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;kclimb&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;kclimb&#39;)">💭写感受</button><textarea class="note-input" id="n-kclimb" rows="2" placeholder="感受…" onblur="saveN(&#39;kclimb&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot kids"></div><div class="g-title ">卡丁车<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;kart&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;kart&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找店</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;kart&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%BA%97&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;kart&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;kart&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;kart&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;kart&#39;)">💭写感受</button><textarea class="note-input" id="n-kart" rows="2" placeholder="感受…" onblur="saveN(&#39;kart&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot kids"></div><div class="g-title ">滑冰<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;skate&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;skate&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找冰场</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;skate&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%86%B0%E5%9C%BA&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;skate&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;skate&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;skate&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;skate&#39;)">💭写感受</button><textarea class="note-input" id="n-skate" rows="2" placeholder="感受…" onblur="saveN(&#39;skate&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot kids"></div><div class="g-title ">冲浪（带娃）<span class="g-count-label"> · 1家</span></div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;ksurf&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;ksurf&#39;)">📋</button></div></div><div class="shops-wrap "><div class="sub-card  "><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">待找冲浪馆</span><span class="s-area">待定</span><button class="s-link-edit" onclick="event.stopPropagation();openEdit(&#39;ksurf&#39;,0)">✏️</button></div><div class="s-links"><a class="s-nav" href="baidumap://map/place/search?query=%E5%BE%85%E6%89%BE%E5%86%B2%E6%B5%AA%E9%A6%86&amp;region=%E9%87%8D%E5%BA%86" target="_blank">🗺 导航</a></div></div><button class="s-check " onclick="event.stopPropagation();togShop(&#39;ksurf&#39;,0)"></button></div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝写攻略</button><div class="s-guide"><textarea placeholder="攻略、价格、怎么去、小红书tips…" onblur="saveG(&#39;ksurf&#39;,0,this)"></textarea></div></div><button class="add-shop-btn" onclick="event.stopPropagation();openAdd(&#39;ksurf&#39;)">+ 添加店铺</button><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;ksurf&#39;)">💭写感受</button><textarea class="note-input" id="n-ksurf" rows="2" placeholder="感受…" onblur="saveN(&#39;ksurf&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot food"></div><div class="g-title ">火锅</div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-check " onclick="event.stopPropagation();togFood(&#39;hotpot&#39;)" style="width:32px;height:32px"></button><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;hotpot&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;hotpot&#39;)">📋</button></div></div><div class="shops-wrap "><div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝 写攻略</button>
+        <div class="s-guide">
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide(&#39;hotpot&#39;,this)"></textarea></div>
+      </div><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;hotpot&#39;)">💭写感受</button><textarea class="note-input" id="n-hotpot" rows="2" placeholder="感受…" onblur="saveN(&#39;hotpot&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot food"></div><div class="g-title ">小面</div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-check " onclick="event.stopPropagation();togFood(&#39;noodle&#39;)" style="width:32px;height:32px"></button><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;noodle&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;noodle&#39;)">📋</button></div></div><div class="shops-wrap "><div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝 写攻略</button>
+        <div class="s-guide">
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide(&#39;noodle&#39;,this)"></textarea></div>
+      </div><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;noodle&#39;)">💭写感受</button><textarea class="note-input" id="n-noodle" rows="2" placeholder="感受…" onblur="saveN(&#39;noodle&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot food"></div><div class="g-title ">江湖菜</div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-check " onclick="event.stopPropagation();togFood(&#39;jhcai&#39;)" style="width:32px;height:32px"></button><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;jhcai&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;jhcai&#39;)">📋</button></div></div><div class="shops-wrap "><div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝 写攻略</button>
+        <div class="s-guide">
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide(&#39;jhcai&#39;,this)"></textarea></div>
+      </div><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;jhcai&#39;)">💭写感受</button><textarea class="note-input" id="n-jhcai" rows="2" placeholder="感受…" onblur="saveN(&#39;jhcai&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot food"></div><div class="g-title ">黔江鸡杂</div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-check " onclick="event.stopPropagation();togFood(&#39;qjjz&#39;)" style="width:32px;height:32px"></button><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;qjjz&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;qjjz&#39;)">📋</button></div></div><div class="shops-wrap "><div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝 写攻略</button>
+        <div class="s-guide">
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide(&#39;qjjz&#39;,this)"></textarea></div>
+      </div><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;qjjz&#39;)">💭写感受</button><textarea class="note-input" id="n-qjjz" rows="2" placeholder="感受…" onblur="saveN(&#39;qjjz&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot food"></div><div class="g-title ">凉虾</div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-check " onclick="event.stopPropagation();togFood(&#39;lxia&#39;)" style="width:32px;height:32px"></button><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;lxia&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;lxia&#39;)">📋</button></div></div><div class="shops-wrap "><div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝 写攻略</button>
+        <div class="s-guide">
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide(&#39;lxia&#39;,this)"></textarea></div>
+      </div><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;lxia&#39;)">💭写感受</button><textarea class="note-input" id="n-lxia" rows="2" placeholder="感受…" onblur="saveN(&#39;lxia&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot food"></div><div class="g-title ">酸辣粉</div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-check " onclick="event.stopPropagation();togFood(&#39;slfen&#39;)" style="width:32px;height:32px"></button><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;slfen&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;slfen&#39;)">📋</button></div></div><div class="shops-wrap "><div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝 写攻略</button>
+        <div class="s-guide">
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide(&#39;slfen&#39;,this)"></textarea></div>
+      </div><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;slfen&#39;)">💭写感受</button><textarea class="note-input" id="n-slfen" rows="2" placeholder="感受…" onblur="saveN(&#39;slfen&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot food"></div><div class="g-title ">烧烤/串串</div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-check " onclick="event.stopPropagation();togFood(&#39;bbq&#39;)" style="width:32px;height:32px"></button><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;bbq&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;bbq&#39;)">📋</button></div></div><div class="shops-wrap "><div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝 写攻略</button>
+        <div class="s-guide">
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide(&#39;bbq&#39;,this)"></textarea></div>
+      </div><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;bbq&#39;)">💭写感受</button><textarea class="note-input" id="n-bbq" rows="2" placeholder="感受…" onblur="saveN(&#39;bbq&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot food"></div><div class="g-title ">豆花</div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-check " onclick="event.stopPropagation();togFood(&#39;douhua&#39;)" style="width:32px;height:32px"></button><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;douhua&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;douhua&#39;)">📋</button></div></div><div class="shops-wrap "><div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝 写攻略</button>
+        <div class="s-guide">
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide(&#39;douhua&#39;,this)"></textarea></div>
+      </div><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;douhua&#39;)">💭写感受</button><textarea class="note-input" id="n-douhua" rows="2" placeholder="感受…" onblur="saveN(&#39;douhua&#39;)"></textarea></div></div></div><div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ">▸</span><div class="g-dot food"></div><div class="g-title ">夜市小吃</div><div class="g-tags"><span class="tag tag-walk">随时去</span></div><div class="g-actions"><button class="s-check " onclick="event.stopPropagation();togFood(&#39;yeshi&#39;)" style="width:32px;height:32px"></button><button class="s-link-edit" onclick="event.stopPropagation();openEditItem(&#39;yeshi&#39;)" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn " onclick="event.stopPropagation();togglePlan(&#39;yeshi&#39;)">📋</button></div></div><div class="shops-wrap "><div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>📝 写攻略</button>
+        <div class="s-guide">
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide(&#39;yeshi&#39;,this)"></textarea></div>
+      </div><div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN(&#39;yeshi&#39;)">💭写感受</button><textarea class="note-input" id="n-yeshi" rows="2" placeholder="感受…" onblur="saveN(&#39;yeshi&#39;)"></textarea></div></div></div><button class="add-item-btn" onclick="openAddItem()">+ 添加项目</button></div>
 
 <!-- Edit Panel -->
 <div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
@@ -260,6 +308,10 @@ body>*{position:relative;z-index:1}
       <input class="panel-input" id="pArea" list="areaList" placeholder="比如：解放碑">
       <datalist id="areaList"></datalist>
     </div>
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">地址（选填，用于百度地图导航）</label>
+    <input class="panel-input" id="pAddr" placeholder="比如：渝中区解放碑步行街88号">
   </div>
   <div class="panel-row">
     <div class="panel-field">
@@ -296,18 +348,18 @@ body>*{position:relative;z-index:1}
   <div class="panel-field">
     <label class="panel-label">分类</label>
     <div class="panel-cats" id="iCatRow">
-      <button class="panel-cat-btn" data-cat="body" onclick="pickCat('body')">💪身体</button>
-      <button class="panel-cat-btn" data-cat="look" onclick="pickCat('look')">✨形象</button>
-      <button class="panel-cat-btn" data-cat="exp" onclick="pickCat('exp')">🎭体验</button>
-      <button class="panel-cat-btn" data-cat="kids" onclick="pickCat('kids')">👦带娃</button>
-      <button class="panel-cat-btn" data-cat="food" onclick="pickCat('food')">🍜美食</button>
+      <button class="panel-cat-btn" data-cat="body" onclick="pickCat(&#39;body&#39;)">💪身体</button>
+      <button class="panel-cat-btn" data-cat="look" onclick="pickCat(&#39;look&#39;)">✨形象</button>
+      <button class="panel-cat-btn" data-cat="exp" onclick="pickCat(&#39;exp&#39;)">🎭体验</button>
+      <button class="panel-cat-btn" data-cat="kids" onclick="pickCat(&#39;kids&#39;)">👦带娃</button>
+      <button class="panel-cat-btn" data-cat="food" onclick="pickCat(&#39;food&#39;)">🍜美食</button>
     </div>
   </div>
   <div class="panel-field">
     <label class="panel-label">打卡方式</label>
     <div style="display:flex;gap:10px;align-items:center;margin-top:4px">
       <label style="display:flex;align-items:center;gap:4px;font-size:13px;color:var(--text-mid);cursor:pointer">
-        <input type="radio" name="iType" value="check" checked onchange="toggleTarget()"> 一次
+        <input type="radio" name="iType" value="check" checked="" onchange="toggleTarget()"> 一次
       </label>
       <label style="display:flex;align-items:center;gap:4px;font-size:13px;color:var(--text-mid);cursor:pointer">
         <input type="radio" name="iType" value="counter" onchange="toggleTarget()"> 多次
@@ -386,11 +438,13 @@ const AREA_COORDS={
   '新光天地':[29.5225,106.4855],
   '爱琴海':[29.5260,106.4920],
   '龙湖时代天街':[29.5180,106.4710],
+  '时代天街':[29.5180,106.4710],
   '解放碑':[29.5570,106.5780],
   '观音桥':[29.5730,106.5730],
   '南坪':[29.5330,106.5710],
   '杨家坪':[29.5170,106.5120],
   '沙坪坝':[29.5710,106.4540],
+  '三峡广场':[29.5720,106.4530],
   '大坪':[29.5400,106.5260],
   '江北嘴':[29.5680,106.5830],
   '磁器口':[29.5800,106.4480],
@@ -400,9 +454,31 @@ const AREA_COORDS={
   '南岸':[29.5280,106.5720],
   '九龙坡':[29.5020,106.5110],
   '渝北':[29.6180,106.6310],
+  '新桥医院':[29.5130,106.4890],
+  '石桥铺':[29.5220,106.4980],
+  '二郎':[29.5080,106.4830],
+  '陈家坪':[29.5100,106.5050],
+  '照母山':[29.6050,106.4850],
+  '大学城':[29.5850,106.3100],
+  '南山':[29.5200,106.5900],
+  '北城天街':[29.5730,106.5730],
+  '弹子石':[29.5550,106.5950],
+  '茶园':[29.5150,106.6250],
+  '巴国城':[29.5060,106.5020],
 };
 
-function getCoord(area){return AREA_COORDS[area]||null}
+// Fuzzy match: find the best matching preset area for a user-entered area name
+function getCoord(area){
+  if(!area||area==='待定')return null;
+  // Exact match first
+  if(AREA_COORDS[area])return AREA_COORDS[area];
+  // Check if user input contains a preset name, or preset contains user input
+  const keys=Object.keys(AREA_COORDS);
+  for(const k of keys){
+    if(area.includes(k)||k.includes(area))return AREA_COORDS[k];
+  }
+  return null;
+}
 function distKm(a,b){
   if(!a||!b)return 999;
   const R=6371,dLat=(b[0]-a[0])*Math.PI/180,dLon=(b[1]-a[1])*Math.PI/180;
@@ -421,11 +497,21 @@ function closestShopDist(item,targetArea){
 let items,planned,catFilter='all',areaFilter='all',kidsArea='';
 
 function cp(i){return{...i,shops:i.shops.map(s=>({...s}))}}
-function loadData(){try{const s=localStorage.getItem(SK);if(s){const p=JSON.parse(s);return ITEMS.map(def=>{const sv=p.find(x=>x.id===def.id);if(!sv)return cp(def);const ms=def.shops.map((d,i)=>{const ss=sv.shops&&sv.shops[i];return ss?{...d,...ss}:{...d}});if(sv.shops&&sv.shops.length>def.shops.length)for(let i=def.shops.length;i<sv.shops.length;i++)ms.push(sv.shops[i]);return{...def,...sv,shops:ms}})}}catch(e){}return ITEMS.map(cp)}
+function loadData(){try{const s=localStorage.getItem(SK);if(s){const p=JSON.parse(s);
+  // Merge defaults with saved
+  const merged=ITEMS.map(def=>{const sv=p.find(x=>x.id===def.id);if(!sv)return cp(def);const ms=def.shops.map((d,i)=>{const ss=sv.shops&&sv.shops[i];return ss?{...d,...ss}:{...d}});if(sv.shops&&sv.shops.length>def.shops.length)for(let i=def.shops.length;i<sv.shops.length;i++)ms.push(sv.shops[i]);return{...def,...sv,shops:ms}});
+  // Also add any custom items not in ITEMS
+  p.forEach(sv=>{if(!ITEMS.find(d=>d.id===sv.id))merged.push({...sv,shops:(sv.shops||[]).map(s=>({...s}))})});
+  return merged;
+}}catch(e){}return ITEMS.map(cp)}
 function save(){localStorage.setItem(SK,JSON.stringify(items))}
 function loadPlan(){try{const s=localStorage.getItem(PK);return s?JSON.parse(s):[];}catch(e){return[]}}
 function savePlan(){localStorage.setItem(PK,JSON.stringify(planned))}
-function isDone(it){return it.type==='check'?it.shops.some(s=>s.done):it.count>=it.target}
+function isDone(it){
+  if(it.cat==='food')return it.done||false;
+  if(it.type==='check')return it.shops.some(s=>s.done);
+  return it.count>=it.target;
+}
 function getAreas(it){return[...new Set(it.shops.map(s=>s.area).filter(a=>a&&a!=='待定'))]}
 function allAreas(){const a=new Set();items.forEach(it=>it.shops.forEach(s=>{if(s.area&&s.area!=='待定')a.add(s.area)}));return[...a].sort()}
 
@@ -482,7 +568,14 @@ function render(){
   const el=document.getElementById('content');
   let f=items.filter(it=>{
     if(catFilter!=='all'&&it.cat!==catFilter)return false;
-    if(areaFilter!=='all'){const a=getAreas(it);if(!a.includes(areaFilter)&&!it.shops.some(s=>s.area==='待定'))return false}
+    if(areaFilter!=='all'){
+      // Check if any shop's area matches the filter (exact or fuzzy)
+      const hasMatch=it.shops.some(s=>{
+        if(!s.area||s.area==='待定')return false;
+        return s.area===areaFilter||s.area.includes(areaFilter)||areaFilter.includes(s.area);
+      });
+      if(!hasMatch)return false;
+    }
     return true;
   });
   if(kidsArea)f=sortProx(f,kidsArea);
@@ -495,12 +588,16 @@ function render(){
     const isNear=itemDist<3;
     const autoOpen=forceOpen||false;
     let tags='';
-    if(kidsArea&&isNear)tags+=`<span class="tag tag-nearby">📍${itemDist<1?'<1km':itemDist.toFixed(1)+'km'}</span>`;
+    if(kidsArea&&isNear)tags+=`<span class="tag tag-nearby">📍${itemDist<0.5?'很近':itemDist<1?'<1km':itemDist.toFixed(1)+'km'}</span>`;
     if(it.appt)tags+=`<span class="tag tag-appt">🔖预约</span>`;
     if(it.eventDate)tags+=`<span class="tag tag-date">📅${it.eventDate}</span>`;
     if(!it.appt&&!it.eventDate)tags+=`<span class="tag tag-walk">随时去</span>`;
 
     let right=`<button class="s-link-edit" onclick="event.stopPropagation();openEditItem('${it.id}')" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn ${pl?'planned':''}" onclick="event.stopPropagation();togglePlan('${it.id}')">📋</button>`;
+    // Food items: direct check on item level
+    if(it.cat==='food'&&it.type==='check'){
+      right=`<button class="s-check ${done?'checked':''}" onclick="event.stopPropagation();togFood('${it.id}')" style="width:32px;height:32px">${done?'✓':''}</button>`+right;
+    }
     if(it.type==='counter')right=`<div class="g-counter"><button class="cnt-btn" onclick="event.stopPropagation();chgCnt('${it.id}',-1)">−</button><span class="cnt-num">${it.count}/${it.target}</span><button class="cnt-btn" onclick="event.stopPropagation();chgCnt('${it.id}',1)">+</button></div>`+right;
 
     // Sort shops by distance when kidsArea active
@@ -517,16 +614,16 @@ function render(){
       const hg=s.guide&&s.guide.trim();
       const dist=kidsArea?shopDist(s,kidsArea):999;
       const isClose=dist<3;
-      // Distance label
-      const distLabel=kidsArea&&s.area!=='待定'?`<span style="font-size:9px;color:${isClose?'var(--sage)':'var(--text-light)'};margin-left:4px">${dist<1?'<1km':dist.toFixed(1)+'km'}</span>`:'';
-      // Links row
-      let links='';
-      if(s.url||s.xhs){
-        links='<div class="s-links">';
-        if(s.url)links+=`<a class="s-link dzdp" href="${s.url}" target="_blank">📍 大众点评</a>`;
-        if(s.xhs)links+=`<a class="s-link xhs" href="${s.xhs}" target="_blank">📕 小红书</a>`;
-        links+='</div>';
-      }
+      const hasCoords=dist<900;
+      const distLabel=kidsArea&&hasCoords?`<span style="font-size:11px;color:${isClose?'var(--sage)':'var(--text-dim)'};margin-left:4px">${dist<0.5?'很近':dist<1?'<1km':dist.toFixed(1)+'km'}</span>`:'';
+      // Links row with nav
+      let links='<div class="s-links">';
+      // Baidu map nav
+      const navQuery=s.addr||s.name;
+      links+=`<a class="s-nav" href="baidumap://map/place/search?query=${encodeURIComponent(navQuery)}&region=重庆" target="_blank">🗺 导航</a>`;
+      if(s.url)links+=`<a class="s-link dzdp" href="${s.url}" target="_blank">📍 大众点评</a>`;
+      if(s.xhs)links+=`<a class="s-link xhs" href="${s.xhs}" target="_blank">📕 小红书</a>`;
+      links+='</div>';
       let ck='';if(it.type==='check')ck=`<button class="s-check ${sd?'checked':''}" onclick="event.stopPropagation();togShop('${it.id}',${idx})">${sd?'✓':''}</button>`;
       const hidden=showOnlyClosest&&sortIdx>0?'style="display:none" data-extra="1"':'';
       return`<div class="sub-card ${sd?'done-c':''} ${isClose?'nearby-highlight':''}" ${hidden}><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">${s.name}</span><span class="s-area">${s.area}</span>${distLabel}<button class="s-link-edit" onclick="event.stopPropagation();openEdit('${it.id}',${idx})">✏️</button></div>${sn}${links}</div>${ck}</div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>${hg?'📝攻略':'📝写攻略'}</button><div class="s-guide">${hg?`<div class="s-guide-saved">${s.guide}</div>`:''}` +
@@ -539,6 +636,18 @@ function render(){
     let noteH='';
     if(it.note)noteH=`<div class="g-note"><div class="note-saved">"${it.note}"</div><button class="note-toggle" onclick="event.stopPropagation();openN('${it.id}')">✏️编辑</button><textarea class="note-input" id="n-${it.id}" rows="2" placeholder="感受…" onblur="saveN('${it.id}')">${it.note}</textarea></div>`;
     else noteH=`<div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN('${it.id}')">💭写感受</button><textarea class="note-input" id="n-${it.id}" rows="2" placeholder="感受…" onblur="saveN('${it.id}')"></textarea></div>`;
+
+    // Food items: no shop cards, just guide + note
+    if(it.cat==='food'){
+      const fg=it.foodGuide||'';
+      const hasFg=fg.trim();
+      const foodContent=`<div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>${hasFg?'📝 攻略/笔记':'📝 写攻略'}</button>
+        <div class="s-guide">${hasFg?`<div class="s-guide-saved">${fg}</div>`:''}
+        <textarea placeholder="哪家好吃、怎么点、避坑tips…" onblur="saveFoodGuide('${it.id}',this)">${fg}</textarea></div>
+      </div>`;
+      return`<div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ${autoOpen?'open':''}">▸</span><div class="g-dot ${it.cat}"></div><div class="g-title ${done?'done-t':''}">${it.title}</div><div class="g-tags">${tags}</div><div class="g-actions">${right}</div></div><div class="shops-wrap ${autoOpen?'open':''}">${foodContent}${noteH}</div></div>`;
+    }
 
     return`<div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ${autoOpen?'open':''}">▸</span><div class="g-dot ${it.cat}"></div><div class="g-title ${done?'done-t':''}">${it.title}<span class="g-count-label"> · ${it.shops.length}家</span></div><div class="g-tags">${tags}</div><div class="g-actions">${right}</div></div><div class="shops-wrap ${autoOpen?'open':''}">${sc}${showAllBtn}${addBtn}${noteH}</div></div>`;
   }
@@ -574,6 +683,8 @@ function showAllShops(btn){
   btn.remove();
 }
 function togShop(id,idx){const it=items.find(i=>i.id===id);if(it&&it.shops[idx]!==undefined){it.shops[idx].done=!it.shops[idx].done;save();render()}}
+function togFood(id){const it=items.find(i=>i.id===id);if(it){it.done=!it.done;save();render()}}
+function saveFoodGuide(id,ta){const it=items.find(i=>i.id===id);if(it){it.foodGuide=ta.value.trim();save();}}
 function chgCnt(id,d){const it=items.find(i=>i.id===id);if(it){it.count=Math.max(0,Math.min(it.target,it.count+d));save();render()}}
 function togGuide(btn){btn.classList.toggle('open');const g=btn.nextElementSibling;g.classList.toggle('show');if(g.classList.contains('show')){const t=g.querySelector('textarea');if(t)t.focus()}}
 function saveG(id,idx,ta){const it=items.find(i=>i.id===id);if(it&&it.shops[idx]!==undefined){it.shops[idx].guide=ta.value.trim();save()}}
@@ -594,6 +705,7 @@ function openAdd(itemId){
   document.getElementById('panelTitle').textContent='添加店铺';
   document.getElementById('pName').value='';
   document.getElementById('pArea').value='';
+  document.getElementById('pAddr').value='';
   document.getElementById('pDzdp').value='';
   document.getElementById('pXhs').value='';
   document.getElementById('pNote').value='';
@@ -610,6 +722,7 @@ function openEdit(itemId,shopIdx){
   document.getElementById('panelTitle').textContent='编辑店铺';
   document.getElementById('pName').value=s.name||'';
   document.getElementById('pArea').value=s.area||'';
+  document.getElementById('pAddr').value=s.addr||'';
   document.getElementById('pDzdp').value=s.url||'';
   document.getElementById('pXhs').value=s.xhs||'';
   document.getElementById('pNote').value=s.note||'';
@@ -635,6 +748,7 @@ function savePanel(){
   const name=document.getElementById('pName').value.trim();
   if(!name){document.getElementById('pName').style.borderColor='#d44';return}
   const area=document.getElementById('pArea').value.trim()||'待定';
+  const addr=document.getElementById('pAddr').value.trim();
   const url=document.getElementById('pDzdp').value.trim();
   const xhs=document.getElementById('pXhs').value.trim();
   const note=document.getElementById('pNote').value.trim();
@@ -643,10 +757,10 @@ function savePanel(){
   if(!it)return;
 
   if(panelMode==='add'){
-    it.shops.push({name,area,url,xhs,note,guide:'',done:false});
+    it.shops.push({name,area,addr,url,xhs,note,guide:'',done:false});
   }else{
     const s=it.shops[panelShopIdx];
-    if(s){s.name=name;s.area=area;s.url=url;s.xhs=xhs;s.note=note}
+    if(s){s.name=name;s.area=area;s.addr=addr;s.url=url;s.xhs=xhs;s.note=note}
   }
   save();closePanel();buildChips();render();
 }
@@ -770,9 +884,51 @@ function delItem(){
 
 // === FILTER EVENTS ===
 document.getElementById('areaFilters').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;areaFilter=c.dataset.area;buildChips();render()});
-document.getElementById('kidsAct').addEventListener('change',e=>{kidsArea=e.target.value||'';render()});
+document.getElementById('kidsAct').addEventListener('change',e=>{
+  kidsArea=e.target.value||'';
+  myGPS=null; // clear GPS when switching to preset
+  document.getElementById('geoBtn').textContent='📍 我的位置';
+  render();
+});
+
+// === GEOLOCATION ===
+let myGPS=null;
+function getMyLocation(){
+  const btn=document.getElementById('geoBtn');
+  btn.classList.add('loading');btn.textContent='定位中…';
+  if(!navigator.geolocation){btn.textContent='不支持定位';btn.classList.remove('loading');return}
+  navigator.geolocation.getCurrentPosition(pos=>{
+    myGPS=[pos.coords.latitude,pos.coords.longitude];
+    btn.classList.remove('loading');btn.textContent='📍 已定位';
+    // Clear preset selection
+    document.getElementById('kidsAct').value='';
+    kidsArea='__gps__';
+    render();
+  },err=>{
+    btn.classList.remove('loading');btn.textContent='📍 定位失败';
+    setTimeout(()=>{btn.textContent='📍 我的位置'},2000);
+  },{enableHighAccuracy:true,timeout:10000});
+}
+
+// Override distance functions to support GPS
+const _origShopDist=shopDist;
+shopDist=function(shop,targetArea){
+  if(targetArea==='__gps__'&&myGPS){
+    const sc=getCoord(shop.area);
+    return distKm(myGPS,sc);
+  }
+  return _origShopDist(shop,targetArea);
+};
+const _origClosest=closestShopDist;
+closestShopDist=function(item,targetArea){
+  if(targetArea==='__gps__'&&myGPS){
+    return Math.min(...item.shops.map(s=>{const sc=getCoord(s.area);return distKm(myGPS,sc)}));
+  }
+  return _origClosest(item,targetArea);
+};
 
 buildChips();renderTmrw();render();
 </script>
-</body>
-</html>
+
+
+</body></html>
