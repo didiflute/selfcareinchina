@@ -1,9 +1,10 @@
-const CACHE_NAME = 'recharge-v28';
+const CACHE_NAME = 'recharge-v29';
 const ASSETS = [
   './',
   './index.html',
   './bg.png',
   './manifest.json',
+  './apple-touch-icon.png',
   'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap'
 ];
 
