@@ -208,12 +208,27 @@ body>*{position:relative;z-index:1}
 /* Add item button */
 .add-item-btn{margin:16px 24px;padding:16px;border:1.5px dashed var(--text-dim);border-radius:var(--radius);background:rgba(255,255,255,0.6);color:var(--text-dim);font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .2s;text-align:center;width:calc(100% - 48px)}
 .add-item-btn:active{transform:scale(.98);border-color:var(--coral);color:var(--coral)}
+
+/* Search bar */
+.search-bar{margin:12px 24px 0;position:relative}
+.search-input{width:100%;padding:10px 14px 10px 36px;border:1.5px solid var(--card-border);border-radius:12px;background:rgba(255,255,255,0.9);font-size:14px;font-family:inherit;color:var(--text);outline:none;box-sizing:border-box}
+.search-input:focus{border-color:var(--coral);background:white}
+.search-input::placeholder{color:var(--text-light)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-light);pointer-events:none}
+.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:16px;color:var(--text-light);cursor:pointer;padding:4px;display:none}
+.search-clear.show{display:block}
 </style>
 </head>
 <body>
 <div class="header">
   <div class="brand"><div class="brand-icon">⚡</div><h1><em>Recharge</em> 自我充电</h1></div>
   <div class="sub">重庆 · 6/7 — 6/22 · 属于我的16天</div>
+</div>
+
+<div class="search-bar">
+  <span class="search-icon">🔍</span>
+  <input class="search-input" id="searchInput" type="text" placeholder="搜索项目、店铺、地址、攻略…" oninput="onSearch(this.value)">
+  <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
 </div>
 
 <div class="energy"><div class="energy-card">
@@ -352,8 +367,8 @@ const ITEMS=[
   // 身体 pts:20
   {id:'pilates',title:'私教普拉提',cat:'body',appt:true,type:'counter',target:6,count:0,shops:[{name:'倾·普拉提（新光里店）',area:'新光天地',addr:'嘉州路92号新光里A栋201',url:'https://m.dianping.com',xhs:'',note:'4.6分197条 · 人均¥207 · 3号线嘉州路站280m · 10:00-21:00',guide:'【倾·普拉提 新光里店】\n📍 嘉州路92号新光里A栋201\n🚇 3号线嘉州路站出入口步行280m\n⏰ 10:00-21:00\n⭐ 4.6分197条 · 人均¥207\n\n【环境✨】\n明亮清新，教室都是落地窗\n望出去是银杏树，很漂亮\n设施：更衣室、物品寄存、地暖、淋浴房\n无隐性消费\n\n【老师推荐】\n紫君老师（好评11）· Eric（好评10）· Joy',myNotes:'',done:false},{name:'那·瑜伽&孕产·普拉提·塑身减脂（人和天地店）',area:'新光天地',addr:'新南路11号人和天地小区',url:'https://m.dianping.com',xhs:'',note:'4.5分426条 · 嘉州路站7口520m · 10:00-21:00 · 收录14年老店',guide:'🏷 团购搜：【馆主推荐】瑜伽/普拉提大器械一对一专属定制私教\n\n【那·瑜伽 人和天地店】\n📍 新南路11号人和天地小区\n🚇 嘉州路站7口步行520m\n⏰ 10:00-21:00\n⭐ 4.5分426条 · 收录14年老店！\n\n【团购超值🔥】\n¥128（原¥800，1.6折！）\n私教1对1，60分钟/节\n零基础适用，全部人群\n每人限购1张，购后30天有效\n4家门店适用，93%好评\n\n【课程类型超多】\n垫上普拉提、器械普拉提、塑形普拉提\n康复普拉提、体态普拉提\n哈他瑜伽、阿汤斯加瑜伽、艾扬格瑜伽\n声瑜伽、流瑜伽、阴瑜伽、阳瑜伽\n轮瑜伽、棒瑜伽、球瑜伽、椅子瑜伽\n墙绳瑜伽、经络瑜伽、肩颈瑜伽、盆骨瑜伽等\n\n💡 ¥128体验一节试试，性价比极高',myNotes:'',done:false},{name:'泛亚·瑜伽普拉提（重庆中心）',area:'新光天地',addr:'龙溪街道红锦大道89号SKLP商场C区3楼',url:'https://m.dianping.com',xhs:'',note:'4.6分588条 · 嘉州路站1口230m · 10:00-22:00 · 瑜伽热门榜第7',guide:'【泛亚·瑜伽普拉提 重庆中心】\n📍 SKLP商场C区3楼\n🚇 嘉州路站1口230m\n⏰ 10:00-22:00\n⭐ 4.6分588条 · 瑜伽热门榜第7名\n新加坡品牌 · VIP包房 · 淋浴房\n\n【团购💰】\n🧘 团课+小班 ¥60（原¥220）34种课程\n🧘 小班+私教 ¥160（原¥630）\n🧘 团课+小班+私教 ¥180（原¥720）',myNotes:'',done:false},{name:'灵奢普拉提（启元光里店）',area:'观音桥',addr:'小苑路17号L3-06',url:'https://m.dianping.com',xhs:'',note:'4.8分329条 · 冉家坝站3D口180m · 好评榜第7 · 全预约制',guide:'🏷 团购搜：【新客专享】普拉提私教1+普拉提小班1\n\n【灵奢普拉提 启元光里店】\n📍 小苑路17号L3-06\n🚇 冉家坝站3D口180m\n⭐ 4.8分329条 · 好评榜第7 · 全预约制\n\n【团购💰】\n🧘 大器械私教3节 ¥394（原¥1194）\n🧘 私教1+小班1 ¥163（原¥636）100%好评',myNotes:'',done:false}],note:'',pts:20},
   {id:'gym',title:'私教课·健身房器械',cat:'body',appt:true,type:'counter',target:5,count:0,shops:[{name:'寻咖食客精品咖啡学院',area:'龙湖',addr:'龙湖新壹街A馆1栋17楼24号',url:'https://m.dianping.com',xhs:'',note:'',guide:'',done:false}],note:'',pts:20},
-  {id:'gastro',title:'胃肠镜检查',cat:'body',appt:true,type:'check',shops:[{name:'待找医院',area:'待定',url:'',note:'需提前预约+禁食准备',guide:'',done:false}],note:'',pts:20},
-  {id:'tcm',title:'中药调理',cat:'body',appt:true,type:'counter',target:3,count:0,shops:[{name:'待找中医馆',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:20},
+  {id:'gastro',title:'胃肠镜检查',cat:'body',appt:true,type:'check',shops:[{name:'新桥医院',area:'新桥医院',addr:'新桥医院',url:'',xhs:'',note:'必做！一回去就做',guide:'【胃肠镜检查】\n📍 新桥医院\n⚠️ 必做！一回去就约！\n提前预约+禁食准备\n\n💡 到了重庆第一时间安排',myNotes:'',done:false}],note:'',pts:20},
+  {id:'tcm',title:'中药调理',cat:'body',appt:true,type:'counter',target:3,count:0,shops:[{name:'新桥医院',area:'新桥医院',addr:'新桥医院',url:'',xhs:'',note:'必做！一回去就做',guide:'【中药调理】\n📍 新桥医院\n⚠️ 必做！一回去就约！\n\n💡 到了重庆第一时间安排',myNotes:'',done:false}],note:'',pts:20},
   {id:'head',title:'头疗',cat:'body',appt:false,type:'check',shops:[{name:'丝域养发馆（新牌坊店）',area:'新牌坊',addr:'新牌坊1路265号渝复丽园C1幢1-1',url:'https://m.dianping.com',xhs:'',note:'4.5分250条 · 嘉州路站7口950m · 09:30-21:30 · 连锁 · 无隐性消费',guide:'🏷 团购搜：【头疗放松】水漾舒活spa/头皮温瑜伽2选1\n\n【丝域养发馆 新牌坊店】\n📍 新牌坊1路265号渝复丽园C1幢1-1\n🚇 嘉州路站7口步行950m\n⏰ 09:30-21:30\n⭐ 4.5分250条 · 连锁品牌 · 年度影响力品牌\n无隐性消费 · 刷卡支付\n\n【团购选项💰】\n\nA.【头疗放松】¥128（原¥458，2.8折）\n水漾舒活spa/头皮温瑜伽 二选一\n缓解压力，肌肽温泉矿物，60分钟\n\nB.【头疗轻养】¥98（原¥198，5折）\n桃胶轻养spa\n头部放松，桃树脂，60分钟\n\nC.【新客养发体验】¥138（原¥468，3折）\n玫瑰养发/珍珠养发 二选一\n染烫发质修护，专利玫瑰成分，85分钟\n98%好评601条，926家门店适用\n\nD.【柔顺滑养发】¥198（原¥696，2.9折）🔥\n玫瑰养发+头皮卸妆\n发质修护85分钟+头皮清洁\n97%好评14330条！年售7.5万+\n2079家门店适用\n\n💡 头疗放松¥128最适合体验，养发修护选D性价比最高',myNotes:'',done:false},{name:'头妍·头逍遥·经络头疗（观音桥店）',area:'观音桥',addr:'建新北路重庆茂业天地商场7层7006',url:'https://m.dianping.com',xhs:'',note:'4.5分3004条 · 观音桥站5口550m · 10:30-22:00 · 年度影响力品牌',guide:'🏷 团购搜：【头皮吸尘器】精准去屑｜舒缓皮炎｜控油补水3选1\n\n【头妍·头逍遥 观音桥店】\n📍 茂业天地商场7层7006\n🚇 3号线观音桥站5口550m\n⏰ 10:30-22:00\n⭐ 4.5分3004条！· 年度影响力品牌\n\n【团购🔥】¥199（原¥308，6.5折）\n80分钟茶麸成分 · 免预约\n99%好评 · 年售600+',myNotes:'',done:false},{name:'杉树花洗脸洗头吧（SKLP店）',area:'新光天地',addr:'红锦大道89号SKLP商场三楼C区03037号',url:'https://m.dianping.com',xhs:'',note:'4.5分1671条 · 嘉州路站330m · 10:00-22:00 · 修丽可授权 · 可带宠物',guide:'🏷 团购搜：【养发护发】深层清洁+珍珠养发\n\n【杉树花 SKLP店】\n📍 SKLP商场三楼C区03037号\n🚇 嘉州路站1口330m\n⏰ 10:00-22:00\n⭐ 4.5分1671条 · SPA好评榜第3\n修丽可官方授权店 · 可带宠物\n\n【团购🔥】¥98（原¥368，2.7折）\n深层清洁+珍珠养发50分钟 · 年售500+',myNotes:'',done:false},{name:'丝域养发馆（财富购物中心店）',area:'观音桥',addr:'洪湖东路1号重庆财富购物中心L2层26-2',url:'https://m.dianping.com',xhs:'',note:'4.6分626条 · 洪湖东路站1A口280m · 10:00-22:00 · 连锁 · 年度影响力品牌',guide:'🏷 团购搜：【脱发推荐】防脱调理+头部舒压\n\n【丝域养发馆 财富购物中心店】\n📍 洪湖东路1号财富购物中心L2层26-2（临近HM商铺）\n🚇 环线洪湖东路站1A口步行280m\n⏰ 10:00-22:00\n⭐ 4.6分626条 · 连锁 · 年度影响力品牌\n\n【团购🔥】\n【脱发推荐】防脱调理+头部舒压\n¥103（原¥198，5.2折）\n60分钟 · 防脱滋养+防脱特证\n年售9.7万+！！超级爆款\n\n【叠加】头皮清洁 ¥19.9（原¥98，2.1折）\n薄荷薰衣草8分钟 · 年售4000+\n\n💡 跟新牌坊店同品牌，这家在观音桥财富中心',myNotes:'',done:false}],note:'',pts:20},
   {id:'foot',title:'足疗',cat:'body',appt:false,type:'check',shops:[{name:'待找店A',area:'待定',url:'',note:'',guide:'',done:false},{name:'待找店B',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:20},
   {id:'acup',title:'针灸按摩',cat:'body',appt:true,type:'check',shops:[{name:'端艾堂·SPA·艾灸（新光里001店）',area:'新光天地',addr:'嘉州路92号新光里2楼',url:'https://m.dianping.com',xhs:'',note:'4.9分939条 · 人均¥211 · 3号线嘉州路站250m · 09:00-22:30 · 10年老店',guide:'🏷 团购搜：【肠胃调养】按摩SPA+艾灸｜多食油腻应酬多｜60分钟\n\n【端艾堂·SPA·艾灸 新光里001店】\n📍 嘉州路92号新光里2楼（跟倾普拉提同一栋楼）\n🚇 3号线嘉州路站出入口步行250m\n⏰ 09:00-22:30\n⭐ 4.9分939条 · 人均¥211 · 连锁\n🏆 加州花园推拿养生销量榜第3名\n收录10年老店 · 10个房间 · 有淋浴房 · 免费茶水小食\n\n【团购选项💰】\n\nA.【肠胃调养】按摩SPA+艾灸 ¥143（原¥328，4.4折）🔥\n60分钟，腹部\n年售6000+！销量高于附近90%同类团购\n\nB.【职场刚需】头疗·睡眠调养 ¥178（原¥278，6.4折）\n45分钟，头部+肩颈\n年售1000+，"服务热情，环境静谧舒适"\n\nC.【女性专属】暖宫养元 ¥213（原¥328，6.5折）\n70分钟，按摩+艾灸，腹部\n100%好评40条！年售700+\n流程：迎宾养生茶→辨体配穴→调息→臀部精油SPA→…\n\n还有：推拿/按摩、精油SPA、拔罐、刮痧等项目\n\n💡 肠胃调养¥143最热门，女性专属暖宫¥213好评100%',myNotes:'',done:false},{name:'锦艾·推拿艾灸&疗愈SPA（SKLP0072号店）',area:'新光天地',addr:'龙溪街道红锦大道89号嘉州SKLP C区3层3030',url:'https://m.dianping.com',xhs:'',note:'4.9分674条 · 人均¥171 · 嘉州路站1口210m · 10:00-23:30 · 销量榜第2',guide:'🏷 团购搜：【春日暖阳·武汉爆款】精油推拿SPA+艾灸｜80min\n\n【锦艾 SKLP店】\n📍 SKLP C区3层3030\n🚇 嘉州路站1口210m\n⏰ 10:00-23:30\n⭐ 4.9分674条 · 人均¥171 · 销量榜第2名\n8个房间 · "很新奇的体验，房间里有淋浴间"\n\n【团购🔥】¥184（原¥298，6.2折）\n精油推拿SPA+艾灸80分钟',myNotes:'',done:false},{name:'锦艾·推拿艾灸&疗愈SPA（财富中心0070号店）',area:'观音桥',addr:'天宫殿街道洪湖东路1号财富MALL三层A-9-2',url:'https://m.dianping.com',xhs:'',note:'4.6分462条 · 人均¥145 · 洪湖东路站1A口210m · 10:00-23:30 · 销量榜第1！',guide:'🏷 团购搜：【春季特惠】80min全身精油SPA/推拿按摩｜二选一\n\n【锦艾 财富中心店】\n📍 洪湖东路1号财富MALL三层（海底捞斜对面）\n🚇 环线洪湖东路站1A口210m\n⏰ 10:00-23:30\n⭐ 4.6分462条 · 人均¥145\n🏆 财富中心推拿养生销量榜第1名！\n9个房间\n\n【团购🔥】¥97（原¥288，3.4折）\n80min全身精油SPA/推拿按摩 二选一\n销量高于附近91%！\n\n💡 比SKLP店便宜，¥97超值',myNotes:'',done:false}],note:'',pts:20},
@@ -411,14 +426,15 @@ const ITEMS=[
   {id:'bbq8090',title:'8090烧烤（新牌坊店）',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'📍 渝北区新牌坊红叶路4号\n💰 人均¥50，丰俭由人\n新开的店，老板娘人超级好👍\n\n【烧烤🔥】\n各种食材都看得出来的新鲜，肉和海鲜品质很好！\n跟常见的辣椒面烧烤不同，更多照顾食材本身的口感和味道\n净是香味！整体咸香鲜的口味，贼香！\n每种食材烤的时间都刚刚好，外表金黄微焦\n\n【必点🥇】\n🍢 把把烧——随便拿好吗！剪成一盘可以拌蛋炒饭\n🦐 大虾——真的是大虾，超级多肉！超级新鲜！\n里面还有酸萝卜，酸酸脆脆提升口感，直接拌饭，再来几勺土豆粉的汤汁，绝了！\n\n【苕皮豆干——这个绝🤤】\n3块钱一串！苕皮和豆干一个一张串在一起烤\n糯叽叽的苕皮和卤香的豆干，都烤的冒泡\n中间裹上酸菜，一口接一口停不下来！口感太丰富了\n\n【素菜必拿】\n荤菜随意拿（哪有肉不好吃的😋）\n素菜一定要拿：娃娃菜！青椒！木耳！年糕！苕皮！豆干！\n各种素菜水嫩脆超级提升口感，又很解腻',pts:8},
   {id:'zaodong',title:'灶东家民间菜（松牌路店）',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'📍 松牌路10号（松牌路和嘉州路交叉口西10米，新光天地对面）\n⏰ 周一至周日 09:30-22:30\n💰 人均¥75\n⚠️ 生意超级火爆🔥 5点多就过去店内都没空位了！\n全部被预订满，只有室外有位置\n周末最好早点预定，非周末会好点\n\n每道菜的分量都特别旺实，江湖味非常巴适✅\n\n【必点菜🥇】\n✅ 高压粉蒸肠头🌶️——招牌菜果然赞！肠头劲道又入味，底部绵软香甜的红苕让肠头入口时带着一丝回甜\n✅ 东家白砍鸡🐔——鲜辣开胃，鸡肉是乌鸡肉质紧实，里面的翅头最出彩！用的是新鲜的贡菜！嘎嘣脆！清甜爽脆！一致好评💯\n✅ 火爆双脆🌶️——双脆就是腰花和黄喉，火候恰到好处，腰花和黄喉又嫩又脆，泡椒味酸辣辣超下饭！\n✅ 烤火椒皮蛋🍆——味道不错\n✅ 农村锅边馍🌽——玉米味的馍馍，酥脆又香糯，可以当主食',pts:8},
   {id:'ziwei',title:'冉家坝紫薇路美食街',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'📍 冉家坝·源著天街·余溪路&天竺路\n"紫薇路"二世代 即将爆🔥的节奏\n整个街区基调、氛围已初具雏形\n\n【咖啡☕】\n☕ pengzai\n☕ sander coffee（dirty系列）\n☕ coffee zesty（02号白吐司）\n☕ the end coffee\n☕ 一根鱼咖啡\n\n【面食🍜】\n🍜 桃必福牛肉面（葱爆辣子面、仔姜牛肉面）\n🍜 锦瑟發财面（辣咖喱牛腩面）\n🍜 晓pho越南粉\n\n【烘培🥐】\n🥐 佐敦面包铺（吐司系列、拉差酱辣猪肉三明治）\n🥐 旺角菠萝冲浪（冰火菠萝油）\n\n【餐饮🍽】\n🍽 八爪卤卤烫\n🍽 红玉Aroma\n🍽 firfir·thai restaurant（好吃的泰式漂亮饭）\n🍽 所边边（在派出所旁边而得名，小月球的分店）\n\n💡 离PLAN DANCE舞蹈和SEVEN唱功学院很近，上完课顺便逛吃',pts:8},
+  {id:'lrt',title:'李若桃酸奶',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'🥛 李若桃酸奶\n尤其是原味超好喝！\n可点外卖到家🛵\n\n💡 不用出门，外卖直接送',pts:8},
 ];
 
-const SK='recharge_v26',PK='recharge_plan_v26';
+const SK='recharge_v28',PK='recharge_plan_v28';
 
 // === LIFE ZONES (生活圈) ===
 // Each zone has a center coord and a list of area names that belong to it
 const LIFE_ZONES={
-  '龙湖/新牌坊':{coord:[29.5650,106.4880],areas:['龙湖花园','新光天地','新光里','松牌路','新牌坊','龙湖','嘉州路','红锦大道','爱琴海']},
+  '龙湖/新牌坊':{coord:[29.5650,106.4880],areas:['龙湖花园','新光天地','新光里','松牌路','新牌坊','龙湖','嘉州路','红锦大道','爱琴海','冉家坝','源著','紫薇路','天竺路','龙山大道','两江新区']},
   '观音桥/九街':{coord:[29.5730,106.5730],areas:['观音桥','北城天街','茂业天地','九街','未来国际']},
   '大坪/时代天街':{coord:[29.5350,106.5000],areas:['大坪','龙湖时代天街','时代天街','英利','大坪英利']},
   '解放碑/渝中':{coord:[29.5530,106.5690],areas:['解放碑','渝中','洪崖洞','鹅岭','佛图关','来福士','朝天门','半山崖线']},
@@ -553,6 +569,7 @@ function render(){
   const el=document.getElementById('content');
   let f=items.filter(it=>{
     if(catFilter!=='all'&&it.cat!==catFilter)return false;
+    if(!matchesSearch(it))return false;
     if(areaFilter!=='all'){
       // Check if any shop belongs to the selected life zone
       const zoneData=LIFE_ZONES[areaFilter];
@@ -959,6 +976,42 @@ closestShopDist=function(item,targetArea){
 // Register Service Worker for offline support
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+
+// === SEARCH ===
+let searchQuery='';
+function onSearch(val){
+  searchQuery=val.trim().toLowerCase();
+  document.getElementById('searchClear').classList.toggle('show',searchQuery.length>0);
+  render();
+}
+function clearSearch(){
+  searchQuery='';
+  document.getElementById('searchInput').value='';
+  document.getElementById('searchClear').classList.remove('show');
+  render();
+}
+function matchesSearch(it){
+  if(!searchQuery)return true;
+  const q=searchQuery;
+  // Search title
+  if(it.title.toLowerCase().includes(q))return true;
+  // Search shops: name, area, addr, note, guide, myNotes
+  if(it.shops&&it.shops.some(s=>{
+    if(s.name&&s.name.toLowerCase().includes(q))return true;
+    if(s.area&&s.area.toLowerCase().includes(q))return true;
+    if(s.addr&&s.addr.toLowerCase().includes(q))return true;
+    if(s.note&&s.note.toLowerCase().includes(q))return true;
+    if(s.guide&&s.guide.toLowerCase().includes(q))return true;
+    if(s.myNotes&&s.myNotes.toLowerCase().includes(q))return true;
+    return false;
+  }))return true;
+  // Search foodGuide and foodNotes
+  if(it.foodGuide&&it.foodGuide.toLowerCase().includes(q))return true;
+  if(it.foodNotes&&it.foodNotes.toLowerCase().includes(q))return true;
+  // Search item note
+  if(it.note&&it.note.toLowerCase().includes(q))return true;
+  return false;
 }
 
 buildChips();renderTmrw();render();
