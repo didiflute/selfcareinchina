@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Recharge">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#e8725c">
+<title>Recharge 自我充电</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf7f4;--bg-warm:#f5efe8;
+  --card-bg:#fff;--card-border:rgba(0,0,0,.05);--card-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.03);
+  --coral:#e8725c;--coral-soft:rgba(232,114,92,.10);--coral-glow:rgba(232,114,92,.25);
+  --amber:#d4943a;--amber-soft:rgba(212,148,58,.10);
+  --sage:#6a9e7e;--sage-soft:rgba(106,158,126,.10);
+  --plum:#9474b4;--plum-soft:rgba(148,116,180,.10);
+  --sky:#5b94c4;--sky-soft:rgba(91,148,196,.10);
+  --orange:#e09850;--orange-soft:rgba(224,152,80,.10);
+  --text:#2c2420;--text-mid:#4a3f38;--text-dim:#6b5e56;--text-light:#8a7e74;
+  --done-bg:#f0f7f2;--done-text:#9eb8a6;
+  --radius:16px;--radius-sm:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:120px;overflow-x:hidden;background-image:url('bg.png');background-size:cover;background-position:center top;background-attachment:fixed;background-repeat:no-repeat;position:relative}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(to bottom,rgba(250,247,244,0.88),rgba(250,247,244,0.75),rgba(250,247,244,0.55));pointer-events:none;z-index:0}
+body>*{position:relative;z-index:1}
+
+.header{padding:52px 24px 24px;position:relative;overflow:hidden;background:transparent}
+.brand{display:flex;align-items:center;gap:12px;position:relative}
+.brand-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--coral),var(--amber));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 10px var(--coral-glow)}
+.brand h1{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:0.5px;color:var(--text-mid)}
+.brand h1 em{font-style:italic;color:var(--coral);font-weight:400}
+.header .sub{font-size:14px;color:var(--text-dim);margin-top:6px;font-weight:400;padding-left:54px}
+
+.energy{margin:0;background:transparent;padding:16px 24px 20px}
+.energy-card{background:rgba(255,255,255,0.93);border-radius:var(--radius);padding:18px;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
+.energy-card::after{content:'⚡';position:absolute;right:16px;top:14px;font-size:32px;opacity:.08}
+.energy-main{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.energy-label{font-size:13px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;font-weight:500}
+.energy-pct{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--coral)}
+.energy-pct small{font-family:'Noto Sans SC';font-size:14px;font-weight:400;color:var(--text-dim)}
+.bar-track{height:8px;background:var(--bg-warm);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.25,1,.5,1);position:relative}
+.bar-fill.main{background:linear-gradient(90deg,var(--coral),var(--amber))}
+.bar-fill.main::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4));border-radius:0 4px 4px 0}
+.dims{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin-top:14px}
+.dim{display:flex;flex-direction:column;gap:4px}
+.dim-top{display:flex;justify-content:space-between;align-items:center}
+.dim-label{font-size:13px;color:var(--text-dim);font-weight:500}
+.dim-pct{font-size:13px;font-weight:600}
+.dim-pct.body{color:var(--sage)}.dim-pct.look{color:var(--coral)}.dim-pct.exp{color:var(--plum)}.dim-pct.kids{color:var(--sky)}.dim-pct.food{color:var(--orange)}
+.dim-bar{height:5px;background:var(--bg-warm);border-radius:3px;overflow:hidden}
+.dim-fill{height:100%;border-radius:3px;transition:width .5s ease}
+.dim-fill.body{background:var(--sage)}.dim-fill.look{background:var(--coral)}.dim-fill.exp{background:var(--plum)}.dim-fill.kids{background:var(--sky)}.dim-fill.food{background:var(--orange)}
+
+.tomorrow{margin:0 24px 12px;background:linear-gradient(135deg,rgba(255,248,240,0.85),rgba(255,245,235,0.85));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(232,114,92,.12);border-radius:var(--radius);padding:14px 16px;display:none}
+.tomorrow.has-items{display:block}
+.tomorrow-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.tomorrow-title{font-size:14px;font-weight:600;color:var(--coral)}
+.tomorrow-clear{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit}
+.tomorrow-items{display:flex;flex-direction:column;gap:4px}
+.tomorrow-item{display:flex;align-items:center;gap:8px;font-size:14px;padding:8px 12px;background:white;border-radius:8px;border:1px solid rgba(0,0,0,.04)}
+.t-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.t-dot.body{background:var(--sage)}.t-dot.look{background:var(--coral)}.t-dot.exp{background:var(--plum)}.t-dot.kids{background:var(--sky)}.t-dot.food{background:var(--orange)}
+.t-name{flex:1;color:var(--text-mid)}.t-remove{font-size:14px;color:var(--text-light);background:none;border:none;cursor:pointer;padding:0 2px}
+
+.kids-bar{margin:0 24px 12px;background:rgba(212,148,58,0.08);border:1px solid rgba(212,148,58,.15);border-radius:var(--radius-sm);padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-mid)}
+.kids-bar select{background:white;border:1px solid rgba(212,148,58,.25);color:var(--amber);border-radius:6px;padding:6px 10px;font-size:14px;font-family:inherit;font-weight:500;outline:none;max-width:200px}
+.kids-bar .hint{color:var(--amber);opacity:.7;font-size:12px;margin-left:auto}
+
+.tabs{display:flex;margin:0 24px 12px;background:rgba(255,255,255,0.9);border-radius:var(--radius-sm);border:1px solid var(--card-border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab{flex:0 0 auto;padding:10px 12px;font-size:13px;font-weight:500;text-align:center;color:var(--text-dim);cursor:pointer;border:none;background:none;font-family:inherit;white-space:nowrap;transition:all .2s}
+.tab.active{background:var(--coral);color:white;border-radius:var(--radius-sm)}
+
+.filters{padding:0 24px 8px;display:flex;flex-direction:column;gap:8px}
+.filter-row-label{font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.chip{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;border:1px solid var(--card-border);background:rgba(255,255,255,0.88);color:var(--text-dim);cursor:pointer;transition:all .2s;white-space:nowrap}
+.chip:active{transform:scale(.95)}
+.chip.a-all{background:var(--bg-warm);border-color:var(--text-light);color:var(--text-mid)}
+.chip.a-area{background:var(--amber-soft);border-color:var(--amber);color:var(--amber)}
+
+.sec-label{padding:16px 24px 6px;font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
+
+/* PROJECT CARD */
+.group{margin:0 24px 12px;animation:fadeUp .25s ease both;background:rgba(255,255,255,0.92);border-radius:var(--radius);box-shadow:var(--card-shadow);border:1px solid var(--card-border);overflow:hidden}
+.group.done-group{background:var(--done-bg);box-shadow:none;border-color:transparent;opacity:.7}
+.group-head{display:flex;align-items:center;gap:8px;padding:14px 16px;cursor:pointer}
+.g-exp{font-size:11px;color:var(--text-dim);transition:transform .2s;display:inline-block}
+.g-exp.open{transform:rotate(90deg)}
+.g-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.g-dot.body{background:var(--sage)}.g-dot.look{background:var(--coral)}.g-dot.exp{background:var(--plum)}.g-dot.kids{background:var(--sky)}.g-dot.food{background:var(--orange)}
+.g-title{font-size:16px;font-weight:600;color:var(--text-mid);flex:1}
+.g-title.done-t{color:var(--done-text);text-decoration:line-through}
+.g-count-label{font-size:13px;color:var(--text-dim);font-weight:400}
+.g-tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500}
+.tag-appt{background:var(--coral-soft);color:var(--coral)}.tag-date{background:var(--plum-soft);color:var(--plum)}.tag-walk{background:var(--sage-soft);color:var(--sage)}.tag-nearby{background:var(--amber-soft);color:var(--amber)}
+.g-actions{display:flex;align-items:center;gap:5px}
+.g-plan-btn{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--text-light);background:none;color:var(--text-dim);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.g-plan-btn:active{transform:scale(.9)}
+.g-plan-btn.planned{background:var(--coral);border-color:var(--coral);color:white}
+.g-counter{display:flex;align-items:center;gap:2px}
+.cnt-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--text-light);background:none;color:var(--text-dim);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cnt-btn:active{transform:scale(.88)}
+.cnt-num{font-size:14px;font-weight:600;min-width:36px;text-align:center;color:var(--coral)}
+
+/* SHOPS WRAP (inside card) */
+.shops-wrap{display:none;padding:0 16px 14px;flex-direction:column;gap:8px}
+.shops-wrap.open{display:flex}
+
+/* SHOP SUB-CARD */
+.sub-card{background:var(--bg-warm);border-radius:12px;padding:12px 14px;border:1px solid rgba(0,0,0,.04);transition:all .2s}
+.sub-card.done-c{background:var(--done-bg);border-color:transparent}
+.sub-card.done-c .s-name{color:var(--done-text);text-decoration:line-through}
+.sub-card.nearby-highlight{border-color:var(--amber);border-width:1.5px;background:rgba(212,148,58,.04)}
+.sub-top{display:flex;align-items:center;gap:10px}
+.sub-info{flex:1;min-width:0}
+.s-name-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.s-name{font-size:15px;font-weight:500}
+.s-name a{color:var(--text);text-decoration:none;border-bottom:1px dashed var(--text-light)}
+.s-area{font-size:11px;padding:2px 7px;border-radius:8px;background:var(--amber-soft);color:var(--amber);font-weight:500}
+.s-note{font-size:13px;color:var(--text-dim);margin-top:3px;font-style:italic}
+.s-check{width:30px;height:30px;border-radius:50%;border:2px solid var(--text-light);background:none;color:var(--text-light);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.s-check:active{transform:scale(.9)}
+.s-check.checked{background:var(--sage);border-color:var(--sage);color:white}
+
+.s-expand-btn{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit;margin-top:6px;padding:2px 0;display:flex;align-items:center;gap:3px}
+.s-expand-btn .arr{font-size:10px;display:inline-block;transition:transform .2s}
+.s-expand-btn.open .arr{transform:rotate(90deg)}
+.s-guide{display:none;margin-top:6px}
+.s-guide.show{display:block}
+.s-guide textarea{width:100%;background:white;border:1px solid rgba(0,0,0,.06);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--text);font-family:inherit;resize:vertical;outline:none;min-height:50px;line-height:1.6}
+.s-guide textarea:focus{border-color:var(--coral)}
+.s-guide-saved{font-size:14px;color:var(--text-dim);line-height:1.6;white-space:pre-wrap;padding:4px 0}
+
+.g-note{margin:0;padding:10px 0 0;border-top:1px solid rgba(0,0,0,.04)}
+.note-toggle{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit;padding:3px 0}
+.note-input{width:100%;margin-top:4px;background:white;border:1px solid rgba(0,0,0,.06);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--text);font-family:inherit;resize:none;outline:none;display:none}
+.note-input:focus{border-color:var(--coral)}
+.note-input.show{display:block}
+.note-saved{font-size:14px;color:var(--text-dim);margin-top:3px;font-style:italic}
+
+/* NAV BUTTON */
+.s-nav{display:inline-flex;align-items:center;gap:3px;font-size:12px;padding:4px 10px;border-radius:6px;background:#3385ff;color:white;text-decoration:none;font-weight:500}
+
+/* GEO BUTTON */
+.geo-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:8px;border:1.5px solid var(--sage);background:var(--sage-soft);color:var(--sage);font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s}
+.geo-btn:active{transform:scale(.95)}
+.geo-btn.loading{opacity:.6;pointer-events:none}
+
+.empty{text-align:center;padding:40px 20px;color:var(--text-dim)}
+.empty .emoji{font-size:32px;margin-bottom:10px}
+.empty p{font-size:13px;line-height:1.6}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* SHOP LINKS ROW */
+.s-links{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
+.s-link{font-size:12px;padding:4px 10px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:3px;font-weight:500}
+.s-link.dzdp{background:#ff6633;color:white}
+.s-link.xhs{background:#fe2c55;color:white}
+.s-link-edit{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit;padding:3px 2px;margin-left:2px}
+
+/* ADD SHOP BTN */
+.add-shop-btn{width:100%;padding:12px;border:1.5px dashed var(--text-dim);border-radius:10px;background:none;color:var(--text-dim);font-size:14px;font-family:inherit;cursor:pointer;transition:all .2s;margin-top:2px}
+.add-shop-btn:active{transform:scale(.98);border-color:var(--coral);color:var(--coral)}
+
+/* PANEL OVERLAY */
+.panel-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100;display:none;opacity:0;transition:opacity .25s}
+.panel-overlay.show{display:block;opacity:1}
+
+/* BOTTOM PANEL */
+.panel{position:fixed;bottom:0;left:0;right:0;background:var(--card-bg);border-radius:20px 20px 0 0;z-index:101;transform:translateY(100%);transition:transform .3s cubic-bezier(.25,1,.5,1);max-height:85vh;overflow-y:auto;padding:20px 24px 36px;box-shadow:0 -4px 20px rgba(0,0,0,.1)}
+.panel.show{transform:translateY(0)}
+.panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.panel-title{font-size:16px;font-weight:600}
+.panel-close{width:32px;height:32px;border-radius:50%;border:none;background:var(--bg-warm);color:var(--text-dim);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.panel-field{margin-bottom:14px}
+.panel-label{font-size:12px;color:var(--text-dim);font-weight:500;margin-bottom:4px;display:block}
+.panel-input{width:100%;padding:10px 12px;border:1px solid rgba(0,0,0,.08);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;color:var(--text);background:var(--bg);outline:none}
+.panel-input:focus{border-color:var(--coral)}
+.panel-input::placeholder{color:var(--text-light)}
+.panel-select{width:100%;padding:10px 12px;border:1px solid rgba(0,0,0,.08);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;color:var(--text);background:var(--bg);outline:none;appearance:none}
+.panel-row{display:flex;gap:10px}
+.panel-row .panel-field{flex:1}
+.panel-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.panel-btn{flex:1;padding:12px;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .15s}
+.panel-btn:active{transform:scale(.97)}
+.panel-btn.primary{background:var(--coral);color:white}
+.panel-btn.secondary{background:var(--bg-warm);color:var(--text-mid)}
+.panel-btn.danger{background:rgba(221,68,68,0.08);color:#d44;font-size:13px;font-weight:600;padding:10px 14px;flex:1 1 100%;border:1.5px solid rgba(221,68,68,0.25);border-radius:var(--radius-sm);text-align:center;order:3}
+
+/* Item panel cat buttons */
+.panel-cats{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.panel-cat-btn{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;border:1.5px solid var(--card-border);background:var(--bg);color:var(--text-dim);cursor:pointer;font-family:inherit;transition:all .15s}
+.panel-cat-btn:active{transform:scale(.95)}
+.panel-cat-btn.sel-body{background:var(--sage-soft);border-color:var(--sage);color:var(--sage)}
+.panel-cat-btn.sel-look{background:var(--coral-soft);border-color:var(--coral);color:var(--coral)}
+.panel-cat-btn.sel-exp{background:var(--plum-soft);border-color:var(--plum);color:var(--plum)}
+.panel-cat-btn.sel-kids{background:var(--sky-soft);border-color:var(--sky);color:var(--sky)}
+.panel-cat-btn.sel-food{background:var(--orange-soft);border-color:var(--orange);color:var(--orange)}
+
+/* Add item button */
+.add-item-btn{margin:16px 24px;padding:16px;border:1.5px dashed var(--text-dim);border-radius:var(--radius);background:rgba(255,255,255,0.6);color:var(--text-dim);font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .2s;text-align:center;width:calc(100% - 48px)}
+.add-item-btn:active{transform:scale(.98);border-color:var(--coral);color:var(--coral)}
+
+/* Search bar */
+.search-bar{margin:12px 24px 0;position:relative}
+.search-input{width:100%;padding:10px 14px 10px 36px;border:1.5px solid var(--card-border);border-radius:12px;background:rgba(255,255,255,0.9);font-size:14px;font-family:inherit;color:var(--text);outline:none;box-sizing:border-box}
+.search-input:focus{border-color:var(--coral);background:white}
+.search-input::placeholder{color:var(--text-light)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-light);pointer-events:none}
+.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:16px;color:var(--text-light);cursor:pointer;padding:4px;display:none}
+.search-clear.show{display:block}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="brand"><div class="brand-icon">⚡</div><h1><em>Recharge</em> 自我充电</h1></div>
+  <div class="sub">重庆 · 6/7 — 6/22 · 属于我的16天</div>
+</div>
+
+<div class="search-bar">
+  <span class="search-icon">🔍</span>
+  <input class="search-input" id="searchInput" type="text" placeholder="搜索项目、店铺、地址、攻略…" oninput="onSearch(this.value)">
+  <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+</div>
+
+<div class="energy"><div class="energy-card">
+  <div class="energy-main"><span class="energy-label">总能量</span><span class="energy-pct" id="totalPct">0<small>%</small></span></div>
+  <div class="bar-track"><div class="bar-fill main" id="totalBar" style="width:0%"></div></div>
+  <div class="dims">
+    <div class="dim"><div class="dim-top"><span class="dim-label">💪身体</span><span class="dim-pct body" id="dimBody">0%</span></div><div class="dim-bar"><div class="dim-fill body" id="barBody" style="width:0%"></div></div></div>
+    <div class="dim"><div class="dim-top"><span class="dim-label">✨形象</span><span class="dim-pct look" id="dimLook">0%</span></div><div class="dim-bar"><div class="dim-fill look" id="barLook" style="width:0%"></div></div></div>
+    <div class="dim"><div class="dim-top"><span class="dim-label">🎭体验</span><span class="dim-pct exp" id="dimExp">0%</span></div><div class="dim-bar"><div class="dim-fill exp" id="barExp" style="width:0%"></div></div></div>
+    <div class="dim"><div class="dim-top"><span class="dim-label">👦带娃</span><span class="dim-pct kids" id="dimKids">0%</span></div><div class="dim-bar"><div class="dim-fill kids" id="barKids" style="width:0%"></div></div></div>
+    <div class="dim"><div class="dim-top"><span class="dim-label">🍜美食</span><span class="dim-pct food" id="dimFood">0%</span></div><div class="dim-bar"><div class="dim-fill food" id="barFood" style="width:0%"></div></div></div>
+  </div>
+</div></div>
+
+<div class="tomorrow" id="tmrw">
+  <div class="tomorrow-header"><span class="tomorrow-title">📋 明天要做</span><button class="tomorrow-clear" onclick="clearTmrw()">清空</button></div>
+  <div class="tomorrow-items" id="tmrwItems"></div>
+</div>
+
+<div class="kids-bar">
+  <span>👦</span><span>娃在上</span>
+  <select id="kidsAct">
+    <option value="">不筛选</option>
+    <option value="龙湖/新牌坊">DQ跑酷（新光里）</option>
+    <option value="龙湖/新牌坊">下棋（龙湖花园）</option>
+    <option value="龙湖/新牌坊">DQ游泳（五洲大酒店）</option>
+    <option value="龙湖/新牌坊">DQ滑冰（爱琴海）</option>
+    <option value="龙湖/新牌坊">🏠 龙湖花园（家）</option>
+    <option value="新桥医院">🏠 新桥医院（家）</option>
+  </select>
+  <button class="geo-btn" id="geoBtn" onclick="getMyLocation()">📍 我的位置</button>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-tab="all" onclick="setTab('all')">全部</button>
+  <button class="tab" data-tab="body" onclick="setTab('body')">💪身体</button>
+  <button class="tab" data-tab="look" onclick="setTab('look')">✨形象</button>
+  <button class="tab" data-tab="exp" onclick="setTab('exp')">🎭体验</button>
+  <button class="tab" data-tab="kids" onclick="setTab('kids')">👦带娃</button>
+  <button class="tab" data-tab="food" onclick="setTab('food')">🍜美食</button>
+</div>
+
+<div class="filters"><div><div class="filter-row-label">商圈</div><div class="filter-row" id="areaFilters"></div></div></div>
+<div id="content"></div>
+
+<!-- Edit Panel -->
+<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+<div class="panel" id="panel">
+  <div class="panel-header">
+    <span class="panel-title" id="panelTitle">添加店铺</span>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">店名 *</label>
+    <input class="panel-input" id="pName" placeholder="比如：富侨足浴">
+  </div>
+  <div class="panel-row">
+    <div class="panel-field">
+      <label class="panel-label">商圈</label>
+      <input class="panel-input" id="pArea" list="areaList" placeholder="比如：解放碑">
+      <datalist id="areaList"></datalist>
+    </div>
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">地址（选填，用于百度地图导航）</label>
+    <input class="panel-input" id="pAddr" placeholder="比如：渝中区解放碑步行街88号">
+  </div>
+  <div class="panel-row">
+    <div class="panel-field">
+      <label class="panel-label">大众点评链接</label>
+      <input class="panel-input" id="pDzdp" placeholder="粘贴链接" type="url">
+    </div>
+    <div class="panel-field">
+      <label class="panel-label">小红书链接</label>
+      <input class="panel-input" id="pXhs" placeholder="粘贴链接" type="url">
+    </div>
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">备注</label>
+    <input class="panel-input" id="pNote" placeholder="比如：小红书推荐的，说环境好">
+  </div>
+  <div class="panel-actions">
+    <button class="panel-btn danger" id="pDel" onclick="delShop()" style="display:none">删除</button>
+    <button class="panel-btn secondary" onclick="closePanel()">取消</button>
+    <button class="panel-btn primary" onclick="savePanel()">保存</button>
+  </div>
+</div>
+
+<!-- Item Panel -->
+<div class="panel-overlay" id="itemPanelOverlay" onclick="closeItemPanel()"></div>
+<div class="panel" id="itemPanel">
+  <div class="panel-header">
+    <span class="panel-title" id="itemPanelTitle">添加项目</span>
+    <button class="panel-close" onclick="closeItemPanel()">✕</button>
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">项目名称 *</label>
+    <input class="panel-input" id="iName" placeholder="比如：瑜伽课">
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">分类</label>
+    <div class="panel-cats" id="iCatRow">
+      <button class="panel-cat-btn" data-cat="body" onclick="pickCat('body')">💪身体</button>
+      <button class="panel-cat-btn" data-cat="look" onclick="pickCat('look')">✨形象</button>
+      <button class="panel-cat-btn" data-cat="exp" onclick="pickCat('exp')">🎭体验</button>
+      <button class="panel-cat-btn" data-cat="kids" onclick="pickCat('kids')">👦带娃</button>
+      <button class="panel-cat-btn" data-cat="food" onclick="pickCat('food')">🍜美食</button>
+    </div>
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">打卡方式</label>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:4px">
+      <label style="display:flex;align-items:center;gap:4px;font-size:13px;color:var(--text-mid);cursor:pointer">
+        <input type="radio" name="iType" value="check" checked onchange="toggleTarget()"> 一次
+      </label>
+      <label style="display:flex;align-items:center;gap:4px;font-size:13px;color:var(--text-mid);cursor:pointer">
+        <input type="radio" name="iType" value="counter" onchange="toggleTarget()"> 多次
+      </label>
+      <input class="panel-input" id="iTarget" type="number" min="2" max="30" value="5" placeholder="次数" style="width:60px;display:none;padding:6px 8px;font-size:13px">
+    </div>
+  </div>
+  <div class="panel-field">
+    <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-mid);cursor:pointer">
+      <input type="checkbox" id="iAppt"> 🔖 需要提前预约
+    </label>
+  </div>
+  <div class="panel-actions">
+    <button class="panel-btn danger" id="iDel" onclick="delItem()" style="display:none">删除项目</button>
+    <button class="panel-btn secondary" onclick="closeItemPanel()">取消</button>
+    <button class="panel-btn primary" onclick="saveItem()">保存</button>
+  </div>
+</div>
+
+<script>
+const ITEMS=[
+  // 身体 pts:20
+  {id:'pilates',title:'私教普拉提',cat:'body',appt:true,type:'counter',target:6,count:0,shops:[{name:'倾·普拉提（新光里店）',area:'新光天地',addr:'嘉州路92号新光里A栋201',url:'https://m.dianping.com',xhs:'',note:'4.6分197条 · 人均¥207 · 3号线嘉州路站280m · 10:00-21:00',guide:'【倾·普拉提 新光里店】\n📍 嘉州路92号新光里A栋201\n🚇 3号线嘉州路站出入口步行280m\n⏰ 10:00-21:00\n⭐ 4.6分197条 · 人均¥207\n\n【环境✨】\n明亮清新，教室都是落地窗\n望出去是银杏树，很漂亮\n设施：更衣室、物品寄存、地暖、淋浴房\n无隐性消费\n\n【老师推荐】\n紫君老师（好评11）· Eric（好评10）· Joy',myNotes:'',done:false},{name:'那·瑜伽&孕产·普拉提·塑身减脂（人和天地店）',area:'新光天地',addr:'新南路11号人和天地小区',url:'https://m.dianping.com',xhs:'',note:'4.5分426条 · 嘉州路站7口520m · 10:00-21:00 · 收录14年老店',guide:'🏷 团购搜：【馆主推荐】瑜伽/普拉提大器械一对一专属定制私教\n\n【那·瑜伽 人和天地店】\n📍 新南路11号人和天地小区\n🚇 嘉州路站7口步行520m\n⏰ 10:00-21:00\n⭐ 4.5分426条 · 收录14年老店！\n\n【团购超值🔥】\n¥128（原¥800，1.6折！）\n私教1对1，60分钟/节\n零基础适用，全部人群\n每人限购1张，购后30天有效\n4家门店适用，93%好评\n\n【课程类型超多】\n垫上普拉提、器械普拉提、塑形普拉提\n康复普拉提、体态普拉提\n哈他瑜伽、阿汤斯加瑜伽、艾扬格瑜伽\n声瑜伽、流瑜伽、阴瑜伽、阳瑜伽\n轮瑜伽、棒瑜伽、球瑜伽、椅子瑜伽\n墙绳瑜伽、经络瑜伽、肩颈瑜伽、盆骨瑜伽等\n\n💡 ¥128体验一节试试，性价比极高',myNotes:'',done:false},{name:'泛亚·瑜伽普拉提（重庆中心）',area:'新光天地',addr:'龙溪街道红锦大道89号SKLP商场C区3楼',url:'https://m.dianping.com',xhs:'',note:'4.6分588条 · 嘉州路站1口230m · 10:00-22:00 · 瑜伽热门榜第7',guide:'【泛亚·瑜伽普拉提 重庆中心】\n📍 SKLP商场C区3楼\n🚇 嘉州路站1口230m\n⏰ 10:00-22:00\n⭐ 4.6分588条 · 瑜伽热门榜第7名\n新加坡品牌 · VIP包房 · 淋浴房\n\n【团购💰】\n🧘 团课+小班 ¥60（原¥220）34种课程\n🧘 小班+私教 ¥160（原¥630）\n🧘 团课+小班+私教 ¥180（原¥720）',myNotes:'',done:false},{name:'灵奢普拉提（启元光里店）',area:'观音桥',addr:'小苑路17号L3-06',url:'https://m.dianping.com',xhs:'',note:'4.8分329条 · 冉家坝站3D口180m · 好评榜第7 · 全预约制',guide:'🏷 团购搜：【新客专享】普拉提私教1+普拉提小班1\n\n【灵奢普拉提 启元光里店】\n📍 小苑路17号L3-06\n🚇 冉家坝站3D口180m\n⭐ 4.8分329条 · 好评榜第7 · 全预约制\n\n【团购💰】\n🧘 大器械私教3节 ¥394（原¥1194）\n🧘 私教1+小班1 ¥163（原¥636）100%好评',myNotes:'',done:false}],note:'',pts:20},
+  {id:'gym',title:'私教课·健身房器械',cat:'body',appt:true,type:'counter',target:5,count:0,shops:[{name:'寻咖食客精品咖啡学院',area:'龙湖',addr:'龙湖新壹街A馆1栋17楼24号',url:'https://m.dianping.com',xhs:'',note:'',guide:'',done:false}],note:'',pts:20},
+  {id:'gastro',title:'胃肠镜检查',cat:'body',appt:true,type:'check',shops:[{name:'新桥医院',area:'新桥医院',addr:'新桥医院',url:'',xhs:'',note:'必做！一回去就做',guide:'【胃肠镜检查】\n📍 新桥医院\n⚠️ 必做！一回去就约！\n提前预约+禁食准备\n\n💡 到了重庆第一时间安排',myNotes:'',done:false}],note:'',pts:20},
+  {id:'tcm',title:'中药调理',cat:'body',appt:true,type:'counter',target:3,count:0,shops:[{name:'新桥医院',area:'新桥医院',addr:'新桥医院',url:'',xhs:'',note:'必做！一回去就做',guide:'【中药调理】\n📍 新桥医院\n⚠️ 必做！一回去就约！\n\n💡 到了重庆第一时间安排',myNotes:'',done:false}],note:'',pts:20},
+  {id:'head',title:'头疗',cat:'body',appt:false,type:'check',shops:[{name:'丝域养发馆（新牌坊店）',area:'新牌坊',addr:'新牌坊1路265号渝复丽园C1幢1-1',url:'https://m.dianping.com',xhs:'',note:'4.5分250条 · 嘉州路站7口950m · 09:30-21:30 · 连锁 · 无隐性消费',guide:'🏷 团购搜：【头疗放松】水漾舒活spa/头皮温瑜伽2选1\n\n【丝域养发馆 新牌坊店】\n📍 新牌坊1路265号渝复丽园C1幢1-1\n🚇 嘉州路站7口步行950m\n⏰ 09:30-21:30\n⭐ 4.5分250条 · 连锁品牌 · 年度影响力品牌\n无隐性消费 · 刷卡支付\n\n【团购选项💰】\n\nA.【头疗放松】¥128（原¥458，2.8折）\n水漾舒活spa/头皮温瑜伽 二选一\n缓解压力，肌肽温泉矿物，60分钟\n\nB.【头疗轻养】¥98（原¥198，5折）\n桃胶轻养spa\n头部放松，桃树脂，60分钟\n\nC.【新客养发体验】¥138（原¥468，3折）\n玫瑰养发/珍珠养发 二选一\n染烫发质修护，专利玫瑰成分，85分钟\n98%好评601条，926家门店适用\n\nD.【柔顺滑养发】¥198（原¥696，2.9折）🔥\n玫瑰养发+头皮卸妆\n发质修护85分钟+头皮清洁\n97%好评14330条！年售7.5万+\n2079家门店适用\n\n💡 头疗放松¥128最适合体验，养发修护选D性价比最高',myNotes:'',done:false},{name:'头妍·头逍遥·经络头疗（观音桥店）',area:'观音桥',addr:'建新北路重庆茂业天地商场7层7006',url:'https://m.dianping.com',xhs:'',note:'4.5分3004条 · 观音桥站5口550m · 10:30-22:00 · 年度影响力品牌',guide:'🏷 团购搜：【头皮吸尘器】精准去屑｜舒缓皮炎｜控油补水3选1\n\n【头妍·头逍遥 观音桥店】\n📍 茂业天地商场7层7006\n🚇 3号线观音桥站5口550m\n⏰ 10:30-22:00\n⭐ 4.5分3004条！· 年度影响力品牌\n\n【团购🔥】¥199（原¥308，6.5折）\n80分钟茶麸成分 · 免预约\n99%好评 · 年售600+',myNotes:'',done:false},{name:'杉树花洗脸洗头吧（SKLP店）',area:'新光天地',addr:'红锦大道89号SKLP商场三楼C区03037号',url:'https://m.dianping.com',xhs:'',note:'4.5分1671条 · 嘉州路站330m · 10:00-22:00 · 修丽可授权 · 可带宠物',guide:'🏷 团购搜：【养发护发】深层清洁+珍珠养发\n\n【杉树花 SKLP店】\n📍 SKLP商场三楼C区03037号\n🚇 嘉州路站1口330m\n⏰ 10:00-22:00\n⭐ 4.5分1671条 · SPA好评榜第3\n修丽可官方授权店 · 可带宠物\n\n【团购🔥】¥98（原¥368，2.7折）\n深层清洁+珍珠养发50分钟 · 年售500+',myNotes:'',done:false},{name:'丝域养发馆（财富购物中心店）',area:'观音桥',addr:'洪湖东路1号重庆财富购物中心L2层26-2',url:'https://m.dianping.com',xhs:'',note:'4.6分626条 · 洪湖东路站1A口280m · 10:00-22:00 · 连锁 · 年度影响力品牌',guide:'🏷 团购搜：【脱发推荐】防脱调理+头部舒压\n\n【丝域养发馆 财富购物中心店】\n📍 洪湖东路1号财富购物中心L2层26-2（临近HM商铺）\n🚇 环线洪湖东路站1A口步行280m\n⏰ 10:00-22:00\n⭐ 4.6分626条 · 连锁 · 年度影响力品牌\n\n【团购🔥】\n【脱发推荐】防脱调理+头部舒压\n¥103（原¥198，5.2折）\n60分钟 · 防脱滋养+防脱特证\n年售9.7万+！！超级爆款\n\n【叠加】头皮清洁 ¥19.9（原¥98，2.1折）\n薄荷薰衣草8分钟 · 年售4000+\n\n💡 跟新牌坊店同品牌，这家在观音桥财富中心',myNotes:'',done:false}],note:'',pts:20},
+  {id:'foot',title:'足疗',cat:'body',appt:false,type:'check',shops:[{name:'待找店A',area:'待定',url:'',note:'',guide:'',done:false},{name:'待找店B',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:20},
+  {id:'acup',title:'针灸按摩',cat:'body',appt:true,type:'check',shops:[{name:'端艾堂·SPA·艾灸（新光里001店）',area:'新光天地',addr:'嘉州路92号新光里2楼',url:'https://m.dianping.com',xhs:'',note:'4.9分939条 · 人均¥211 · 3号线嘉州路站250m · 09:00-22:30 · 10年老店',guide:'🏷 团购搜：【肠胃调养】按摩SPA+艾灸｜多食油腻应酬多｜60分钟\n\n【端艾堂·SPA·艾灸 新光里001店】\n📍 嘉州路92号新光里2楼（跟倾普拉提同一栋楼）\n🚇 3号线嘉州路站出入口步行250m\n⏰ 09:00-22:30\n⭐ 4.9分939条 · 人均¥211 · 连锁\n🏆 加州花园推拿养生销量榜第3名\n收录10年老店 · 10个房间 · 有淋浴房 · 免费茶水小食\n\n【团购选项💰】\n\nA.【肠胃调养】按摩SPA+艾灸 ¥143（原¥328，4.4折）🔥\n60分钟，腹部\n年售6000+！销量高于附近90%同类团购\n\nB.【职场刚需】头疗·睡眠调养 ¥178（原¥278，6.4折）\n45分钟，头部+肩颈\n年售1000+，"服务热情，环境静谧舒适"\n\nC.【女性专属】暖宫养元 ¥213（原¥328，6.5折）\n70分钟，按摩+艾灸，腹部\n100%好评40条！年售700+\n流程：迎宾养生茶→辨体配穴→调息→臀部精油SPA→…\n\n还有：推拿/按摩、精油SPA、拔罐、刮痧等项目\n\n💡 肠胃调养¥143最热门，女性专属暖宫¥213好评100%',myNotes:'',done:false},{name:'锦艾·推拿艾灸&疗愈SPA（SKLP0072号店）',area:'新光天地',addr:'龙溪街道红锦大道89号嘉州SKLP C区3层3030',url:'https://m.dianping.com',xhs:'',note:'4.9分674条 · 人均¥171 · 嘉州路站1口210m · 10:00-23:30 · 销量榜第2',guide:'🏷 团购搜：【春日暖阳·武汉爆款】精油推拿SPA+艾灸｜80min\n\n【锦艾 SKLP店】\n📍 SKLP C区3层3030\n🚇 嘉州路站1口210m\n⏰ 10:00-23:30\n⭐ 4.9分674条 · 人均¥171 · 销量榜第2名\n8个房间 · "很新奇的体验，房间里有淋浴间"\n\n【团购🔥】¥184（原¥298，6.2折）\n精油推拿SPA+艾灸80分钟',myNotes:'',done:false},{name:'锦艾·推拿艾灸&疗愈SPA（财富中心0070号店）',area:'观音桥',addr:'天宫殿街道洪湖东路1号财富MALL三层A-9-2',url:'https://m.dianping.com',xhs:'',note:'4.6分462条 · 人均¥145 · 洪湖东路站1A口210m · 10:00-23:30 · 销量榜第1！',guide:'🏷 团购搜：【春季特惠】80min全身精油SPA/推拿按摩｜二选一\n\n【锦艾 财富中心店】\n📍 洪湖东路1号财富MALL三层（海底捞斜对面）\n🚇 环线洪湖东路站1A口210m\n⏰ 10:00-23:30\n⭐ 4.6分462条 · 人均¥145\n🏆 财富中心推拿养生销量榜第1名！\n9个房间\n\n【团购🔥】¥97（原¥288，3.4折）\n80min全身精油SPA/推拿按摩 二选一\n销量高于附近91%！\n\n💡 比SKLP店便宜，¥97超值',myNotes:'',done:false}],note:'',pts:20},
+  {id:'laser',title:'激光脱唇毛+光子嫩肤',cat:'body',appt:true,type:'check',shops:[{name:'待找医美',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:20},
+  {id:'tennis',title:'网球私教',cat:'body',appt:true,type:'counter',target:3,count:0,shops:[{name:'待找场地',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:20},
+  {id:'boxing',title:'拳击体验课',cat:'body',appt:true,type:'check',shops:[{name:'待找拳馆',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:20},
+  // 形象 pts:10
+  {id:'makeup',title:'化妆课（日常妆）',cat:'look',appt:true,type:'counter',target:6,count:0,shops:[{name:'范美妆私教（重庆观音桥店）',area:'观音桥',addr:'未来国际西北门24楼2408',url:'https://m.dianping.com/shopshare/laJbncOZpTNl2DZG',deal:'dianping://tuan?id=757317810',xhs:'',note:'4.9分737条 · 3号线观音桥站1号口150m · 09:30-20:00 · 提前两天预约',guide:'🏷 团购搜：【课程体验】6节生活妆容零基础生活课程-1v1教学\n\n【范 一对一美妆私教｜日常妆容提升】¥1380\n团购200抵251，线下补差价1129\n1v1教学，手把手辅导，适合零基础小白/手残党\n提前预约上课时间，灵活安排\n提供上课产品+讲解（可找到适合自己的化妆品）\n位置在地铁楼上，交通方便\n学完后可继续回来学，老师辅导\n老师资历5-8年\n\n【6节课内容】\n1. 护肤品的运用（底妆老出问题？护肤步骤好好学，告别底妆搓泥卡粉）\n2. 通透氧气底妆（要想带妆持久，产品和手法都很重要）\n3. 眉型设计（眉毛五官之首，精不精神就靠它）\n4. 美化眼型（如何调整眼型放大双眼）\n5. 自然晕染眼影（风格定位，多颜色怎么搭配）\n6. 美瞳眼线及塑形眼线（心机眼妆的秘密快学）\n7. 立体小颜高光修容及鼻侧影（脸小的秘密）\n8. 唇形塑造，修饰与改善\n9. 生活通勤约会妆容整体塑造\n10. 妆前护理，晚间卸妆\n\n共6课时，结合理论和实践。报名后六个月内上完，不退不转。',done:false},{name:'半醒美妆·化妆造型（观音桥店）',area:'观音桥',addr:'茂业天地21楼09室',url:'https://m.dianping.com/shopshare/k7YowzWPunLpZAZ4',xhs:'',note:'4.6分1211条 · 3号线观音桥站5口560m · 10:00-19:00 · 提前一天预约 · 好评榜第2名',guide:'🏷 团购搜：【化妆私教单次课】1V1美妆私教｜化妆实操体验\n\n【选项A：单次体验 ¥299】门市¥499\n90分钟1对1，可选七种妆容\n日常生活妆/泰妆/欧美妆/甜美约会妆/端庄职业妆/网红妆\n\n【10项课程内容】\n1. 基础护肤知识\n2. 修眉技巧\n3. 通透底妆技巧\n4. 针对个人肤质定妆手法\n5. 针对妆容自然晕染眼影法\n6. 调整眼型韩式美瞳眼线技巧\n7. 个人定制眉型\n8. 日常腮红\n9. 立体修容技巧\n10. 日常咬唇\n\n带自己化妆品，老师教使用方法和搭配\n迟到半小时需另约，不支持旁听\n\n【选项B：4节初阶课程 ¥900】门市¥1200\n4节课×90分钟=360分钟\n基础护肤→底妆→修容→眉毛→基础眼妆→腮红→唇妆\n学完可独立完成日常妆，妆感较淡适合通勤\n有效期一年，报名费不可退\n\n💡 可先买单次¥299试试，满意再买课程包',myNotes:'',done:false},{name:'金夫人化妆摄影职业培训学校',area:'解放碑',addr:'解放碑169号金渝大厦43楼',url:'https://m.dianping.com',xhs:'',note:'4.8分782条 · 临江门站240m · 09:00-17:00 · 美业好评榜第1！· 14年',guide:'🏷 团购搜：【化妆培训】化妆师培训专业课·试听\n\n【金夫人化妆摄影职业培训学校】\n📍 解放碑169号金渝大厦43楼\n🚇 2号线临江门站240m\n⏰ 09:00-17:00\n⭐ 4.8分782条 · 2295人预约\n🏆 重庆美业形象培训好评榜第1名！\n收录14年 · 10年资深导师亲自教学\n20%理论+80%实践 · 小班精致 · 终身复修\n免费试听60分钟\n\n【团购💰】\n💄 化妆师培训试听 ¥1 · 年售70+\n💄 周末个人美妆小班课 ¥199（原¥380）\n💄【美妆私教】1v1单次课 ¥398（原¥500）\n150分钟！零基础 · 100%好评\n老师讲解演示→学员练习手把手辅导\n\n💡 ¥1试听→¥398单次150分钟私教超值',myNotes:'',done:false}],note:'',pts:10},
+  {id:'lash',title:'做美睫',cat:'look',appt:true,type:'check',shops:[{name:'TG糖革·美甲美睫轻奢连锁（财富中心店）',area:'观音桥',addr:'财富大道1号财富购物中心1楼（瑞幸咖啡旁）',url:'https://m.dianping.com',xhs:'',note:'4.6分1240条 · 洪湖东路站1A口320m · 10:00-21:00 · JNA认证 · 收录6年',guide:'【TG糖革 财富中心店】\n📍 财富购物中心1楼（瑞幸咖啡旁）\n🚇 环线洪湖东路站1A口步行320m\n⏰ 10:00-21:00\n⭐ 4.6分1240条 · 日本JNA检定认证\n收录6年 · 无隐性消费\n\n【美睫团购💰】\n💫 初恋新生感日式单根不限根数 ¥298（原¥480）\n本店复购第1名！10天内免费修补\n\n💫 自然款灵动质感微妆高定款 ¥398（原¥680）\n10天内免费修补\n\n💫 超灵动下睫 ¥88（原¥200）\n款式任选',myNotes:'',done:false}],note:'',pts:10},
+  {id:'glasses',title:'配眼镜（超薄1.74镜片）',cat:'look',appt:false,type:'check',shops:[{name:'观音桥眼镜城·蔡司战略合作店',area:'观音桥',addr:'建新北路9号同聚远景5楼',url:'https://m.dianping.com',xhs:'',note:'4.9分4965条 · 人均¥405 · 观音桥站5口140m · 10:00-22:00 · 销量榜第1！',guide:'🏷 团购搜：极薄视野|康耐特1.74FIX双曲面减薄镜片防蓝光配镜套餐\n\n【观音桥眼镜城·蔡司战略合作店】\n📍 建新北路9号同聚远景5楼\n🚇 3号线观音桥站5口步行140m！超近\n⏰ 10:00-22:00\n⭐ 4.9分4965条 · 人均¥405\n🏆 重庆近视配镜销量榜第1名！人气好店\n验光资质核实 · 30天免费换 · 正品保障\n\n【团购💰】\n🥇 康耐特1.74FIX双曲面减薄防蓝光配镜套餐\n¥608（原¥3673，1.7折！）\n重庆眼镜套餐销量榜第3名 · 年售900+\n免预约 · 购后364天有效 · 19家门店适用\n\n🥈 韩国进口凯米1.74防蓝光 ¥268（原¥2480，1.1折）\n300-1200度 · 300元内镜框任选1副 · 年售800+\n\n👦 青少年离焦镜（进口三大品牌近视控制片）\n¥1180（原¥4592）50-600度 · 含防控效果保障',myNotes:'',done:false}],note:'',pts:10},
+  {id:'photo',title:'全家福艺术照',cat:'look',appt:true,type:'check',shops:[{name:'待找摄影工作室',area:'待定',url:'',note:'提前预约',guide:'',done:false}],note:'',pts:10},
+  // 体验 pts:15
+  {id:'hiphop',title:'街舞课',cat:'exp',appt:true,type:'check',shops:[{name:'YASAKI国际舞蹈中心（爱琴海店）',area:'爱琴海',addr:'金开大道爱琴海购物广场玫瑰天街B1栋11F',url:'https://m.dianping.com',xhs:'',note:'4.8分1171条 · 好评榜第2 · 09:00-23:30 · 免费停车',guide:'【YASAKI 爱琴海店】\n📍 金开大道爱琴海购物广场玫瑰天街B1栋11F\n🚇 5号线重光站3A口1.5km\n⏰ 09:00-23:30 · 收录8年 · 免费停车\n⭐ 4.8分1171条 · 两江新区舞蹈好评榜第2名\n\n【团购超值🔥】\n🎵 JAZZ入门大班 ¥0.8！（原¥288）年售3000+\n🎵 社恐i人零基础小班 ¥18.9（原¥520）复购第1名\n🎵 KPOP韩舞 ¥2.6（原¥99）年售500+',myNotes:'',done:false},{name:'阁楼街舞（财富中心店）',area:'观音桥',addr:'财富中心财富MALL A区二楼C20/21号',url:'https://m.dianping.com',xhs:'',note:'4.6分432条 · 洪湖东路站460m · 10:00-22:00',guide:'【阁楼街舞 财富中心店】\n📍 财富MALL A区二楼C20/21号\n🚇 环线洪湖东路站1A口460m\n⏰ 10:00-22:00 · ⭐ 4.6分432条\n\n【团购💰】\n🎵 成人街舞爵士舞1节 ¥6.9（原¥300）年售600+\n🎵 街舞爵士舞2节 ¥20.9 8种舞种任选\n🎵 少儿街舞3.5-12岁 ¥19.9 7种舞种\n💡 有少儿班，可以跟娃一起！',myNotes:'',done:false},{name:'PLAN DANCE舞蹈（冉家坝店）',area:'新光天地',addr:'新南路爱融荟城A区5层',url:'https://m.dianping.com',xhs:'',note:'4.7分330条 · 冉家坝站100m！超近 · 10:00-22:00',guide:'【PLAN DANCE 冉家坝店】\n📍 新南路爱融荟城A区5层\n🚇 冉家坝站3口100m！超近\n⏰ 10:00-22:00 · ⭐ 4.7分330条\n\n【团购💰】\n🎵 零基础爵士舞体验 ¥7.9（原¥100）\n🎵 寒暑月卡 ¥560（原¥880）9种舞种',myNotes:'',done:false}],note:'',pts:15},
+  {id:'climb',title:'攀岩',cat:'exp',appt:false,type:'check',shops:[{name:'山石攀岩',area:'待定',url:'https://m.dianping.com',note:'单人私教课',guide:'',done:false}],note:'',pts:15},
+  {id:'drums',title:'架子鼓',cat:'exp',appt:true,type:'check',shops:[{name:'待找琴行',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'paint',title:'画室画画',cat:'exp',appt:false,type:'check',shops:[{name:'待找画室',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'latte',title:'咖啡拉花',cat:'exp',appt:true,type:'check',shops:[{name:'寻咖食客精品咖啡学院',area:'龙湖',addr:'龙湖新壹街A馆1栋17楼24号',url:'https://m.dianping.com',xhs:'',note:'4.8分195条 · 3/6号线红旗河沟站1口820m · 09:30-22:00 · 兴趣生活好评榜第2',guide:'🏷 团购搜：小班咖啡拉花4课时零基础入门\n\n【寻咖食客精品咖啡学院】\n📍 龙湖新壹街A馆1栋17楼24号\n🚇 3/6号线红旗河沟站1口820m\n⏰ 09:30-22:00\n⭐ 4.8分195条 · 146人预约\n🏆 重庆兴趣生活好评榜第2名\n承接团建聚会 · 免费重学 · 推荐就业 · 创业指导\n\n【入门推荐🔥】\n☕ 小班咖啡拉花4课时 ¥398（原¥1980，2.1折）\n零基础入门 · 4节×45分钟 · 100%好评\n需预约 · 购后30天有效\n课程：咖啡机原理→磨豆机原理→浓缩咖啡标准制作→高品质奶泡打发→咖啡拉花训练\n\n【进阶课程】\n☕ 专业意式拉花15课时 ¥980（原¥1980）6个款式\n☕ 专业冲煮课15课时 ¥980\n☕ 少儿咖啡拉花 ¥798（6-15岁）\n☕ 咖啡夜校12节 ¥999\n\n💡 ¥398四节课入门，100%好评',myNotes:'',done:false}],note:'',pts:15},
+  {id:'glass',title:'做玻璃',cat:'exp',appt:true,type:'check',shops:[{name:'待找工坊',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'bake',title:'西点培训',cat:'exp',appt:true,type:'check',shops:[{name:'待找烘焙教室',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'concert',title:'演唱会',cat:'exp',appt:false,type:'check',eventDate:'查到后填入',shops:[{name:'待查演出',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'festival',title:'音乐节',cat:'exp',appt:false,type:'check',eventDate:'查到后填入',shops:[{name:'待查演出',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'livehouse',title:'Livehouse',cat:'exp',appt:false,type:'check',eventDate:'查到后填入',shops:[{name:'待查场地',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'exhibit',title:'展览',cat:'exp',appt:false,type:'check',eventDate:'查到后填入',shops:[{name:'待查展览',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'nightmkt',title:'逛夜市',cat:'exp',appt:false,type:'check',shops:[{name:'待定夜市',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'climb',title:'攀岩体验（自己去）',cat:'exp',appt:true,type:'check',shops:[{name:'山石攀岩（C33店）',area:'爱琴海',addr:'鸳鸯街道经开园金渝大道102号附5号2-18',url:'https://m.dianping.com',xhs:'',note:'4.6分203条 · 两江新区销量榜第1 · 13:00-22:00',guide:'【山石攀岩 C33店】\n📍 金渝大道102号附5号2-18\n⏰ 13:00-22:00\n⭐ 4.6分203条 · 两江新区攀岩馆销量榜第1名\n\n【团购💰】\n🧗（限工作日）单人攀岩私教60分钟 ¥188（原¥350，5.4折）\n含全天门票+攀岩鞋+镁粉+安全带+保险+教练1小时\n93%好评 · 年售400+\n\n🧗 每周二女性半价全天门票 ¥64（原¥128）\n年售4000+！不限时！\n\n💡 周二去最划算¥64全天不限时，想学技巧买私教¥188',myNotes:'',done:false}],note:'',pts:15},
+  {id:'surf',title:'冲浪体验',cat:'exp',appt:true,type:'check',shops:[{name:'待找冲浪馆',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'talkshow',title:'脱口秀',cat:'exp',appt:true,type:'check',shops:[{name:'旅行箱喜剧脱口秀剧场',area:'新光天地',addr:'龙溪街道红锦大道89号新光里+SKLP四楼C区',url:'https://m.dianping.com',xhs:'',note:'4.8分 · 嘉州路站34m！超近 · 新光里SKLP四楼',guide:'【旅行箱喜剧脱口秀剧场】\n📍 龙溪街道红锦大道89号新光里+SKLP四楼C区\n🚇 3号线嘉州路站出入口步行34m！！就在地铁口\n⭐ 4.8分\n\n【近期演出🎤】\n\n🎭 脱口秀开放麦&「要不整点」播客录制\n2026.04.01-04.29\n¥9.9起 · 套票60×2仅¥100 · 折扣价¥40\n\n🎭【脱口秀小剧场】特邀：林琛\n2026.04.03-04.27\n¥30起 · 猫眼评分9.8！\n套票60×2仅¥100 · 折扣价¥40\n\n🎭 寒有余脱口秀专场「逃跑路线」精选专场\n2026.04.04 周六 19:30\n¥99起\n\n💡 就在新光里SKLP四楼，做完普拉提/按摩顺便看一场！',myNotes:'',done:false},{name:'拾楼小剧场',area:'渝中',addr:'',url:'',xhs:'',note:'话剧/即兴喜剧/脱口秀',guide:'【拾楼小剧场】\n渝中区 · 话剧/即兴喜剧/脱口秀\n\n💡 具体演出信息待查，大众点评搜"拾楼小剧场"',myNotes:'',done:false}],note:'',pts:15},
+  {id:'theater',title:'去剧院',cat:'exp',appt:true,type:'check',shops:[{name:'重庆大剧院',area:'江北嘴',addr:'江北嘴北城文华街东路（朝天门对面）',url:'https://m.dianping.com',xhs:'',note:'4.9分 · 6号线大剧院站2口442m',guide:'【重庆大剧院】\n📍 江北嘴北城文华街东路（朝天门对面）\n🚇 6号线大剧院站2口步行442m\n⭐ 4.9分\n票房热线：023-61863166/99\n取票：平日9:00-18:00，演出日9:00-20:00\n\n【6月演出🎭】\n\n🎭 曹禺经典话剧《雷雨》重庆站（大剧场）\n2026.06.19 周五 19:30\n¥100-580（100票档每张减40）\n⚠️ 1.0米以下儿童谢绝入场\n不支持退票！\n\n🎭 沉浸式海洋科学与幻想之旅舞台剧《海底两万里》（大剧场）\n2026.06.20 周六\n¥80-480（80票档每张减32）\n经典文学著作改编\n\n【近期精选】\n🎵 卡拉永远OK——华语流行金曲演唱会 4/3 ¥80起\n🎵 音乐戏剧《小王子》（中剧场）4/3-4/4 ¥80起\n🎵 潘美辰2026「回家2.0」巡回演唱会 4/4 ¥180起\n🎭 沉浸式全景互动舞台剧《冰雪女王·艾莎的公主奇缘》4/5 ¥80起',myNotes:'',done:false},{name:'重庆国泰艺术中心',area:'解放碑',addr:'临江路3号',url:'https://m.dianping.com',xhs:'',note:'4.9分1848条 · 2号线临江门站208m',guide:'【重庆国泰艺术中心】\n📍 临江路3号\n🚇 2号线临江门站出入口步行208m\n⭐ 4.9分1848条\n\n【近期演出🎭】\n\n🎭 开心麻花王牌爆笑舞台剧《乌龙山伯爵》\n2026.04.03-04.05 · ¥80起\n\n🎭 大型治愈系话剧《心光-王阳明传奇》龙场悟道\n2026.05.16 周六 19:28 · ¥88起\n猫眼评分8.6 · 折扣6.5折 原¥180仅¥118\n\n【评价关键词】\n适合艺术爱好者54 · 喜剧元素丰富3 · 地铁直达方便7 · 题凑夜晚灯光璀璨6',myNotes:'',done:false},{name:'重庆劳动文化宫大剧院',area:'渝中',addr:'两路口街道中山二路174号',url:'https://m.dianping.com',xhs:'',note:'两路口 · 话剧/京味儿大戏',guide:'【重庆劳动文化宫大剧院】\n📍 两路口街道中山二路174号\n\n【6月演出🎭】\n\n🎭 京味儿大戏-老舍经典话剧《茶馆》\n2026.06.20 周六 19:30 · 约110分钟\n¥70-290（180票档5折）\n\n💡 《茶馆》和《雷雨》都在6/19-20，可以选一个看！',myNotes:'',done:false}],note:'',pts:15},
+  // 带娃 pts:15
+  {id:'boat',title:'船宴',cat:'kids',appt:true,type:'check',shops:[{name:'巴国城船宴',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'kclimb',title:'攀岩（带娃）',cat:'kids',appt:false,type:'check',shops:[{name:'山石攀岩（C33店）',area:'爱琴海',addr:'鸳鸯街道经开园金渝大道102号附5号2-18',url:'https://m.dianping.com',xhs:'',note:'4.6分203条 · 两江新区攀岩馆销量榜第1！· 人气好店 · 13:00-22:00',guide:'🏷 团购搜：青少年攀岩体验课（限5-12岁）\n\n【山石攀岩 C33店】\n📍 鸳鸯街道经开园金渝大道102号附5号2-18\n（距砂之船重庆两江奥莱步行1.0km）\n⏰ 13:00-22:00\n⭐ 4.6分203条\n🏆 两江新区攀岩馆销量榜第1名！人气好店\n支持散客 · 专业教练 · 有成人课 · 休息区\n\n【带娃团购🧒】\n🧗 青少年攀岩体验课（限5-12岁）¥89.9（原¥188，4.8折）\n45分钟室内 · 96%好评 · 年售400+\n含场地+装备+教练培训费\n\n【妈妈自己去👩】\n🧗（限工作日）单人攀岩私教60分钟 ¥188（原¥350，5.4折）\n12周岁以上 · 93%好评 · 年售400+\n含全天内外场门票+攀岩鞋+镁粉+安全带+保险+教练1小时带教\n\n🏷 每周二内外场全天门票半价（限18岁以上女性）\n¥64（原¥128）年售4000+！\n\n💡 带娃买¥89.9体验课，自己想去买周二女性半价¥64或工作日私教¥188',myNotes:'',done:false}],note:'',pts:15},
+  {id:'kart',title:'卡丁车',cat:'kids',appt:false,type:'check',shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'skate',title:'滑冰',cat:'kids',appt:false,type:'check',shops:[{name:'冰世界真冰滑冰场（爱琴海店）',area:'爱琴海',addr:'鸳鸯街道金开大道1003号附1号金开爱琴海购物中心F4层',url:'https://m.dianping.com',xhs:'',note:'4.4分249条 · 人均¥47 · 13:00-21:00 · 溜冰销量榜第1！',guide:'【冰世界真冰滑冰场 爱琴海店】\n📍 金开爱琴海购物中心F4层\n⏰ 13:00-21:00\n⭐ 4.4分249条 · 人均¥47\n🏆 重庆溜冰/滑雪场馆销量榜第1名！\n1200平冰面超大面积 · 专业级\n支持散客 · 专业教练 · 提供护具\n有成人课 · 休息区\n\n【团购💰】\n🎫 单人票90分钟 ¥56（原¥80，7折）年售1000+\n🎫 双人票90分钟 ¥99（原¥140）年售800+\n🎫 三人票90分钟 ¥139（原¥240，5.8折）\n\n💡 三人票¥139最划算，带俩娃正好！',myNotes:'',done:false}],note:'',pts:15},
+  {id:'ksurf',title:'冲浪（带娃）',cat:'kids',appt:false,type:'check',shops:[{name:'待找冲浪馆',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
+  {id:'citywalk',title:'City Walk步道（半山崖线）',cat:'kids',appt:false,type:'check',shops:[{name:'半山崖线→佛图关公园→悬空步道→鹅岭公园',area:'渝中',addr:'佛图关公园南门',url:'',xhs:'',note:'全程下坡不费腿约1小时 · 免费',guide:'【打卡路线】\n半山崖线 → 佛图关公园 → 悬空步道 → 鹅岭公园\n全程下坡不费腿！！\n\n【详细走法】\n✅ 半山崖线轻徒步到佛图关公园，全程大概1小时\n✅ 佛图关公园南门进入，徒步期间还可以拍到林间轻轨\n✅ 悬空步道比较出片的旋转步道在靠近鹅岭公园处\n✅ 从鹅岭公园进入可以继续拍公园美景，吸氧充电\n\n💡 citywalk完可以直奔附近巷子里找吃的',myNotes:'',done:false}],note:'',pts:15},
+  {id:'cqufk',title:'重庆大学防空洞',cat:'kids',appt:true,type:'check',shops:[{name:'重庆大学A区防空洞',area:'沙坪坝',addr:'重庆大学A区钟塔左侧网球场后面',url:'',xhs:'',note:'免费 · 周日不开 · 公众号"平安重大"预约',guide:'【参观攻略】\n📍 重庆大学A区防空洞\n⏰ 9:00-12:00, 15:00-18:00\n⚠️ 周日不开，勿跑空！\n🎫 公众号"平安重大"预约，即可免费进校参观\n🚶 从沙正街正门进入，更便捷\n防空洞入口在钟塔左侧网球场的后面（见小红书图指示）\n\n【亮点】\n重大10月新开的防空洞，免费参观超震撼\n防空洞不仅大，设施陈列和介绍也很精致✨\n虽然只开了1/3的面积，但基本维持了原貌\n沉浸在当年1:1还原的实景之中\n感受重大人顽强不服输的乐观和团结精神\n\n目前游客不多，运气好能碰上讲解员免费讲解\n不仅能学习防空洞的相关知识\n还能带娃身临其境了解历史，来一场爱国教育🇨🇳\n大人孩子都能涨知识～太值啦！\n\n💡 参观完顺便带孩子感受一下重庆高校的氛围',myNotes:'',done:false}],note:'',pts:15},
+  {id:'cwtl',title:'川外小铁路徒步',cat:'kids',appt:false,type:'check',shops:[{name:'川外小铁路',area:'沙坪坝',addr:'梅林停车场',url:'',xhs:'',note:'免费 · 1号线烈士墓站2B口步行15min · 全程2km平坦',guide:'【川外小铁路 · 森系徒步路线】\n重庆市区内户外轻徒步宝藏地！不用出市区就能开启户外治愈之旅\n\n【交通】\n🚇 1号线烈士墓站2B口出站，步行约15分钟\n（觉得步行累也可以出站后坐公交车）\n🚗 自驾导航"梅林停车场"，停车后步行几分钟到入口\n⚠️ 停车提醒：工作日好停，周末不好停！评论区多人建议别开车\n\n【路线info】\n✅ 全程约2km，大半个小时就走完\n✅ 路况很好，基本是平坦道路\n✅ 对徒步小白超友好，老人小孩都能走～\n\n【三大亮点】\n1️⃣ 秋日森系氛围拉满：阳光透过枝叶缝隙洒下斑驳光影，满满森系氛围感🌿\n2️⃣ 复古小铁路：废弃的铁轨诉说着往昔的故事，仿佛能看到曾经列车穿梭的画面，拍照出片随意拿捏📸\n3️⃣ 神秘时光隧道：300多米长的隧道，充满了神秘浪漫\n\n💡 如果不尽兴，可以返回沿着铁轨一直走到梨树湾\n🎒 自己带点干粮和水，随时补充体力\n🚻 公卫较少要注意',myNotes:'',done:false}],note:'',pts:15},
+  {id:'chuanju',title:'川剧（重庆川剧院）',cat:'kids',appt:true,type:'check',shops:[{name:'重庆川剧院–川剧艺术中心',area:'沙坪坝',addr:'金山大道2号',url:'https://m.dianping.com',xhs:'',note:'4.8分 · 5号线人和站1口418m',guide:'🏷 团购搜：沉浸式城市旅游驻场演出《醉人的川剧》\n\n【强烈推荐：《醉人的川剧》】¥84起\n避开网红景点，选这个！性价比很高\n\n1小时演出，折子戏+科普形式，呈现经典川剧片段\n包含演员扮相、经典片段：\n🎭 天女散花\n🎭 皮金滚灯\n🎭 变脸\n🎭 吐火\n\n边品茶边赏戏，太巴适惬意啦☕\n现场座无虚席、大家看入迷，基本无人看手机\n文旅+普及地方戏曲的形式，非常值得体验\n\n川剧真的好美、好灵、好功夫\n曲调欢快动人，歌词有韵！看完已入坑！\n\n【其他演出】\n川剧《柳荫记》¥120（梁祝化鸟寄哀思，清明绝美上演）\n川剧经典折子戏专场 ¥120',myNotes:'',done:false}],note:'',pts:15},
+  {id:'lundu',title:'轮渡嘉陵（磁器口↔洪崖洞）',cat:'kids',appt:false,type:'check',shops:[{name:'轮渡嘉陵',area:'磁器口',addr:'磁器口码头（特钢渡口）',url:'',xhs:'',note:'¥30/人 · 小程序"交运水上观光游"买票',guide:'【轮渡嘉陵 · 嘉陵江水上观光】\n🎫 ¥30/人\n🚢 站点：洪崖洞码头 ↔ 磁器口码头（特钢渡口）\n📱 小程序"交运水上观光游"查班次/买票\n\n【航行时间】\n洪崖洞→磁器口（上水）约70分钟\n磁器口→洪崖洞（下水）约50分钟\n班次较多，最晚一班4点半从磁器口出发\n下雨一般会开，涨水就会停\n\n【为什么推荐🔥】\n💰 30块相当于磁器口到洪崖洞的打车费！解决交通还不堵车\n🌊 一个小时沿岸江景白送\n🚇 会路过李子坝，在船上轻轻松松看轻轨穿楼！不用在大太阳下面傻站着晒\n✨ 今年才复航，知道的人不多也不打挤\n\n【Tips💡】\n1️⃣ 建议坐磁器口→洪崖洞的最后一班，到洪崖洞大概5点半，附近吃个饭直接看夜景🌃\n2️⃣ 磁器口码头（特钢渡口）到磁器口景区还有约1公里，有免费接驳车🚌\n3️⃣ 洪崖洞上船：定位"洪崖洞码头"\n4️⃣ 磁器口上船：定位"特钢渡口"，或在磁器口东门附近坐免费摆渡车过去，大概10分钟',myNotes:'',done:false}],note:'',pts:15},
+  {id:'swim',title:'游泳私教',cat:'kids',appt:true,type:'counter',target:7,count:0,shops:[{name:'浚涛游泳培训（嘉州店）',area:'新光天地',addr:'红锦大道61号',url:'https://m.dianping.com',xhs:'',note:'4.8分620条 · 人均¥1025 · 龙溪站4A口810m · 24小时营业 · 销量榜第1！',guide:'🏷 团购搜：【成人/少儿】单人单次体验（非门票）\n\n【浚涛游泳培训 嘉州店】\n📍 红锦大道61号\n🚇 龙溪站4A口步行810m\n⏰ 24小时营业！\n⭐ 4.8分620条 · 人均¥1025\n🏆 加州花园游泳馆销量榜第1名！\n室内泳池 · 酒店泳池 · 儿童游泳课\n每日消毒 · 收录8年\n\n【团购💰】\n🏊 单次体验（成人/少儿）¥19.9（原¥450，0.5折！）\n40分钟，专业教练下水教学 · 年售300+\n\n🏊 私教1对1 7节课 ¥1200（原¥2100，5.8折）\n90分/节，酒店泳池 · 年售100+\n0基础7节课包会蛙泳！\n\n🏊 进阶自由泳1v1单次 ¥220（原¥300）90分钟\n\n🏊 私教1对1 10节课（少儿/进阶）¥1700（原¥2800）\n蛙泳90分×10=总共15小时\n\n💡 先买¥19.9体验一次，满意再买课程包',myNotes:'',done:false},{name:'璨璨游泳培训中心',area:'新光天地',addr:'红锦大道63号',url:'https://m.dianping.com',xhs:'',note:'4.7分224条 · 07:00-21:00 · 标准泳池50m×21m · 销量榜第2 · 去年哥哥上的兰教练',guide:'【璨璨游泳培训中心】\n📍 红锦大道63号（距阳光五洲大酒店20m）\n⏰ 07:00-21:00\n⭐ 4.7分224条 · 收录5年\n🏆 加州花园游泳馆销量榜第2名！\n标准泳池（50m×21m）· 背漂\n\n⭐ 去年哥哥在这里上的兰教练！\n\n【团购💰】\n🏊 单人体验课 ¥20（原¥368，0.6折）30分钟\n\n🏊【星级教学】1对1 七节课培训全包 ¥1196（原¥2680，4.5折）\n成人 · 免预约\n\n🏊 蝶/仰/蛙/自 10课起1对1教学 ¥180.5/节（原¥368，4.9折）\n不限人群 · 免预约\n\n🏊 蝶/仰/蛙/自 10节课起1对2 ¥152/节（原¥388）\n90天最低价！\n\n💡 去年上过兰教练，今年可以继续约\n\n💰 实际价格：189元/次（跟教练直接约）',myNotes:'',done:false}],note:'',pts:15},
+  {id:'drum',title:'架子鼓（弟弟）',cat:'kids',appt:true,type:'counter',target:5,count:0,shops:[{name:'向日葵流行音乐培训机构（江北观音桥店）',area:'观音桥',addr:'观音桥北城天街海怡花园B栋504',url:'https://m.dianping.com',xhs:'',note:'4.8分609条 · 观音桥音乐好评榜第2 · 13:00-20:30 · 安心学一课一消',guide:'🏷 团购搜：【架子鼓】零基础一对一体验课\n\n【向日葵流行音乐培训 观音桥店】\n📍 北城天街海怡花园B栋504（远东百货对面）\n🚇 9号线观音桥站6A口1.1km\n⏰ 13:00-20:30\n⭐ 4.8分609条 · 1485人预约\n🏆 观音桥音乐好评榜第2名\n安心学：一课一消·随时可退 · 收录9年\n有琴房、练歌房、课后练习指导\n\n【弟弟·架子鼓🥁】\n体验课 ¥1（原¥180，0.1折！）\n6岁-17岁 · 零基础 · 1对1 · 40分钟\n100%好评',myNotes:'',done:false},{name:'北斗流行音乐（恒大中渝广场校区）',area:'新光天地',addr:'恒大中渝广场嘉州城T7栋28-7,28-8',url:'https://m.dianping.com',xhs:'',note:'4.8分363条 · 嘉州路站7口220m！· 两江新区好评榜第2 · 连锁13年',guide:'🏷 团购搜：【架子鼓】1对1·学架子鼓零基础·精品体验课\n\n【北斗流行音乐 恒大中渝广场校区】\n📍 恒大中渝广场嘉州城T7栋28-7,28-8\n🚇 嘉州路站7口220m！离家超近\n⏰ 09:00-22:00\n⭐ 4.8分363条 · 连锁13年\n\n【弟弟·架子鼓🥁】\n体验课 ¥1（原¥200）\n100%好评800条！年售1万+！\n1对1 · 45分钟\n课程：基础乐理→摇滚流行→手部基本功→30分钟教学+15分钟练习\n58家门店 · 购后180天有效\n\n💡 离家近！嘉州路站220m',myNotes:'',done:false},{name:'SEVEN唱功学院（源著校区）',area:'新光天地',addr:'新南路爱融荟城A区3栋13层',url:'https://m.dianping.com',xhs:'',note:'4.6分821条 · 冉家坝站3口160m！· 两江新区音乐热门榜第1！· 24小时 · 15年专注',guide:'🏷 团购搜：🔻吉他/架子鼓/贝斯🔻专业精品体验课\n\n【SEVEN唱功学院 源著校区】\n📍 新南路爱融荟城A区3栋13层\n🚇 5/6号线/环线冉家坝站3口160m！超近\n⏰ 24小时营业\n⭐ 4.6分821条 · 1149人预约\n🏆 两江新区音乐热门榜第1名！\n收录4年 · 15年专注声乐教学 · 安心学一课一消\n有琴房、练歌房、录音棚、乐器售卖\n免费试听+能力水平测试\n\n【弟弟·架子鼓🥁】\n体验课 ¥1（原¥500）\n1对1 · 30分钟 · 零基础入门\n课程：架子鼓基础知识→基础技巧→基础练习\n2家门店适用 · 购后30天有效\n\n💡 冉家坝站160m，跟PLAN DANCE舞蹈在同一个商场！',myNotes:'',done:false}],note:'',pts:15},
+  {id:'guitar',title:'电吉他/声乐（哥哥）',cat:'kids',appt:true,type:'counter',target:5,count:0,shops:[{name:'向日葵流行音乐培训机构（江北观音桥店）',area:'观音桥',addr:'观音桥北城天街海怡花园B栋504',url:'https://m.dianping.com',xhs:'',note:'4.8分609条 · 观音桥音乐好评榜第2 · 13:00-20:30',guide:'🏷 团购搜：【吉他/古典吉他/电吉他/电贝斯】零基础1对1体验\n\n【向日葵流行音乐培训 观音桥店】\n📍 北城天街海怡花园B栋504（远东百货对面）\n🚇 9号线观音桥站6A口1.1km\n⏰ 13:00-20:30\n⭐ 4.8分609条\n🏆 观音桥音乐好评榜第2名\n\n【哥哥·电吉他🎸】\n体验课 ¥1（原¥310，0.1折！）\n零基础1对1 · 100%好评28条\n18岁及以上（如果孩子可以先问店家）\n\n【哥哥·流行声乐🎤】\n零基础K歌1对1体验课 ¥1（原¥300）\n100%好评126条 · 年售100+\n流行声乐30分钟+量声定制教学方案\n\n【试听】\n5个科目任选试听1节 ¥1 · 年售200+\n架子鼓/流行声乐等\n\n💡 全部¥1体验！先各买一节试试',myNotes:'',done:false},{name:'北斗流行音乐（恒大中渝广场校区）',area:'新光天地',addr:'恒大中渝广场嘉州城T7栋28-7,28-8',url:'https://m.dianping.com',xhs:'',note:'4.8分363条 · 嘉州路站7口220m！· 两江新区好评榜第2 · 连锁13年',guide:'🏷 团购搜：【电吉他】1对1·学吉他零基础体验课\n\n【北斗流行音乐 恒大中渝广场校区】\n📍 恒大中渝广场嘉州城T7栋28-7,28-8\n🚇 嘉州路站7口步行220m！离家超近\n⏰ 09:00-22:00\n⭐ 4.8分363条 · 连锁13年\n\n【哥哥·电吉他🎸】\n体验课 ¥1（原¥300）\n100%好评193条 · 年售3000+\n1对1 · 45分钟 · 零基础入门\n课程：右手拨弦左手音阶→爬格子→各种风格节奏→30分钟教学+15分钟练习\n\n【哥哥·流行唱歌🎤】\n「学唱歌·流行唱法」1对1精品体验课 ¥1（原¥200）\n100%好评1308条！年售2.4万+！！\n45分钟 · 课程目标：基础知识+气息运用+腔体共鸣\n30分钟教学+15分钟自主练习\n\n💡 离家超近！试听课全部¥1，比向日葵更方便',myNotes:'',done:false},{name:'SEVEN唱功学院（源著校区）',area:'新光天地',addr:'新南路爱融荟城A区3栋13层',url:'https://m.dianping.com',xhs:'',note:'4.6分821条 · 冉家坝站160m！· 热门榜第1 · 24小时 · 15年专注声乐',guide:'🏷 团购搜：🔻成人吉他零基础🔻体验课\n\n【SEVEN唱功学院 源著校区】\n📍 新南路爱融荟城A区3栋13层\n🚇 冉家坝站3口160m！\n⏰ 24小时营业\n⭐ 4.6分821条 · 热门榜第1名\n15年专注声乐教学\n\n【哥哥·吉他🎸】\n成人吉他零基础体验课 ¥1 · 1对1 · 30分钟\n\n【哥哥·流行声乐🎤】\n试听课1节 ¥1起 · 架子鼓/流行声乐等6个科目任选\n青少/成人适用 · 年售9000+\n\n【哥哥·架子鼓/贝斯/吉他专业精品】\n¥1（原¥500）1对1 · 30分钟\n100%好评 · 年售70+\n\n💡 跟PLAN DANCE舞蹈同一个商场！冉家坝站160m',myNotes:'',done:false}],note:'',pts:15},
+  {id:'dqpk',title:'DQ跑酷',cat:'kids',appt:true,type:'counter',target:10,count:0,shops:[{name:'Joyleap·派动综合体能馆（新光里店）',area:'新光天地',addr:'龙溪街道红锦大道89号新光里2楼C201',url:'https://m.dianping.com/shopshare/G6l1TlpCKD1ckAQX',xhs:'',note:'3号线嘉州路站步行240m · 10:00-20:00 · 评分4.5',guide:'',done:false}],note:'',pts:15},
+  // 美食 pts:8
+  {id:'hotpot',title:'火锅',cat:'food',appt:false,type:'check',shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:8},
+  {id:'noodle',title:'小面',cat:'food',appt:false,type:'check',shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:8},
+  {id:'jhcai',title:'江湖菜',cat:'food',appt:false,type:'check',shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:8},
+  {id:'qjjz',title:'黔江鸡杂',cat:'food',appt:false,type:'check',shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:8},
+  {id:'lxia',title:'凉虾',cat:'food',appt:false,type:'check',shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:8},
+  {id:'slfen',title:'酸辣粉',cat:'food',appt:false,type:'check',shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:8},
+  {id:'bbq',title:'烧烤/串串',cat:'food',appt:false,type:'check',shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:8},
+  {id:'douhua',title:'豆花',cat:'food',appt:false,type:'check',shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:8},
+  {id:'yeshi',title:'夜市小吃',cat:'food',appt:false,type:'check',shops:[{name:'待找夜市',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:8},
+  {id:'sanli',title:'三笠黔牛·贵州铜锅牛肉',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'📍 两江新区龙山大道111号\n🚇 5/6号线大龙山站4口步行930m\n⏰ 11:00-14:00, 16:30-22:00\n⭐ 4.4分674条 · 人均¥75\n🏆 紫都城/沃尔玛美食好评榜第3名\n贵州菜|黔菜 · 有停车场\n\n【必吃推荐🔥】\n🥇 腊肉炒荞麦饭——炒鸡香！！\n🥇 炸粑稀饭——真的巨好吃\n🥇 玫瑰糕粑稀饭——同样巨好吃\n🥇 引子冰浆——特色饮品\n🥩 铜锅牛肉——招牌\n\n💰 团购：【寻味贵州】特色铜锅干锅牛肉2人餐 ¥123（原¥149）\n💰 50元代金券 ¥43（8.6折）',pts:8},
+  {id:'bbq8090',title:'8090烧烤（新牌坊店）',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'📍 渝北区新牌坊红叶路4号\n💰 人均¥50，丰俭由人\n新开的店，老板娘人超级好👍\n\n【烧烤🔥】\n各种食材都看得出来的新鲜，肉和海鲜品质很好！\n跟常见的辣椒面烧烤不同，更多照顾食材本身的口感和味道\n净是香味！整体咸香鲜的口味，贼香！\n每种食材烤的时间都刚刚好，外表金黄微焦\n\n【必点🥇】\n🍢 把把烧——随便拿好吗！剪成一盘可以拌蛋炒饭\n🦐 大虾——真的是大虾，超级多肉！超级新鲜！\n里面还有酸萝卜，酸酸脆脆提升口感，直接拌饭，再来几勺土豆粉的汤汁，绝了！\n\n【苕皮豆干——这个绝🤤】\n3块钱一串！苕皮和豆干一个一张串在一起烤\n糯叽叽的苕皮和卤香的豆干，都烤的冒泡\n中间裹上酸菜，一口接一口停不下来！口感太丰富了\n\n【素菜必拿】\n荤菜随意拿（哪有肉不好吃的😋）\n素菜一定要拿：娃娃菜！青椒！木耳！年糕！苕皮！豆干！\n各种素菜水嫩脆超级提升口感，又很解腻',pts:8},
+  {id:'zaodong',title:'灶东家民间菜（松牌路店）',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'📍 松牌路10号（松牌路和嘉州路交叉口西10米，新光天地对面）\n⏰ 周一至周日 09:30-22:30\n💰 人均¥75\n⚠️ 生意超级火爆🔥 5点多就过去店内都没空位了！\n全部被预订满，只有室外有位置\n周末最好早点预定，非周末会好点\n\n每道菜的分量都特别旺实，江湖味非常巴适✅\n\n【必点菜🥇】\n✅ 高压粉蒸肠头🌶️——招牌菜果然赞！肠头劲道又入味，底部绵软香甜的红苕让肠头入口时带着一丝回甜\n✅ 东家白砍鸡🐔——鲜辣开胃，鸡肉是乌鸡肉质紧实，里面的翅头最出彩！用的是新鲜的贡菜！嘎嘣脆！清甜爽脆！一致好评💯\n✅ 火爆双脆🌶️——双脆就是腰花和黄喉，火候恰到好处，腰花和黄喉又嫩又脆，泡椒味酸辣辣超下饭！\n✅ 烤火椒皮蛋🍆——味道不错\n✅ 农村锅边馍🌽——玉米味的馍馍，酥脆又香糯，可以当主食',pts:8},
+  {id:'ziwei',title:'冉家坝紫薇路美食街',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'📍 冉家坝·源著天街·余溪路&天竺路\n"紫薇路"二世代 即将爆🔥的节奏\n整个街区基调、氛围已初具雏形\n\n【咖啡☕】\n☕ pengzai\n☕ sander coffee（dirty系列）\n☕ coffee zesty（02号白吐司）\n☕ the end coffee\n☕ 一根鱼咖啡\n\n【面食🍜】\n🍜 桃必福牛肉面（葱爆辣子面、仔姜牛肉面）\n🍜 锦瑟發财面（辣咖喱牛腩面）\n🍜 晓pho越南粉\n\n【烘培🥐】\n🥐 佐敦面包铺（吐司系列、拉差酱辣猪肉三明治）\n🥐 旺角菠萝冲浪（冰火菠萝油）\n\n【餐饮🍽】\n🍽 八爪卤卤烫\n🍽 红玉Aroma\n🍽 firfir·thai restaurant（好吃的泰式漂亮饭）\n🍽 所边边（在派出所旁边而得名，小月球的分店）\n\n💡 离PLAN DANCE舞蹈和SEVEN唱功学院很近，上完课顺便逛吃',pts:8},
+  {id:'lrt',title:'李若桃酸奶',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'🥛 李若桃酸奶\n尤其是原味超好喝！\n可点外卖到家🛵\n\n💡 不用出门，外卖直接送',pts:8},
+];
+
+const SK='recharge_v29',PK='recharge_plan_v29';
+
+// === LIFE ZONES (生活圈) ===
+// Each zone has a center coord and a list of area names that belong to it
+const LIFE_ZONES={
+  '龙湖/新牌坊':{coord:[29.5650,106.4880],areas:['龙湖花园','新光天地','新光里','松牌路','新牌坊','龙湖','嘉州路','红锦大道','爱琴海','冉家坝','源著','紫薇路','天竺路','龙山大道','两江新区']},
+  '观音桥/九街':{coord:[29.5730,106.5730],areas:['观音桥','北城天街','茂业天地','九街','未来国际']},
+  '大坪/时代天街':{coord:[29.5350,106.5000],areas:['大坪','龙湖时代天街','时代天街','英利','大坪英利']},
+  '解放碑/渝中':{coord:[29.5530,106.5690],areas:['解放碑','渝中','洪崖洞','鹅岭','佛图关','来福士','朝天门','半山崖线']},
+  '沙坪坝/磁器口':{coord:[29.5750,106.4500],areas:['沙坪坝','三峡广场','重大','川外','磁器口','烈士墓','梅林','金山大道','大学城']},
+  '杨家坪/九龙坡':{coord:[29.5100,106.5100],areas:['杨家坪','九龙坡','巴国城','动物园']},
+  '南坪/南岸':{coord:[29.5300,106.5710],areas:['南坪','南岸','南滨路','弹子石','南山']},
+  '江北嘴':{coord:[29.5680,106.5830],areas:['江北嘴','江北','重庆大剧院']},
+  '新桥医院':{coord:[29.5130,106.4890],areas:['新桥医院','新桥']},
+};
+
+// Map any area name to its life zone
+function getZone(area){
+  if(!area||area==='待定')return null;
+  for(const[zn,z]of Object.entries(LIFE_ZONES)){
+    if(z.areas.some(a=>area.includes(a)||a.includes(area)))return zn;
+  }
+  return null;
+}
+
+// Get coord for any area (via life zone center)
+function getCoord(area){
+  if(!area||area==='待定')return null;
+  const zone=getZone(area);
+  if(zone)return LIFE_ZONES[zone].coord;
+  return null;
+}
+
+// Get life zone for an item (from its shops)
+function getItemZones(it){
+  const zones=new Set();
+  it.shops.forEach(s=>{const z=getZone(s.area);if(z)zones.add(z)});
+  return[...zones];
+}
+
+// Get life zone for a food item (parse address from foodGuide)
+function getFoodZone(it){
+  if(it.foodGuide){
+    for(const[zn,z]of Object.entries(LIFE_ZONES)){
+      if(z.areas.some(a=>it.foodGuide.includes(a)))return zn;
+    }
+  }
+  return null;
+}
+function distKm(a,b){
+  if(!a||!b)return 999;
+  const R=6371,dLat=(b[0]-a[0])*Math.PI/180,dLon=(b[1]-a[1])*Math.PI/180;
+  const x=Math.sin(dLat/2)**2+Math.cos(a[0]*Math.PI/180)*Math.cos(b[0]*Math.PI/180)*Math.sin(dLon/2)**2;
+  return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+}
+function shopDist(shop,targetArea){
+  const tc=getCoord(targetArea),sc=getCoord(shop.area);
+  return distKm(tc,sc);
+}
+function closestShopDist(item,targetArea){
+  if(!targetArea)return 999;
+  return Math.min(...item.shops.map(s=>shopDist(s,targetArea)));
+}
+
+let items,planned,catFilter='all',areaFilter='all',kidsArea='';
+
+function cp(i){return{...i,shops:i.shops.map(s=>({...s}))}}
+function loadData(){try{const s=localStorage.getItem(SK);if(s){const p=JSON.parse(s);
+  // Merge defaults with saved
+  const merged=ITEMS.map(def=>{const sv=p.find(x=>x.id===def.id);if(!sv)return cp(def);const ms=def.shops.map((d,i)=>{const ss=sv.shops&&sv.shops[i];return ss?{...d,...ss}:{...d}});if(sv.shops&&sv.shops.length>def.shops.length)for(let i=def.shops.length;i<sv.shops.length;i++)ms.push(sv.shops[i]);return{...def,...sv,shops:ms}});
+  // Also add any custom items not in ITEMS
+  p.forEach(sv=>{if(!ITEMS.find(d=>d.id===sv.id))merged.push({...sv,shops:(sv.shops||[]).map(s=>({...s}))})});
+  return merged;
+}}catch(e){}return ITEMS.map(cp)}
+function save(){localStorage.setItem(SK,JSON.stringify(items))}
+function loadPlan(){try{const s=localStorage.getItem(PK);return s?JSON.parse(s):[];}catch(e){return[]}}
+function savePlan(){localStorage.setItem(PK,JSON.stringify(planned))}
+function isDone(it){
+  if(it.cat==='food')return it.done||false;
+  if(it.type==='check')return it.shops.some(s=>s.done);
+  return it.count>=it.target;
+}
+function getAreas(it){return[...new Set(it.shops.map(s=>s.area).filter(a=>a&&a!=='待定'))]}
+function allAreas(){return Object.keys(LIFE_ZONES)}
+
+items=loadData();planned=loadPlan();
+
+// Energy
+function calcE(){
+  const c={body:{d:0,t:0},look:{d:0,t:0},exp:{d:0,t:0},kids:{d:0,t:0},food:{d:0,t:0}};
+  let tE=0,tP=0;
+  items.forEach(it=>{const cat=c[it.cat];if(!cat)return;const p=it.pts||8;
+    if(it.type==='counter'){const f=it.target>0?it.count/it.target:0;cat.d+=p*f;cat.t+=p;tE+=p*f}
+    else{const d=isDone(it);cat.d+=d?p:0;cat.t+=p;tE+=d?p:0}
+    tP+=p;});
+  return{c,tE,tP};
+}
+function updateE(){
+  const e=calcE();const tp=e.tP>0?Math.round(e.tE/e.tP*100):0;
+  document.getElementById('totalPct').innerHTML=`${tp}<small>%</small>`;
+  document.getElementById('totalBar').style.width=tp+'%';
+  ['body','look','exp','kids','food'].forEach(k=>{
+    const v=e.c[k];const p=v.t>0?Math.round(v.d/v.t*100):0;
+    const C=k[0].toUpperCase()+k.slice(1);
+    document.getElementById('dim'+C).textContent=p+'%';
+    document.getElementById('bar'+C).style.width=p+'%';
+  });
+}
+
+function buildChips(){
+  const el=document.getElementById('areaFilters');
+  let h=`<div class="chip ${areaFilter==='all'?'a-all':''}" data-area="all">全部</div>`;
+  Object.keys(LIFE_ZONES).forEach(zn=>{
+    h+=`<div class="chip ${areaFilter===zn?'a-area':''}" data-area="${zn}">${zn}</div>`;
+  });
+  el.innerHTML=h;
+}
+
+// Tomorrow
+function renderTmrw(){
+  const w=document.getElementById('tmrw'),l=document.getElementById('tmrwItems');
+  if(!planned.length){w.classList.remove('has-items');return}
+  w.classList.add('has-items');
+  l.innerHTML=planned.map(pid=>{const it=items.find(i=>i.id===pid);if(!it)return'';return`<div class="tomorrow-item"><div class="t-dot ${it.cat}"></div><span class="t-name">${it.title}</span><button class="t-remove" onclick="removePlan('${pid}')">✕</button></div>`}).join('');
+}
+function togglePlan(id){const i=planned.indexOf(id);if(i>=0)planned.splice(i,1);else planned.push(id);savePlan();renderTmrw();render()}
+function removePlan(id){planned=planned.filter(p=>p!==id);savePlan();renderTmrw();render()}
+function clearTmrw(){planned=[];savePlan();renderTmrw();render()}
+
+function setTab(cat){catFilter=cat;document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===cat));render()}
+
+function sortProx(arr,area){
+  if(!area)return arr;
+  return[...arr].sort((a,b)=>closestShopDist(a,area)-closestShopDist(b,area));
+}
+
+function render(){
+  const el=document.getElementById('content');
+  let f=items.filter(it=>{
+    if(catFilter!=='all'&&it.cat!==catFilter)return false;
+    if(!matchesSearch(it))return false;
+    if(areaFilter!=='all'){
+      // Check if any shop belongs to the selected life zone
+      const zoneData=LIFE_ZONES[areaFilter];
+      if(zoneData){
+        const hasMatch=it.shops.some(s=>{
+          if(!s.area||s.area==='待定')return false;
+          return zoneData.areas.some(a=>s.area.includes(a)||a.includes(s.area));
+        });
+        // For food items, also check foodGuide text
+        const foodMatch=it.cat==='food'&&it.foodGuide&&zoneData.areas.some(a=>it.foodGuide.includes(a));
+        if(!hasMatch&&!foodMatch)return false;
+      }
+    }
+    return true;
+  });
+  if(kidsArea)f=sortProx(f,kidsArea);
+  const un=f.filter(i=>!isDone(i)),dn=f.filter(i=>isDone(i));
+  if(!f.length){el.innerHTML=`<div class="empty"><div class="emoji">🔍</div><p>没有匹配的项目</p></div>`;updateE();return}
+
+  function rg(it,forceOpen){
+    const done=isDone(it),pl=planned.includes(it.id);
+    const itemDist=kidsArea?closestShopDist(it,kidsArea):999;
+    const isNear=itemDist<3;
+    const autoOpen=forceOpen||false;
+    let tags='';
+    if(kidsArea&&isNear)tags+=`<span class="tag tag-nearby">📍${itemDist<0.5?'很近':itemDist<1?'<1km':itemDist.toFixed(1)+'km'}</span>`;
+    if(it.appt)tags+=`<span class="tag tag-appt">🔖预约</span>`;
+    if(it.eventDate)tags+=`<span class="tag tag-date">📅${it.eventDate}</span>`;
+    if(!it.appt&&!it.eventDate)tags+=`<span class="tag tag-walk">随时去</span>`;
+
+    let right=`<button class="s-link-edit" onclick="event.stopPropagation();openEditItem('${it.id}')" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn ${pl?'planned':''}" onclick="event.stopPropagation();togglePlan('${it.id}')">📋</button>`;
+    // Food items: direct check on item level
+    if(it.cat==='food'&&it.type==='check'){
+      right=`<button class="s-check ${done?'checked':''}" onclick="event.stopPropagation();togFood('${it.id}')" style="width:32px;height:32px">${done?'✓':''}</button>`+right;
+    }
+    if(it.type==='counter')right=`<div class="g-counter"><button class="cnt-btn" onclick="event.stopPropagation();chgCnt('${it.id}',-1)">−</button><span class="cnt-num">${it.count}/${it.target}</span><button class="cnt-btn" onclick="event.stopPropagation();chgCnt('${it.id}',1)">+</button></div>`+right;
+
+    // Sort shops by distance when kidsArea active
+    let sortedShops=[...it.shops];
+    if(kidsArea){sortedShops.sort((a,b)=>shopDist(a,kidsArea)-shopDist(b,kidsArea))}
+
+    // When kidsArea: show only closest shop, rest hidden behind "show all"
+    const showOnlyClosest = kidsArea && sortedShops.length > 1;
+
+    const sc=sortedShops.map((s,sortIdx)=>{
+      const idx=it.shops.indexOf(s);
+      const sd=s.done||false;
+      const sn=s.note?`<div class="s-note">${s.note}</div>`:'';
+      const hg=s.guide&&s.guide.trim();
+      const dist=kidsArea?shopDist(s,kidsArea):999;
+      const isClose=dist<3;
+      const hasCoords=dist<900;
+      const distLabel=kidsArea&&hasCoords?`<span style="font-size:11px;color:${isClose?'var(--sage)':'var(--text-dim)'};margin-left:4px">${dist<0.5?'很近':dist<1?'<1km':dist.toFixed(1)+'km'}</span>`:'';
+      // Links row with nav
+      let links='<div class="s-links">';
+      // Baidu map nav
+      const navQuery=s.addr||s.name;
+      links+=`<a class="s-nav" href="baidumap://map/place/search?query=${encodeURIComponent(navQuery)}&region=重庆">🗺 导航</a>`;
+      if(s.url){const dzdpSearch='dianping://searchshoplist?keyword='+encodeURIComponent(s.name);links+=`<a class="s-link dzdp" href="${dzdpSearch}">📍 大众点评</a>`}
+      if(s.xhs)links+=`<a class="s-link xhs" href="${s.xhs}">📕 小红书</a>`;
+      links+='</div>';
+      let ck='';if(it.type==='check')ck=`<button class="s-check ${sd?'checked':''}" onclick="event.stopPropagation();togShop('${it.id}',${idx})">${sd?'✓':''}</button>`;
+      const hidden=showOnlyClosest&&sortIdx>0?'style="display:none" data-extra="1"':'';
+      const mn=s.myNotes||'';
+      let guideSection='';
+      if(hg){
+        const guideText=s.guide.replace(/\\n/g,'\n');
+        const lines=guideText.split('\n');
+        const firstLine=lines[0]||'';
+        const rest=lines.slice(1).join('\n');
+        if(firstLine.startsWith('🏷')){
+          const dealName=firstLine.replace('🏷 团购搜：','').replace('🏷','');
+          guideSection=`<div style="background:linear-gradient(135deg,#fff3ed,#fff8f0);border:1.5px dashed var(--coral);border-radius:10px;padding:10px 12px;margin-bottom:10px;position:relative;overflow:hidden">
+            <div style="font-size:11px;color:var(--coral);font-weight:600;letter-spacing:1px;margin-bottom:4px">📋 大众点评搜索以下团购名称</div>
+            <div style="font-size:15px;font-weight:700;color:var(--text);line-height:1.4;padding:6px 8px;background:white;border-radius:6px;border:1px solid rgba(0,0,0,.06)">${dealName}</div>
+          </div><div class="s-guide-saved">${rest}</div>`;
+        }else{
+          guideSection=`<div class="s-guide-saved">${guideText}</div>`;
+        }
+      }
+      const notesSection=`<div style="margin-top:${hg?'8':'0'}px"><div style="font-size:12px;color:var(--text-dim);margin-bottom:4px">${hg?'✏️ 我的笔记：':''}  </div><textarea placeholder="写你自己的笔记…" onblur="saveNotes('${it.id}',${idx},this)">${mn}</textarea></div>`;
+      return`<div class="sub-card ${sd?'done-c':''} ${isClose?'nearby-highlight':''}" ${hidden}><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">${s.name}</span><span class="s-area">${s.area}</span>${distLabel}<button class="s-link-edit" onclick="event.stopPropagation();openEdit('${it.id}',${idx})">✏️</button></div>${sn}${links}</div>${ck}</div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>${hg?'📝攻略/笔记':'📝写笔记'}</button><div class="s-guide">${guideSection}${notesSection}</div></div>`;
+    }).join('');
+
+    const showAllBtn=showOnlyClosest?`<button class="add-shop-btn" style="border-style:solid;font-size:11px;padding:8px" onclick="event.stopPropagation();showAllShops(this)">查看全部 ${sortedShops.length} 家 ▾</button>`:'';
+    const addBtn=`<button class="add-shop-btn" onclick="event.stopPropagation();openAdd('${it.id}')">+ 添加店铺</button>`;
+
+    let noteH='';
+    if(it.note)noteH=`<div class="g-note"><div class="note-saved">"${it.note}"</div><button class="note-toggle" onclick="event.stopPropagation();openN('${it.id}')">✏️编辑</button><textarea class="note-input" id="n-${it.id}" rows="2" placeholder="感受…" onblur="saveN('${it.id}')">${it.note}</textarea></div>`;
+    else noteH=`<div class="g-note"><button class="note-toggle" onclick="event.stopPropagation();openN('${it.id}')">💭写感受</button><textarea class="note-input" id="n-${it.id}" rows="2" placeholder="感受…" onblur="saveN('${it.id}')"></textarea></div>`;
+
+    // Food items: no shop cards, just guide + note
+    if(it.cat==='food'){
+      const fg=(it.foodGuide||'').replace(/\\n/g,'\n');
+      const hasFg=fg.trim();
+      const fn=it.foodNotes||'';
+      let foodGuideHTML='';
+      if(hasFg){
+        const fgLines=fg.split('\n');
+        const fgFirst=fgLines[0]||'';
+        const fgRest=fgLines.slice(1).join('\n');
+        if(fgFirst.startsWith('🏷')){
+          const dealName=fgFirst.replace('🏷 团购搜：','').replace('🏷','');
+          foodGuideHTML=`<div style="background:linear-gradient(135deg,#fff3ed,#fff8f0);border:1.5px dashed var(--coral);border-radius:10px;padding:10px 12px;margin-bottom:10px"><div style="font-size:11px;color:var(--coral);font-weight:600;letter-spacing:1px;margin-bottom:4px">📋 大众点评搜索以下团购名称</div><div style="font-size:15px;font-weight:700;color:var(--text);line-height:1.4;padding:6px 8px;background:white;border-radius:6px;border:1px solid rgba(0,0,0,.06)">${dealName}</div></div><div class="s-guide-saved">${fgRest}</div>`;
+        }else{
+          foodGuideHTML=`<div class="s-guide-saved">${fg}</div>`;
+        }
+      }
+      const foodContent=`<div style="margin-top:4px">
+        <button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>${hasFg?'📝 攻略/笔记':'📝 写笔记'}</button>
+        <div class="s-guide">${foodGuideHTML}
+        <div style="margin-top:8px"><div style="font-size:12px;color:var(--text-dim);margin-bottom:4px">${hasFg?'✏️ 我的笔记：':''}</div>
+        <textarea placeholder="写你自己的笔记…" onblur="saveFoodNotes('${it.id}',this)">${fn}</textarea></div></div>
+      </div>`;
+      return`<div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ${autoOpen?'open':''}">▸</span><div class="g-dot ${it.cat}"></div><div class="g-title ${done?'done-t':''}">${it.title}</div><div class="g-tags">${tags}</div><div class="g-actions">${right}</div></div><div class="shops-wrap ${autoOpen?'open':''}">${foodContent}${noteH}</div></div>`;
+    }
+
+    return`<div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ${autoOpen?'open':''}">▸</span><div class="g-dot ${it.cat}"></div><div class="g-title ${done?'done-t':''}">${it.title}<span class="g-count-label"> · ${it.shops.length}家</span></div><div class="g-tags">${tags}</div><div class="g-actions">${right}</div></div><div class="shops-wrap ${autoOpen?'open':''}">${sc}${showAllBtn}${addBtn}${noteH}</div></div>`;
+  }
+
+  let h='';
+  if(kidsArea){
+    // Split nearby (<3km) vs far
+    const nearUn=un.filter(i=>closestShopDist(i,kidsArea)<3);
+    const farUn=un.filter(i=>closestShopDist(i,kidsArea)>=3);
+    const nearWalk=nearUn.filter(i=>!i.appt);
+    const nearAppt=nearUn.filter(i=>i.appt);
+    if(nearWalk.length)h+=`<div class="sec-label">⚡ 3km内 · 随时去</div>${nearWalk.map(i=>rg(i,true)).join('')}`;
+    if(nearAppt.length)h+=`<div class="sec-label">📍 3km内 · 需预约</div>${nearAppt.map(i=>rg(i,true)).join('')}`;
+    const farWalk=farUn.filter(i=>!i.appt);
+    const farAppt=farUn.filter(i=>i.appt);
+    if(farWalk.length)h+=`<div class="sec-label">🚶 更远 · 随时去</div>${farWalk.map(i=>rg(i,false)).join('')}`;
+    if(farAppt.length)h+=`<div class="sec-label">🔖 更远 · 需预约</div>${farAppt.map(i=>rg(i,false)).join('')}`;
+  }else{if(un.length)h+=`<div class="sec-label">待打卡</div>${un.map(i=>rg(i,false)).join('')}`}
+  if(dn.length)h+=`<div class="sec-label">已完成 ✨</div>${dn.map(i=>rg(i,false)).join('')}`;
+
+  // Add item button
+  const catLabels={all:'项目',body:'身体项目',look:'形象项目',exp:'体验项目',kids:'带娃项目',food:'美食项目'};
+  h+=`<button class="add-item-btn" onclick="openAddItem()">+ 添加${catLabels[catFilter]||'项目'}</button>`;
+
+  el.innerHTML=h;updateE();
+}
+
+// Interactions
+function togGrp(head){head.querySelector('.g-exp').classList.toggle('open');head.nextElementSibling.classList.toggle('open')}
+function showAllShops(btn){
+  const wrap=btn.parentElement;
+  wrap.querySelectorAll('[data-extra]').forEach(el=>el.style.display='');
+  btn.remove();
+}
+function togShop(id,idx){const it=items.find(i=>i.id===id);if(it&&it.shops[idx]!==undefined){it.shops[idx].done=!it.shops[idx].done;save();render()}}
+function togFood(id){const it=items.find(i=>i.id===id);if(it){it.done=!it.done;save();render()}}
+function saveFoodGuide(id,ta){const it=items.find(i=>i.id===id);if(it){it.foodGuide=ta.value.trim();save();}}
+function saveFoodNotes(id,ta){const it=items.find(i=>i.id===id);if(it){it.foodNotes=ta.value.trim();save();}}
+
+// Open app with fallback to web URL
+function openApp(scheme,webUrl){
+  // On iOS, just open the web URL directly - it will trigger Universal Link if app is installed
+  window.location.href=webUrl;
+}
+function chgCnt(id,d){const it=items.find(i=>i.id===id);if(it){it.count=Math.max(0,Math.min(it.target,it.count+d));save();render()}}
+function togGuide(btn){btn.classList.toggle('open');const g=btn.nextElementSibling;g.classList.toggle('show')}
+function saveG(id,idx,ta){const it=items.find(i=>i.id===id);if(it&&it.shops[idx]!==undefined){it.shops[idx].guide=ta.value.trim();save()}}
+function saveNotes(id,idx,ta){const it=items.find(i=>i.id===id);if(it&&it.shops[idx]!==undefined){it.shops[idx].myNotes=ta.value.trim();save()}}
+function openN(id){const t=document.getElementById('n-'+id);t.classList.toggle('show');if(t.classList.contains('show'))t.focus()}
+function saveN(id){const t=document.getElementById('n-'+id);const it=items.find(i=>i.id===id);if(it){it.note=t.value.trim();save();setTimeout(()=>render(),100)}}
+
+// === PANEL (Add/Edit Shop) ===
+let panelMode='add',panelItemId='',panelShopIdx=-1;
+
+function populateAreaDatalist(){
+  const dl=document.getElementById('areaList');
+  const areas=allAreas();
+  dl.innerHTML=areas.map(a=>`<option value="${a}">`).join('');
+}
+
+function openAdd(itemId){
+  panelMode='add';panelItemId=itemId;panelShopIdx=-1;
+  document.getElementById('panelTitle').textContent='添加店铺';
+  document.getElementById('pName').value='';
+  document.getElementById('pArea').value='';
+  document.getElementById('pAddr').value='';
+  document.getElementById('pDzdp').value='';
+  document.getElementById('pXhs').value='';
+  document.getElementById('pNote').value='';
+  document.getElementById('pDel').style.display='none';
+  populateAreaDatalist();
+  showPanel();
+}
+
+function openEdit(itemId,shopIdx){
+  panelMode='edit';panelItemId=itemId;panelShopIdx=shopIdx;
+  const it=items.find(i=>i.id===itemId);
+  if(!it||!it.shops[shopIdx])return;
+  const s=it.shops[shopIdx];
+  document.getElementById('panelTitle').textContent='编辑店铺';
+  document.getElementById('pName').value=s.name||'';
+  document.getElementById('pArea').value=s.area||'';
+  document.getElementById('pAddr').value=s.addr||'';
+  document.getElementById('pDzdp').value=s.url||'';
+  document.getElementById('pXhs').value=s.xhs||'';
+  document.getElementById('pNote').value=s.note||'';
+  document.getElementById('pDel').style.display='block';
+  populateAreaDatalist();
+  showPanel();
+}
+
+function showPanel(){
+  document.getElementById('panelOverlay').classList.add('show');
+  document.getElementById('panel').classList.add('show');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('pName').focus(),300);
+}
+
+function closePanel(){
+  document.getElementById('panelOverlay').classList.remove('show');
+  document.getElementById('panel').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+function savePanel(){
+  const name=document.getElementById('pName').value.trim();
+  if(!name){document.getElementById('pName').style.borderColor='#d44';return}
+  const area=document.getElementById('pArea').value.trim()||'待定';
+  const addr=document.getElementById('pAddr').value.trim();
+  const url=document.getElementById('pDzdp').value.trim();
+  const xhs=document.getElementById('pXhs').value.trim();
+  const note=document.getElementById('pNote').value.trim();
+
+  const it=items.find(i=>i.id===panelItemId);
+  if(!it)return;
+
+  if(panelMode==='add'){
+    it.shops.push({name,area,addr,url,xhs,note,guide:'',done:false});
+  }else{
+    const s=it.shops[panelShopIdx];
+    if(s){s.name=name;s.area=area;s.addr=addr;s.url=url;s.xhs=xhs;s.note=note}
+  }
+  save();closePanel();buildChips();render();
+}
+
+function delShop(){
+  if(!confirm('确定删除这家店铺？'))return;
+  const it=items.find(i=>i.id===panelItemId);
+  if(it&&it.shops[panelShopIdx]!==undefined){
+    it.shops.splice(panelShopIdx,1);
+    if(it.shops.length===0)it.shops.push({name:'待找店',area:'待定',url:'',xhs:'',note:'',guide:'',done:false});
+    save();closePanel();buildChips();render();
+  }
+}
+
+// === ITEM PANEL (Add/Edit Item) ===
+let itemPanelMode='add',editItemId='',selectedCat='';
+const CAT_PTS={body:20,look:10,exp:15,kids:15,food:8};
+
+function pickCat(cat){
+  selectedCat=cat;
+  document.querySelectorAll('.panel-cat-btn').forEach(b=>{
+    b.className='panel-cat-btn';
+    if(b.dataset.cat===cat)b.classList.add('sel-'+cat);
+  });
+}
+
+function toggleTarget(){
+  const isCounter=document.querySelector('input[name="iType"]:checked').value==='counter';
+  document.getElementById('iTarget').style.display=isCounter?'block':'none';
+}
+
+function openAddItem(){
+  itemPanelMode='add';editItemId='';
+  document.getElementById('itemPanelTitle').textContent='添加项目';
+  document.getElementById('iName').value='';
+  document.querySelector('input[name="iType"][value="check"]').checked=true;
+  toggleTarget();
+  document.getElementById('iAppt').checked=false;
+  document.getElementById('iTarget').value='5';
+  document.getElementById('iDel').style.display='none';
+  // Pre-select category if on a specific tab
+  selectedCat=catFilter!=='all'?catFilter:'';
+  document.querySelectorAll('.panel-cat-btn').forEach(b=>{
+    b.className='panel-cat-btn';
+    if(selectedCat&&b.dataset.cat===selectedCat)b.classList.add('sel-'+selectedCat);
+  });
+  document.getElementById('itemPanelOverlay').classList.add('show');
+  document.getElementById('itemPanel').classList.add('show');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('iName').focus(),300);
+}
+
+function closeItemPanel(){
+  document.getElementById('itemPanelOverlay').classList.remove('show');
+  document.getElementById('itemPanel').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+function saveItem(){
+  const name=document.getElementById('iName').value.trim();
+  if(!name){document.getElementById('iName').style.borderColor='#d44';return}
+  if(!selectedCat){alert('请选择分类');return}
+  const isCounter=document.querySelector('input[name="iType"]:checked').value==='counter';
+  const target=isCounter?parseInt(document.getElementById('iTarget').value)||5:0;
+  const appt=document.getElementById('iAppt').checked;
+
+  if(itemPanelMode==='add'){
+    const id='custom_'+Date.now();
+    const newItem={
+      id,title:name,cat:selectedCat,appt,
+      type:isCounter?'counter':'check',
+      target:isCounter?target:0,count:0,
+      shops:[{name:'待找店',area:'待定',url:'',xhs:'',note:'',guide:'',done:false}],
+      note:'',pts:CAT_PTS[selectedCat]||10
+    };
+    if(isCounter) newItem.eventDate=undefined;
+    items.push(newItem);
+  } else {
+    const it=items.find(i=>i.id===editItemId);
+    if(it){
+      it.title=name;it.cat=selectedCat;it.appt=appt;
+      it.type=isCounter?'counter':'check';
+      if(isCounter){it.target=target;if(!it.count)it.count=0}
+      it.pts=CAT_PTS[selectedCat]||10;
+    }
+  }
+  save();closeItemPanel();render();
+}
+
+function openEditItem(id){
+  const it=items.find(i=>i.id===id);
+  if(!it)return;
+  itemPanelMode='edit';editItemId=id;
+  document.getElementById('itemPanelTitle').textContent='编辑项目';
+  document.getElementById('iName').value=it.title;
+  selectedCat=it.cat;
+  document.querySelectorAll('.panel-cat-btn').forEach(b=>{
+    b.className='panel-cat-btn';
+    if(b.dataset.cat===selectedCat)b.classList.add('sel-'+selectedCat);
+  });
+  if(it.type==='counter'){
+    document.querySelector('input[name="iType"][value="counter"]').checked=true;
+    document.getElementById('iTarget').value=it.target||5;
+  }else{
+    document.querySelector('input[name="iType"][value="check"]').checked=true;
+  }
+  toggleTarget();
+  document.getElementById('iAppt').checked=it.appt||false;
+  document.getElementById('iDel').style.display='block';
+  document.getElementById('itemPanelOverlay').classList.add('show');
+  document.getElementById('itemPanel').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function delItem(){
+  if(!confirm('确定删除这个项目？所有店铺和打卡记录都会丢失。'))return;
+  items=items.filter(i=>i.id!==editItemId);
+  planned=planned.filter(p=>p!==editItemId);
+  save();savePlan();closeItemPanel();renderTmrw();render();
+}
+
+// === FILTER EVENTS ===
+document.getElementById('areaFilters').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;areaFilter=c.dataset.area;buildChips();render()});
+document.getElementById('kidsAct').addEventListener('change',e=>{
+  kidsArea=e.target.value||'';
+  myGPS=null; // clear GPS when switching to preset
+  document.getElementById('geoBtn').textContent='📍 我的位置';
+  render();
+});
+
+// === GEOLOCATION ===
+let myGPS=null;
+function getMyLocation(){
+  const btn=document.getElementById('geoBtn');
+  btn.classList.add('loading');btn.textContent='定位中…';
+  if(!navigator.geolocation){btn.textContent='不支持定位';btn.classList.remove('loading');return}
+  navigator.geolocation.getCurrentPosition(pos=>{
+    myGPS=[pos.coords.latitude,pos.coords.longitude];
+    btn.classList.remove('loading');btn.textContent='📍 已定位';
+    // Clear preset selection
+    document.getElementById('kidsAct').value='';
+    kidsArea='__gps__';
+    render();
+  },err=>{
+    btn.classList.remove('loading');btn.textContent='📍 定位失败';
+    setTimeout(()=>{btn.textContent='📍 我的位置'},2000);
+  },{enableHighAccuracy:true,timeout:10000});
+}
+
+// Override distance functions to support GPS
+const _origShopDist=shopDist;
+shopDist=function(shop,targetArea){
+  if(targetArea==='__gps__'&&myGPS){
+    const sc=getCoord(shop.area);
+    return distKm(myGPS,sc);
+  }
+  return _origShopDist(shop,targetArea);
+};
+const _origClosest=closestShopDist;
+closestShopDist=function(item,targetArea){
+  if(targetArea==='__gps__'&&myGPS){
+    return Math.min(...item.shops.map(s=>{const sc=getCoord(s.area);return distKm(myGPS,sc)}));
+  }
+  return _origClosest(item,targetArea);
+};
+
+// Register Service Worker for offline support
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+
+// === SEARCH ===
+let searchQuery='';
+function onSearch(val){
+  searchQuery=val.trim().toLowerCase();
+  document.getElementById('searchClear').classList.toggle('show',searchQuery.length>0);
+  render();
+}
+function clearSearch(){
+  searchQuery='';
+  document.getElementById('searchInput').value='';
+  document.getElementById('searchClear').classList.remove('show');
+  render();
+}
+function matchesSearch(it){
+  if(!searchQuery)return true;
+  const q=searchQuery;
+  // Search title
+  if(it.title.toLowerCase().includes(q))return true;
+  // Search shops: name, area, addr, note, guide, myNotes
+  if(it.shops&&it.shops.some(s=>{
+    if(s.name&&s.name.toLowerCase().includes(q))return true;
+    if(s.area&&s.area.toLowerCase().includes(q))return true;
+    if(s.addr&&s.addr.toLowerCase().includes(q))return true;
+    if(s.note&&s.note.toLowerCase().includes(q))return true;
+    if(s.guide&&s.guide.toLowerCase().includes(q))return true;
+    if(s.myNotes&&s.myNotes.toLowerCase().includes(q))return true;
+    return false;
+  }))return true;
+  // Search foodGuide and foodNotes
+  if(it.foodGuide&&it.foodGuide.toLowerCase().includes(q))return true;
+  if(it.foodNotes&&it.foodNotes.toLowerCase().includes(q))return true;
+  // Search item note
+  if(it.note&&it.note.toLowerCase().includes(q))return true;
+  return false;
+}
+
+buildChips();renderTmrw();render();
+</script>
+</body>
+</html>
