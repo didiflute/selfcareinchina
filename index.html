@@ -7,48 +7,61 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Recharge">
 <link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#e8725c">
 <title>Recharge 自我充电</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#faf7f4;--bg-warm:#f5efe8;
-  --card-bg:#fff;--card-border:rgba(0,0,0,.05);--card-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.03);
-  --coral:#e8725c;--coral-soft:rgba(232,114,92,.10);--coral-glow:rgba(232,114,92,.25);
-  --amber:#d4943a;--amber-soft:rgba(212,148,58,.10);
-  --sage:#6a9e7e;--sage-soft:rgba(106,158,126,.10);
-  --plum:#9474b4;--plum-soft:rgba(148,116,180,.10);
-  --sky:#5b94c4;--sky-soft:rgba(91,148,196,.10);
-  --orange:#e09850;--orange-soft:rgba(224,152,80,.10);
-  --text:#2c2420;--text-mid:#4a3f38;--text-dim:#6b5e56;--text-light:#8a7e74;
-  --done-bg:#f0f7f2;--done-text:#9eb8a6;
-  --radius:16px;--radius-sm:10px;
+  /* Background - warm beige from Demo B */
+  --bg:#f5f1eb;--bg-warm:#efe8dd;
+  --card-bg:#fff;--card-border:rgba(0,0,0,.06);--card-shadow:0 1px 4px rgba(0,0,0,.03),0 4px 14px rgba(0,0,0,.03);
+  --line:rgba(0,0,0,0.06);
+  /* Brand - softer terra cotta */
+  --coral:#d8856a;--coral-soft:rgba(216,133,106,.10);--coral-glow:rgba(216,133,106,.20);
+  --amber:#c08a55;--amber-soft:rgba(192,138,85,.10);
+  /* Category - desaturated vintage */
+  --sage:#8a9a7e;--sage-soft:rgba(138,154,126,.10);
+  --plum:#9d8aab;--plum-soft:rgba(157,138,171,.10);
+  --sky:#7e9aaf;--sky-soft:rgba(126,154,175,.10);
+  --orange:#c08a55;--orange-soft:rgba(192,138,85,.10);
+  /* Text - warm browns */
+  --text:#2a2622;--text-mid:#4a4540;--text-dim:#7a736d;--text-light:#a39b94;
+  --done-bg:#f0ede5;--done-text:#a39b94;
+  /* Radius - smaller, more editorial */
+  --r-lg:12px; --r-md:8px; --r-sm:4px;
+  /* Spacing 8px system */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px;
+  /* Legacy aliases */
+  --radius:var(--r-md);--radius-sm:var(--r-sm);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:120px;overflow-x:hidden;background-image:url('bg.png');background-size:cover;background-position:center top;background-attachment:fixed;background-repeat:no-repeat;position:relative}
-body::before{content:'';position:fixed;inset:0;background:linear-gradient(to bottom,rgba(250,247,244,0.88),rgba(250,247,244,0.75),rgba(250,247,244,0.55));pointer-events:none;z-index:0}
-body>*{position:relative;z-index:1}
+body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:120px;overflow-x:hidden;font-weight:400}
 
-.header{padding:52px 24px 24px;position:relative;overflow:hidden;background:transparent}
-.brand{display:flex;align-items:center;gap:12px;position:relative}
-.brand-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--coral),var(--amber));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 10px var(--coral-glow)}
-.brand h1{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:0.5px;color:var(--text-mid)}
-.brand h1 em{font-style:italic;color:var(--coral);font-weight:400}
-.header .sub{font-size:14px;color:var(--text-dim);margin-top:6px;font-weight:400;padding-left:54px}
+.header{padding:48px 24px 20px;position:relative;overflow:hidden;background:transparent;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:flex-end;gap:14px;position:relative}
+.brand-icon{width:42px;height:42px;background:linear-gradient(135deg,#e89478,var(--coral));border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 16px rgba(216,133,106,.20)}
+.brand-text{display:flex;flex-direction:column;gap:2px}
+.brand h1{font-family:'Playfair Display',serif;font-size:30px;font-weight:400;letter-spacing:-0.5px;color:var(--text);line-height:1}
+.brand h1 em{font-style:italic;color:var(--coral);font-weight:500}
+.brand-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--text-dim);letter-spacing:3px;font-weight:400;margin-top:2px}
+.day-counter{font-family:'Inter',sans-serif;font-size:10px;color:var(--coral);margin-top:6px;letter-spacing:2.5px;text-transform:uppercase;font-weight:500}
+.header .sub{display:none}
 
-.energy{margin:0;background:transparent;padding:16px 24px 20px}
-.energy-card{background:rgba(255,255,255,0.93);border-radius:var(--radius);padding:18px;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
-.energy-card::after{content:'⚡';position:absolute;right:16px;top:14px;font-size:32px;opacity:.08}
-.energy-main{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
-.energy-label{font-size:13px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;font-weight:500}
-.energy-pct{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--coral)}
-.energy-pct small{font-family:'Noto Sans SC';font-size:14px;font-weight:400;color:var(--text-dim)}
-.bar-track{height:8px;background:var(--bg-warm);border-radius:4px;overflow:hidden}
-.bar-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.25,1,.5,1);position:relative}
-.bar-fill.main{background:linear-gradient(90deg,var(--coral),var(--amber))}
-.bar-fill.main::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4));border-radius:0 4px 4px 0}
-.dims{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin-top:14px}
+.energy{margin:0;background:transparent;padding:var(--s-2) var(--s-5) var(--s-3)}
+.energy-card{background:rgba(255,255,255,0.85);border-radius:var(--r-md);padding:var(--s-4);position:relative;overflow:hidden;border:1px solid rgba(0,0,0,.04)}
+.energy-card::after{content:'⚡';position:absolute;right:14px;top:12px;font-size:28px;opacity:.06}
+.energy-main{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--s-2)}
+.energy-label{font-size:12px;color:var(--text-light);letter-spacing:1px;text-transform:uppercase;font-weight:500}
+.energy-pct{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--text-mid);font-weight:400}
+.energy-pct small{font-family:'Noto Sans SC';font-size:13px;font-weight:400;color:var(--text-light)}
+.bar-track{height:6px;background:rgba(0,0,0,0.05);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.25,1,.5,1);position:relative}
+.bar-fill.main{background:linear-gradient(90deg,var(--coral),#f0a48a)}
+.bar-fill.main::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4));border-radius:0 3px 3px 0}
+.dims{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2) var(--s-3);margin-top:var(--s-3)}
 .dim{display:flex;flex-direction:column;gap:4px}
 .dim-top{display:flex;justify-content:space-between;align-items:center}
 .dim-label{font-size:13px;color:var(--text-dim);font-weight:500}
@@ -73,86 +86,87 @@ body>*{position:relative;z-index:1}
 .kids-bar select{background:white;border:1px solid rgba(212,148,58,.25);color:var(--amber);border-radius:6px;padding:6px 10px;font-size:14px;font-family:inherit;font-weight:500;outline:none;max-width:200px}
 .kids-bar .hint{color:var(--amber);opacity:.7;font-size:12px;margin-left:auto}
 
-.tabs{display:flex;margin:0 24px 12px;background:rgba(255,255,255,0.9);border-radius:var(--radius-sm);border:1px solid var(--card-border);overflow-x:auto;-webkit-overflow-scrolling:touch}
-.tab{flex:0 0 auto;padding:10px 12px;font-size:13px;font-weight:500;text-align:center;color:var(--text-dim);cursor:pointer;border:none;background:none;font-family:inherit;white-space:nowrap;transition:all .2s}
-.tab.active{background:var(--coral);color:white;border-radius:var(--radius-sm)}
+.tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:var(--s-1)}
+.tab{flex:0 0 auto;padding:8px 14px;font-size:13px;font-weight:500;text-align:center;color:var(--text-dim);cursor:pointer;border:none;background:none;font-family:inherit;white-space:nowrap;transition:all .2s;border-radius:var(--r-md)}
+.tab.active{background:var(--text-mid);color:white}
 
-.filters{padding:0 24px 8px;display:flex;flex-direction:column;gap:8px}
+.filters{padding:0 var(--s-5) var(--s-2);display:flex;flex-direction:column;gap:var(--s-2)}
 .filter-row-label{font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
-.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.filter-row{display:flex;gap:var(--s-1);flex-wrap:wrap;margin-top:var(--s-1)}
 .chip{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;border:1px solid var(--card-border);background:rgba(255,255,255,0.88);color:var(--text-dim);cursor:pointer;transition:all .2s;white-space:nowrap}
 .chip:active{transform:scale(.95)}
 .chip.a-all{background:var(--bg-warm);border-color:var(--text-light);color:var(--text-mid)}
 .chip.a-area{background:var(--amber-soft);border-color:var(--amber);color:var(--amber)}
 
+/* Area dropdown */
+.area-select{background:white;border:1.5px solid var(--card-border);color:var(--text-mid);border-radius:10px;padding:8px 14px;font-size:14px;font-family:inherit;font-weight:500;outline:none;width:100%;max-width:300px;appearance:auto}
+.area-select:focus{border-color:var(--amber)}
+
 .sec-label{padding:16px 24px 6px;font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
 
-/* PROJECT CARD */
-.group{margin:0 24px 12px;animation:fadeUp .25s ease both;background:rgba(255,255,255,0.92);border-radius:var(--radius);box-shadow:var(--card-shadow);border:1px solid var(--card-border);overflow:hidden}
+/* PROJECT CARD - editorial */
+.group{margin:0 var(--s-5) var(--s-2);animation:fadeUp .25s ease both;background:white;border-radius:var(--r-md);box-shadow:none;border:1px solid var(--line);overflow:hidden}
 .group.done-group{background:var(--done-bg);box-shadow:none;border-color:transparent;opacity:.7}
-.group-head{display:flex;align-items:center;gap:8px;padding:14px 16px;cursor:pointer}
-.g-exp{font-size:11px;color:var(--text-dim);transition:transform .2s;display:inline-block}
+.group-head{display:flex;align-items:center;gap:var(--s-2);padding:var(--s-3) var(--s-4);cursor:pointer}
+.g-exp{font-size:11px;color:var(--text-light);transition:transform .2s;display:inline-block}
 .g-exp.open{transform:rotate(90deg)}
-.g-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.g-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .g-dot.body{background:var(--sage)}.g-dot.look{background:var(--coral)}.g-dot.exp{background:var(--plum)}.g-dot.kids{background:var(--sky)}.g-dot.food{background:var(--orange)}
-.g-title{font-size:16px;font-weight:600;color:var(--text-mid);flex:1}
+.g-title{font-family:'Noto Serif SC';font-size:15px;font-weight:500;color:var(--text);flex:1}
 .g-title.done-t{color:var(--done-text);text-decoration:line-through}
-.g-count-label{font-size:13px;color:var(--text-dim);font-weight:400}
-.g-tags{display:flex;gap:4px;flex-wrap:wrap}
-.tag{font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500}
-.tag-appt{background:var(--coral-soft);color:var(--coral)}.tag-date{background:var(--plum-soft);color:var(--plum)}.tag-walk{background:var(--sage-soft);color:var(--sage)}.tag-nearby{background:var(--amber-soft);color:var(--amber)}
-.g-actions{display:flex;align-items:center;gap:5px}
-.g-plan-btn{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--text-light);background:none;color:var(--text-dim);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.g-count-label{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-light);font-weight:400;letter-spacing:0.5px}
+.g-actions{display:flex;align-items:center;gap:var(--s-1)}
+.g-plan-btn{width:28px;height:28px;border-radius:var(--r-sm);border:1px solid var(--text-light);background:none;color:var(--text-dim);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .g-plan-btn:active{transform:scale(.9)}
 .g-plan-btn.planned{background:var(--coral);border-color:var(--coral);color:white}
 .g-counter{display:flex;align-items:center;gap:2px}
-.cnt-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--text-light);background:none;color:var(--text-dim);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cnt-btn{width:24px;height:24px;border-radius:50%;border:1px solid var(--text-light);background:none;color:var(--text-dim);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .cnt-btn:active{transform:scale(.88)}
-.cnt-num{font-size:14px;font-weight:600;min-width:36px;text-align:center;color:var(--coral)}
+.cnt-num{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;min-width:36px;text-align:center;color:var(--text-mid)}
 
 /* SHOPS WRAP (inside card) */
-.shops-wrap{display:none;padding:0 16px 14px;flex-direction:column;gap:8px}
+.shops-wrap{display:none;padding:var(--s-3) var(--s-4) var(--s-3);flex-direction:column;gap:var(--s-2);background:rgba(0,0,0,0.012);border-top:1px solid var(--line)}
 .shops-wrap.open{display:flex}
 
 /* SHOP SUB-CARD */
-.sub-card{background:var(--bg-warm);border-radius:12px;padding:12px 14px;border:1px solid rgba(0,0,0,.04);transition:all .2s}
+.sub-card{background:white;border-radius:var(--r-sm);padding:var(--s-3);border:1px solid var(--line);transition:all .2s}
 .sub-card.done-c{background:var(--done-bg);border-color:transparent}
 .sub-card.done-c .s-name{color:var(--done-text);text-decoration:line-through}
-.sub-card.nearby-highlight{border-color:var(--amber);border-width:1.5px;background:rgba(212,148,58,.04)}
+.tag{font-family:'Inter',sans-serif;font-size:9px;padding:3px 8px;border-radius:var(--r-sm);font-weight:500;text-transform:uppercase;letter-spacing:1.2px}
+.tag-appt{background:transparent;color:var(--sage);border:1px solid var(--sage)}
+.tag-date{background:var(--plum-soft);color:var(--plum);border:1px solid transparent}
+.tag-walk{background:transparent;color:var(--text-light);border:1px solid var(--line)}
+.tag-nearby{background:var(--coral);color:white;border:1px solid var(--coral);font-weight:600}
+.sub-card.nearby-highlight{border-color:var(--coral);border-width:1.5px;background:var(--coral-soft)}
 .sub-top{display:flex;align-items:center;gap:10px}
 .sub-info{flex:1;min-width:0}
 .s-name-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .s-name{font-size:15px;font-weight:500}
 .s-name a{color:var(--text);text-decoration:none;border-bottom:1px dashed var(--text-light)}
-.s-area{font-size:11px;padding:2px 7px;border-radius:8px;background:var(--amber-soft);color:var(--amber);font-weight:500}
+.s-area{font-family:'Inter',sans-serif;font-size:10px;padding:2px 7px;border-radius:var(--r-sm);background:transparent;color:var(--text-light);font-weight:500;text-transform:uppercase;letter-spacing:0.8px;border:1px solid var(--line)}
 .s-note{font-size:13px;color:var(--text-dim);margin-top:3px;font-style:italic}
-.s-check{width:30px;height:30px;border-radius:50%;border:2px solid var(--text-light);background:none;color:var(--text-light);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.s-check{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--text-light);background:none;color:var(--text-light);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
 .s-check:active{transform:scale(.9)}
 .s-check.checked{background:var(--sage);border-color:var(--sage);color:white}
 
-.s-expand-btn{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit;margin-top:6px;padding:2px 0;display:flex;align-items:center;gap:3px}
+.s-expand-btn{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-dim);background:none;border:none;cursor:pointer;margin-top:6px;padding:2px 0;display:flex;align-items:center;gap:3px;text-transform:uppercase;letter-spacing:1px;font-weight:500}
 .s-expand-btn .arr{font-size:10px;display:inline-block;transition:transform .2s}
 .s-expand-btn.open .arr{transform:rotate(90deg)}
 .s-guide{display:none;margin-top:6px}
 .s-guide.show{display:block}
-.s-guide textarea{width:100%;background:white;border:1px solid rgba(0,0,0,.06);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--text);font-family:inherit;resize:vertical;outline:none;min-height:50px;line-height:1.6}
-.s-guide textarea:focus{border-color:var(--coral)}
-.s-guide-saved{font-size:14px;color:var(--text-dim);line-height:1.6;white-space:pre-wrap;padding:4px 0}
+.s-guide textarea{width:100%;background:white;border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px;font-size:14px;color:var(--text);font-family:'Noto Serif SC';resize:vertical;outline:none;min-height:50px;line-height:1.7}
+.s-guide textarea:focus{border-color:var(--text-light)}
+.s-guide-saved{font-size:14px;color:var(--text-mid);line-height:1.8;white-space:pre-wrap;padding:4px 0;font-family:'Noto Serif SC'}
 
-.g-note{margin:0;padding:10px 0 0;border-top:1px solid rgba(0,0,0,.04)}
-.note-toggle{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit;padding:3px 0}
-.note-input{width:100%;margin-top:4px;background:white;border:1px solid rgba(0,0,0,.06);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--text);font-family:inherit;resize:none;outline:none;display:none}
-.note-input:focus{border-color:var(--coral)}
+.g-note{margin:0;padding:10px 0 0;border-top:1px solid var(--line)}
+.note-toggle{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-dim);background:none;border:none;cursor:pointer;padding:3px 0;text-transform:uppercase;letter-spacing:1px;font-weight:500}
+.note-input{width:100%;margin-top:4px;background:white;border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px;font-size:14px;color:var(--text);font-family:'Noto Serif SC';resize:none;outline:none;display:none}
+.note-input:focus{border-color:var(--text-light)}
 .note-input.show{display:block}
-.note-saved{font-size:14px;color:var(--text-dim);margin-top:3px;font-style:italic}
+.note-saved{font-size:14px;color:var(--text-dim);margin-top:3px;font-style:italic;font-family:'Playfair Display',serif}
 
 /* NAV BUTTON */
-.s-nav{display:inline-flex;align-items:center;gap:3px;font-size:12px;padding:4px 10px;border-radius:6px;background:#3385ff;color:white;text-decoration:none;font-weight:500}
-
-/* GEO BUTTON */
-.geo-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:8px;border:1.5px solid var(--sage);background:var(--sage-soft);color:var(--sage);font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s}
-.geo-btn:active{transform:scale(.95)}
-.geo-btn.loading{opacity:.6;pointer-events:none}
+.s-nav{display:inline-flex;align-items:center;gap:3px;font-family:'Inter',sans-serif;font-size:10px;padding:4px 10px;border-radius:var(--r-sm);background:var(--text-mid);color:white;text-decoration:none;font-weight:500;text-transform:uppercase;letter-spacing:0.8px}
 
 .empty{text-align:center;padding:40px 20px;color:var(--text-dim)}
 .empty .emoji{font-size:32px;margin-bottom:10px}
@@ -161,13 +175,13 @@ body>*{position:relative;z-index:1}
 
 /* SHOP LINKS ROW */
 .s-links{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
-.s-link{font-size:12px;padding:4px 10px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:3px;font-weight:500}
-.s-link.dzdp{background:#ff6633;color:white}
-.s-link.xhs{background:#fe2c55;color:white}
+.s-link{font-family:'Inter',sans-serif;font-size:10px;padding:4px 10px;border-radius:var(--r-sm);text-decoration:none;display:inline-flex;align-items:center;gap:3px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
+.s-link.dzdp{background:transparent;color:#ff6633;border:1px solid #ff6633}
+.s-link.xhs{background:transparent;color:#fe2c55;border:1px solid #fe2c55}
 .s-link-edit{font-size:13px;color:var(--text-dim);background:none;border:none;cursor:pointer;font-family:inherit;padding:3px 2px;margin-left:2px}
 
 /* ADD SHOP BTN */
-.add-shop-btn{width:100%;padding:12px;border:1.5px dashed var(--text-dim);border-radius:10px;background:none;color:var(--text-dim);font-size:14px;font-family:inherit;cursor:pointer;transition:all .2s;margin-top:2px}
+.add-shop-btn{width:100%;padding:10px;border:1px dashed var(--text-light);border-radius:var(--r-sm);background:none;color:var(--text-light);font-family:'Inter',sans-serif;font-size:11px;cursor:pointer;transition:all .2s;margin-top:2px;text-transform:uppercase;letter-spacing:1px;font-weight:500}
 .add-shop-btn:active{transform:scale(.98);border-color:var(--coral);color:var(--coral)}
 
 /* PANEL OVERLAY */
@@ -210,19 +224,135 @@ body>*{position:relative;z-index:1}
 .add-item-btn:active{transform:scale(.98);border-color:var(--coral);color:var(--coral)}
 
 /* Search bar */
-.search-bar{margin:12px 24px 0;position:relative}
-.search-input{width:100%;padding:10px 14px 10px 36px;border:1.5px solid var(--card-border);border-radius:12px;background:rgba(255,255,255,0.9);font-size:14px;font-family:inherit;color:var(--text);outline:none;box-sizing:border-box}
-.search-input:focus{border-color:var(--coral);background:white}
+.search-bar{margin:var(--s-3) var(--s-5) 0;position:relative}
+.search-input{width:100%;padding:10px var(--s-3) 10px 36px;border:1px solid var(--line);border-radius:var(--r-sm);background:white;font-size:13px;font-family:'Noto Serif SC';color:var(--text);outline:none;box-sizing:border-box;transition:all .2s}
+.search-input:focus{border-color:var(--text-light);background:white;box-shadow:0 0 0 3px rgba(216,133,106,.06)}
 .search-input::placeholder{color:var(--text-light)}
-.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-light);pointer-events:none}
-.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:16px;color:var(--text-light);cursor:pointer;padding:4px;display:none}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--text-light);pointer-events:none;opacity:.6}
+.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:14px;color:var(--text-light);cursor:pointer;padding:4px;display:none}
 .search-clear.show{display:block}
+
+/* Appointment date */
+.g-date-btn{font-family:'Inter',sans-serif;font-size:10px;padding:4px 10px;border-radius:var(--r-sm);border:1px dashed var(--text-light);background:transparent;color:var(--text-light);cursor:pointer;font-weight:500;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;transition:all .15s}
+.g-date-btn:active{transform:scale(.95)}
+.g-date-btn.has-date{background:var(--text-mid);color:white;border:1px solid var(--text-mid);font-weight:500}
+.date-picker-wrap{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:200;display:none;align-items:center;justify-content:center}
+.date-picker-wrap.show{display:flex}
+.date-picker{background:white;border-radius:16px;padding:20px;width:300px;box-shadow:0 8px 30px rgba(0,0,0,.15)}
+.date-picker h3{font-size:16px;margin-bottom:12px;color:var(--text-mid)}
+.date-picker input[type=date]{width:100%;padding:10px;border:1.5px solid var(--card-border);border-radius:8px;font-size:15px;font-family:inherit;outline:none}
+.date-picker input[type=date]:focus{border-color:var(--plum)}
+.date-picker-actions{display:flex;gap:8px;margin-top:14px;justify-content:flex-end}
+.date-picker-actions button{padding:8px 16px;border-radius:8px;font-size:14px;font-family:inherit;cursor:pointer;border:none}
+.dp-cancel{background:var(--bg-warm);color:var(--text-dim)}
+.dp-clear{background:var(--coral-soft);color:var(--coral)}
+.dp-save{background:var(--plum);color:white}
+
+/* Calendar - 16-day Chongqing strip view */
+.cal-view{margin:var(--s-3) var(--s-5) var(--s-3);display:none}
+.cal-view.show{display:block}
+.cal-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:var(--s-4);padding-bottom:var(--s-3);border-bottom:1px solid var(--line)}
+.cal-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;font-style:italic;color:var(--text)}
+.cal-strip{display:flex;flex-direction:column;background:white;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.cal-row{display:flex;gap:var(--s-3);padding:var(--s-3) var(--s-4);border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s;align-items:flex-start}
+.cal-row:last-child{border-bottom:none}
+.cal-row:active{background:rgba(0,0,0,0.02)}
+.cal-row.today{background:var(--coral-soft)}
+.cal-row.past{opacity:.55}
+.cal-row-date{flex-shrink:0;width:80px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding-top:2px}
+.cal-row-day{font-family:'Playfair Display',serif;font-size:24px;font-weight:500;color:var(--text);line-height:1}
+.cal-row.today .cal-row-day{color:var(--coral)}
+.cal-row-meta{font-family:'Inter',sans-serif;font-size:9px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;font-weight:500}
+.cal-row.today .cal-row-meta{color:var(--coral);font-weight:600}
+.cal-row-content{flex:1;display:flex;flex-direction:column;gap:6px;padding-top:4px}
+.cal-row-item{display:flex;align-items:center;gap:var(--s-2);font-family:'Noto Serif SC';font-size:14px;color:var(--text-mid)}
+.cal-row-item.done{text-decoration:line-through;color:var(--text-light)}
+.cal-row-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.cal-row-empty{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--text-light);padding-top:2px}
+
+/* === NEW v2.0 STYLES === */
+
+/* Header brand text restructure */
+.brand-text{display:flex;flex-direction:column}
+.day-counter{font-size:12px;color:var(--text-dim);margin-top:2px;letter-spacing:0.3px}
+
+/* Body padding for bottom nav */
+body{padding-bottom:80px !important}
+
+/* Collapsed Energy Card - editorial style */
+.energy-collapsed{margin:var(--s-3) var(--s-5) 0;background:rgba(255,255,255,0.5);border-radius:var(--r-md);padding:var(--s-3) var(--s-4);display:flex;align-items:center;gap:var(--s-3);cursor:pointer;border:1px solid var(--line);transition:background .2s}
+.energy-collapsed:active{background:rgba(255,255,255,0.75)}
+.ec-summary{display:flex;align-items:center;gap:var(--s-2);flex-shrink:0}
+.ec-icon{font-size:13px;opacity:.55}
+.ec-label{font-family:'Inter',sans-serif;font-size:10px;color:var(--text-light);text-transform:uppercase;letter-spacing:2px;font-weight:500}
+.ec-count{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;color:var(--text-mid)}
+.ec-count small{color:var(--text-light);font-weight:400}
+.ec-mini-bars{flex:1;display:flex;gap:var(--s-2);align-items:center;justify-content:flex-end}
+.ec-mini{display:flex;align-items:center;gap:1px}
+.ec-mini-emoji{font-size:11px;margin-right:2px;opacity:.7}
+.ec-mini-cell{width:4px;height:7px;border-radius:1px;background:rgba(0,0,0,0.07)}
+.ec-mini-cell.body.fill{background:var(--sage)}
+.ec-mini-cell.look.fill{background:var(--coral)}
+.ec-mini-cell.exp.fill{background:var(--plum)}
+.ec-mini-cell.kids.fill{background:var(--sky)}
+.ec-mini-cell.food.fill{background:var(--orange)}
+.ec-toggle{font-size:10px;color:var(--text-light);transition:transform .2s;margin-left:var(--s-1)}
+.ec-toggle.open{transform:rotate(180deg)}
+
+/* Today Widget - editorial pullout style */
+.today-widget{margin:var(--s-3) var(--s-5) 0;background:white;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;position:relative;box-shadow:0 2px 14px rgba(216,133,106,.06)}
+.tw-header{padding:var(--s-4) var(--s-4) var(--s-2) var(--s-4);display:flex;align-items:flex-start;gap:var(--s-2);cursor:pointer;position:relative;padding-left:calc(var(--s-4) + 8px)}
+.today-widget::before{content:'';position:absolute;left:0;top:var(--s-4);bottom:var(--s-4);width:3px;background:var(--coral);border-radius:0 2px 2px 0}
+.tw-title-wrap{flex:1;display:flex;flex-direction:column;gap:2px}
+.tw-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;color:var(--text);font-style:italic;line-height:1.2}
+.tw-sub{font-family:'Inter',sans-serif;font-size:10px;color:var(--coral);text-transform:uppercase;letter-spacing:2px;font-weight:500}
+.tw-toggle{font-size:11px;color:var(--text-light);transition:transform .2s;opacity:.7;margin-top:var(--s-1)}
+.tw-toggle.open{transform:rotate(180deg)}
+.tw-items{padding:0 var(--s-4) var(--s-3);padding-left:calc(var(--s-4) + 8px)}
+.tw-item{display:flex;align-items:center;gap:var(--s-3);padding:var(--s-3) 0;font-size:14px;border-bottom:1px solid var(--line)}
+.tw-item:last-child{border-bottom:none;padding-bottom:0}
+.tw-item:first-child{padding-top:var(--s-2)}
+.tw-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.tw-name{flex:1;color:var(--text-mid);font-family:'Noto Serif SC'}
+.tw-name.done{text-decoration:line-through;color:var(--text-light)}
+.tw-check{width:22px;height:22px;border-radius:var(--r-sm);border:1px solid var(--line);background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent}
+.tw-check.checked{background:var(--sage);border-color:var(--sage);color:white}
+
+/* Sticky Tabs - editorial */
+.tabs-wrap{position:sticky;top:0;z-index:50;background:rgba(245,241,235,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:var(--s-3) var(--s-5) var(--s-2);margin:var(--s-3) 0 0;border-bottom:1px solid var(--line)}
+.tabs-wrap .tabs{margin:0;border:none;background:transparent;padding:0;gap:var(--s-1)}
+.tabs-wrap .tab{flex:0 0 auto;padding:6px 14px;font-size:13px;font-weight:500;text-align:center;color:var(--text-dim);cursor:pointer;border:none;background:transparent;font-family:'Noto Serif SC';white-space:nowrap;transition:all .2s;border-radius:var(--r-md)}
+.tabs-wrap .tab.active{background:var(--text-mid);color:white}
+.filter-row-2{display:flex;gap:var(--s-2);margin-top:var(--s-2);align-items:center}
+.area-select.compact{flex:1;padding:8px var(--s-3);font-size:12px;font-weight:500;border:1px solid var(--line);background:white;color:var(--text-mid);border-radius:var(--r-sm);font-family:'Inter',sans-serif;outline:none;min-width:0;max-width:none;letter-spacing:0.3px;transition:background .2s}
+.area-select.compact:focus{border-color:var(--text-light);background:white}
+.geo-btn{padding:8px var(--s-3);font-size:11px;font-weight:500;border:1px solid var(--line);background:white;color:var(--text-mid);border-radius:var(--r-sm);font-family:'Inter',sans-serif;cursor:pointer;flex-shrink:0;white-space:nowrap;letter-spacing:0.5px;text-transform:uppercase;transition:all .2s}
+.geo-btn:active{transform:scale(.96)}
+.geo-btn.active{background:var(--coral);color:white;border-color:var(--coral)}
+
+/* Bottom Navigation */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--line);padding:var(--s-2) 0 var(--s-5);display:flex;z-index:100}
+.bn-btn{flex:1;background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:var(--s-1);cursor:pointer;font-family:'Inter',sans-serif;color:var(--text-light);transition:color .2s}
+.bn-icon{font-size:20px;filter:grayscale(0.5);transition:filter .2s;opacity:.5}
+.bn-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px}
+.bn-btn.active{color:var(--coral)}
+.bn-btn.active .bn-icon{filter:grayscale(0);opacity:1}
+
+/* Simplified Project Card Header */
+.g-tags-row{display:flex;flex-wrap:wrap;gap:4px;align-items:center;padding:0 16px 10px 38px;font-size:11px}
+.g-tags-row .tag{font-size:11px;padding:2px 8px}
 </style>
 </head>
 <body>
 <div class="header">
-  <div class="brand"><div class="brand-icon">⚡</div><h1><em>Recharge</em> 自我充电</h1></div>
-  <div class="sub">重庆 · 6/7 — 6/22 · 属于我的16天</div>
+  <div class="brand">
+    <div class="brand-icon">⚡</div>
+    <div class="brand-text">
+      <h1><em>Recharge</em></h1>
+      <div class="brand-zh">自 我 充 电</div>
+      <div class="day-counter" id="dayCounter">— Chongqing · Day 1 of 15 —</div>
+    </div>
+  </div>
 </div>
 
 <div class="search-bar">
@@ -231,7 +361,18 @@ body>*{position:relative;z-index:1}
   <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
 </div>
 
-<div class="energy"><div class="energy-card">
+<!-- Collapsible Energy Card -->
+<div class="energy-collapsed" id="energyCollapsed" onclick="toggleEnergy()">
+  <div class="ec-summary">
+    <span class="ec-icon">⚡</span>
+    <span class="ec-label">Done</span>
+    <span class="ec-count" id="ecCount">0<small>/45</small></span>
+  </div>
+  <div class="ec-mini-bars" id="ecMiniBars"></div>
+  <span class="ec-toggle" id="ecToggle">▾</span>
+</div>
+
+<div class="energy" id="energyExpanded" style="display:none"><div class="energy-card">
   <div class="energy-main"><span class="energy-label">总能量</span><span class="energy-pct" id="totalPct">0<small>%</small></span></div>
   <div class="bar-track"><div class="bar-fill main" id="totalBar" style="width:0%"></div></div>
   <div class="dims">
@@ -243,35 +384,46 @@ body>*{position:relative;z-index:1}
   </div>
 </div></div>
 
-<div class="tomorrow" id="tmrw">
-  <div class="tomorrow-header"><span class="tomorrow-title">📋 明天要做</span><button class="tomorrow-clear" onclick="clearTmrw()">清空</button></div>
-  <div class="tomorrow-items" id="tmrwItems"></div>
+<!-- Today Widget (collapsible) -->
+<div class="today-widget" id="todayWidget" style="display:none">
+  <div class="tw-header" onclick="toggleToday()">
+    <div class="tw-title-wrap">
+      <span class="tw-title">Today's Plan</span>
+      <span class="tw-sub" id="twCount">— 0 件事</span>
+    </div>
+    <span class="tw-toggle" id="twToggle">▾</span>
+  </div>
+  <div class="tw-items" id="twItems" style="display:none"></div>
 </div>
 
-<div class="kids-bar">
-  <span>👦</span><span>娃在上</span>
-  <select id="kidsAct">
-    <option value="">不筛选</option>
-    <option value="龙湖/新牌坊">DQ跑酷（新光里）</option>
-    <option value="龙湖/新牌坊">下棋（龙湖花园）</option>
-    <option value="龙湖/新牌坊">DQ游泳（五洲大酒店）</option>
-    <option value="龙湖/新牌坊">DQ滑冰（爱琴海）</option>
-    <option value="龙湖/新牌坊">🏠 龙湖花园（家）</option>
-    <option value="新桥医院">🏠 新桥医院（家）</option>
-  </select>
-  <button class="geo-btn" id="geoBtn" onclick="getMyLocation()">📍 我的位置</button>
+<div class="tabs-wrap">
+  <div class="tabs" id="tabsBar">
+    <button class="tab active" data-tab="all" onclick="setTab('all')">全部</button>
+    <button class="tab" data-tab="body" onclick="setTab('body')">💪身体</button>
+    <button class="tab" data-tab="look" onclick="setTab('look')">✨形象</button>
+    <button class="tab" data-tab="exp" onclick="setTab('exp')">🎭体验</button>
+    <button class="tab" data-tab="kids" onclick="setTab('kids')">👦带娃</button>
+    <button class="tab" data-tab="food" onclick="setTab('food')">🍜美食</button>
+  </div>
+  <div class="filter-row-2">
+    <select id="areaFilter" class="area-select compact" onchange="areaFilter=this.value;render()">
+      <option value="all">📍 全部商圈</option>
+    </select>
+    <select id="kidsAct" class="area-select compact" onchange="kidsArea=this.value;document.getElementById('geoBtn').classList.remove('active');render()">
+      <option value="">👦 娃的活动</option>
+      <option value="龙湖/新牌坊">DQ跑酷（新光里）</option>
+      <option value="龙湖/新牌坊">下棋（龙湖花园）</option>
+      <option value="龙湖/新牌坊">DQ游泳（五洲大酒店）</option>
+      <option value="龙湖/新牌坊">DQ滑冰（爱琴海）</option>
+      <option value="龙湖/新牌坊">🏠 龙湖花园（家）</option>
+      <option value="新桥医院">🏠 新桥医院（家）</option>
+    </select>
+    <button class="geo-btn" id="geoBtn" onclick="getMyLocation()">📍 定位</button>
+  </div>
 </div>
 
-<div class="tabs">
-  <button class="tab active" data-tab="all" onclick="setTab('all')">全部</button>
-  <button class="tab" data-tab="body" onclick="setTab('body')">💪身体</button>
-  <button class="tab" data-tab="look" onclick="setTab('look')">✨形象</button>
-  <button class="tab" data-tab="exp" onclick="setTab('exp')">🎭体验</button>
-  <button class="tab" data-tab="kids" onclick="setTab('kids')">👦带娃</button>
-  <button class="tab" data-tab="food" onclick="setTab('food')">🍜美食</button>
-</div>
+<div class="cal-view" id="calView"></div>
 
-<div class="filters"><div><div class="filter-row-label">商圈</div><div class="filter-row" id="areaFilters"></div></div></div>
 <div id="content"></div>
 
 <!-- Edit Panel -->
@@ -362,11 +514,36 @@ body>*{position:relative;z-index:1}
   </div>
 </div>
 
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <button class="bn-btn active" id="bnProj" onclick="switchView('projects')">
+    <span class="bn-icon">📋</span>
+    <span class="bn-label">项目</span>
+  </button>
+  <button class="bn-btn" id="bnCal" onclick="switchView('calendar')">
+    <span class="bn-icon">📅</span>
+    <span class="bn-label">日历</span>
+  </button>
+</div>
+
+<!-- Date Picker Modal -->
+<div class="date-picker-wrap" id="datePicker">
+  <div class="date-picker">
+    <h3 id="dpTitle">📅 预约日期</h3>
+    <input type="date" id="dpDate" min="2026-06-08" max="2026-06-22">
+    <div class="date-picker-actions">
+      <button class="dp-clear" onclick="clearApptDate()">清除</button>
+      <button class="dp-cancel" onclick="closeDatePicker()">取消</button>
+      <button class="dp-save" onclick="saveApptDate()">确定</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const ITEMS=[
   // 身体 pts:20
   {id:'pilates',title:'私教普拉提',cat:'body',appt:true,type:'counter',target:6,count:0,shops:[{name:'倾·普拉提（新光里店）',area:'新光天地',addr:'嘉州路92号新光里A栋201',url:'https://m.dianping.com',xhs:'',note:'4.6分197条 · 人均¥207 · 3号线嘉州路站280m · 10:00-21:00',guide:'【倾·普拉提 新光里店】\n📍 嘉州路92号新光里A栋201\n🚇 3号线嘉州路站出入口步行280m\n⏰ 10:00-21:00\n⭐ 4.6分197条 · 人均¥207\n\n【环境✨】\n明亮清新，教室都是落地窗\n望出去是银杏树，很漂亮\n设施：更衣室、物品寄存、地暖、淋浴房\n无隐性消费\n\n【老师推荐】\n紫君老师（好评11）· Eric（好评10）· Joy',myNotes:'',done:false},{name:'那·瑜伽&孕产·普拉提·塑身减脂（人和天地店）',area:'新光天地',addr:'新南路11号人和天地小区',url:'https://m.dianping.com',xhs:'',note:'4.5分426条 · 嘉州路站7口520m · 10:00-21:00 · 收录14年老店',guide:'🏷 团购搜：【馆主推荐】瑜伽/普拉提大器械一对一专属定制私教\n\n【那·瑜伽 人和天地店】\n📍 新南路11号人和天地小区\n🚇 嘉州路站7口步行520m\n⏰ 10:00-21:00\n⭐ 4.5分426条 · 收录14年老店！\n\n【团购超值🔥】\n¥128（原¥800，1.6折！）\n私教1对1，60分钟/节\n零基础适用，全部人群\n每人限购1张，购后30天有效\n4家门店适用，93%好评\n\n【课程类型超多】\n垫上普拉提、器械普拉提、塑形普拉提\n康复普拉提、体态普拉提\n哈他瑜伽、阿汤斯加瑜伽、艾扬格瑜伽\n声瑜伽、流瑜伽、阴瑜伽、阳瑜伽\n轮瑜伽、棒瑜伽、球瑜伽、椅子瑜伽\n墙绳瑜伽、经络瑜伽、肩颈瑜伽、盆骨瑜伽等\n\n💡 ¥128体验一节试试，性价比极高',myNotes:'',done:false},{name:'泛亚·瑜伽普拉提（重庆中心）',area:'新光天地',addr:'龙溪街道红锦大道89号SKLP商场C区3楼',url:'https://m.dianping.com',xhs:'',note:'4.6分588条 · 嘉州路站1口230m · 10:00-22:00 · 瑜伽热门榜第7',guide:'【泛亚·瑜伽普拉提 重庆中心】\n📍 SKLP商场C区3楼\n🚇 嘉州路站1口230m\n⏰ 10:00-22:00\n⭐ 4.6分588条 · 瑜伽热门榜第7名\n新加坡品牌 · VIP包房 · 淋浴房\n\n【团购💰】\n🧘 团课+小班 ¥60（原¥220）34种课程\n🧘 小班+私教 ¥160（原¥630）\n🧘 团课+小班+私教 ¥180（原¥720）',myNotes:'',done:false},{name:'灵奢普拉提（启元光里店）',area:'观音桥',addr:'小苑路17号L3-06',url:'https://m.dianping.com',xhs:'',note:'4.8分329条 · 冉家坝站3D口180m · 好评榜第7 · 全预约制',guide:'🏷 团购搜：【新客专享】普拉提私教1+普拉提小班1\n\n【灵奢普拉提 启元光里店】\n📍 小苑路17号L3-06\n🚇 冉家坝站3D口180m\n⭐ 4.8分329条 · 好评榜第7 · 全预约制\n\n【团购💰】\n🧘 大器械私教3节 ¥394（原¥1194）\n🧘 私教1+小班1 ¥163（原¥636）100%好评',myNotes:'',done:false}],note:'',pts:20},
-  {id:'gym',title:'私教课·健身房器械',cat:'body',appt:true,type:'counter',target:5,count:0,shops:[{name:'寻咖食客精品咖啡学院',area:'龙湖',addr:'龙湖新壹街A馆1栋17楼24号',url:'https://m.dianping.com',xhs:'',note:'',guide:'',done:false}],note:'',pts:20},
+  {id:'gym',title:'私教课·健身房器械',cat:'body',appt:true,type:'counter',target:5,count:0,shops:[{name:'待找店',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:20},
   {id:'gastro',title:'胃肠镜检查',cat:'body',appt:true,type:'check',shops:[{name:'新桥医院',area:'新桥医院',addr:'新桥医院',url:'',xhs:'',note:'必做！一回去就做',guide:'【胃肠镜检查】\n📍 新桥医院\n⚠️ 必做！一回去就约！\n提前预约+禁食准备\n\n💡 到了重庆第一时间安排',myNotes:'',done:false}],note:'',pts:20},
   {id:'tcm',title:'中药调理',cat:'body',appt:true,type:'counter',target:3,count:0,shops:[{name:'新桥医院',area:'新桥医院',addr:'新桥医院',url:'',xhs:'',note:'必做！一回去就做',guide:'【中药调理】\n📍 新桥医院\n⚠️ 必做！一回去就约！\n\n💡 到了重庆第一时间安排',myNotes:'',done:false}],note:'',pts:20},
   {id:'head',title:'头疗',cat:'body',appt:false,type:'check',shops:[{name:'丝域养发馆（新牌坊店）',area:'新牌坊',addr:'新牌坊1路265号渝复丽园C1幢1-1',url:'https://m.dianping.com',xhs:'',note:'4.5分250条 · 嘉州路站7口950m · 09:30-21:30 · 连锁 · 无隐性消费',guide:'🏷 团购搜：【头疗放松】水漾舒活spa/头皮温瑜伽2选1\n\n【丝域养发馆 新牌坊店】\n📍 新牌坊1路265号渝复丽园C1幢1-1\n🚇 嘉州路站7口步行950m\n⏰ 09:30-21:30\n⭐ 4.5分250条 · 连锁品牌 · 年度影响力品牌\n无隐性消费 · 刷卡支付\n\n【团购选项💰】\n\nA.【头疗放松】¥128（原¥458，2.8折）\n水漾舒活spa/头皮温瑜伽 二选一\n缓解压力，肌肽温泉矿物，60分钟\n\nB.【头疗轻养】¥98（原¥198，5折）\n桃胶轻养spa\n头部放松，桃树脂，60分钟\n\nC.【新客养发体验】¥138（原¥468，3折）\n玫瑰养发/珍珠养发 二选一\n染烫发质修护，专利玫瑰成分，85分钟\n98%好评601条，926家门店适用\n\nD.【柔顺滑养发】¥198（原¥696，2.9折）🔥\n玫瑰养发+头皮卸妆\n发质修护85分钟+头皮清洁\n97%好评14330条！年售7.5万+\n2079家门店适用\n\n💡 头疗放松¥128最适合体验，养发修护选D性价比最高',myNotes:'',done:false},{name:'头妍·头逍遥·经络头疗（观音桥店）',area:'观音桥',addr:'建新北路重庆茂业天地商场7层7006',url:'https://m.dianping.com',xhs:'',note:'4.5分3004条 · 观音桥站5口550m · 10:30-22:00 · 年度影响力品牌',guide:'🏷 团购搜：【头皮吸尘器】精准去屑｜舒缓皮炎｜控油补水3选1\n\n【头妍·头逍遥 观音桥店】\n📍 茂业天地商场7层7006\n🚇 3号线观音桥站5口550m\n⏰ 10:30-22:00\n⭐ 4.5分3004条！· 年度影响力品牌\n\n【团购🔥】¥199（原¥308，6.5折）\n80分钟茶麸成分 · 免预约\n99%好评 · 年售600+',myNotes:'',done:false},{name:'杉树花洗脸洗头吧（SKLP店）',area:'新光天地',addr:'红锦大道89号SKLP商场三楼C区03037号',url:'https://m.dianping.com',xhs:'',note:'4.5分1671条 · 嘉州路站330m · 10:00-22:00 · 修丽可授权 · 可带宠物',guide:'🏷 团购搜：【养发护发】深层清洁+珍珠养发\n\n【杉树花 SKLP店】\n📍 SKLP商场三楼C区03037号\n🚇 嘉州路站1口330m\n⏰ 10:00-22:00\n⭐ 4.5分1671条 · SPA好评榜第3\n修丽可官方授权店 · 可带宠物\n\n【团购🔥】¥98（原¥368，2.7折）\n深层清洁+珍珠养发50分钟 · 年售500+',myNotes:'',done:false},{name:'丝域养发馆（财富购物中心店）',area:'观音桥',addr:'洪湖东路1号重庆财富购物中心L2层26-2',url:'https://m.dianping.com',xhs:'',note:'4.6分626条 · 洪湖东路站1A口280m · 10:00-22:00 · 连锁 · 年度影响力品牌',guide:'🏷 团购搜：【脱发推荐】防脱调理+头部舒压\n\n【丝域养发馆 财富购物中心店】\n📍 洪湖东路1号财富购物中心L2层26-2（临近HM商铺）\n🚇 环线洪湖东路站1A口步行280m\n⏰ 10:00-22:00\n⭐ 4.6分626条 · 连锁 · 年度影响力品牌\n\n【团购🔥】\n【脱发推荐】防脱调理+头部舒压\n¥103（原¥198，5.2折）\n60分钟 · 防脱滋养+防脱特证\n年售9.7万+！！超级爆款\n\n【叠加】头皮清洁 ¥19.9（原¥98，2.1折）\n薄荷薰衣草8分钟 · 年售4000+\n\n💡 跟新牌坊店同品牌，这家在观音桥财富中心',myNotes:'',done:false}],note:'',pts:20},
@@ -382,8 +559,6 @@ const ITEMS=[
   {id:'photo',title:'全家福艺术照',cat:'look',appt:true,type:'check',shops:[{name:'待找摄影工作室',area:'待定',url:'',note:'提前预约',guide:'',done:false}],note:'',pts:10},
   // 体验 pts:15
   {id:'hiphop',title:'街舞课',cat:'exp',appt:true,type:'check',shops:[{name:'YASAKI国际舞蹈中心（爱琴海店）',area:'爱琴海',addr:'金开大道爱琴海购物广场玫瑰天街B1栋11F',url:'https://m.dianping.com',xhs:'',note:'4.8分1171条 · 好评榜第2 · 09:00-23:30 · 免费停车',guide:'【YASAKI 爱琴海店】\n📍 金开大道爱琴海购物广场玫瑰天街B1栋11F\n🚇 5号线重光站3A口1.5km\n⏰ 09:00-23:30 · 收录8年 · 免费停车\n⭐ 4.8分1171条 · 两江新区舞蹈好评榜第2名\n\n【团购超值🔥】\n🎵 JAZZ入门大班 ¥0.8！（原¥288）年售3000+\n🎵 社恐i人零基础小班 ¥18.9（原¥520）复购第1名\n🎵 KPOP韩舞 ¥2.6（原¥99）年售500+',myNotes:'',done:false},{name:'阁楼街舞（财富中心店）',area:'观音桥',addr:'财富中心财富MALL A区二楼C20/21号',url:'https://m.dianping.com',xhs:'',note:'4.6分432条 · 洪湖东路站460m · 10:00-22:00',guide:'【阁楼街舞 财富中心店】\n📍 财富MALL A区二楼C20/21号\n🚇 环线洪湖东路站1A口460m\n⏰ 10:00-22:00 · ⭐ 4.6分432条\n\n【团购💰】\n🎵 成人街舞爵士舞1节 ¥6.9（原¥300）年售600+\n🎵 街舞爵士舞2节 ¥20.9 8种舞种任选\n🎵 少儿街舞3.5-12岁 ¥19.9 7种舞种\n💡 有少儿班，可以跟娃一起！',myNotes:'',done:false},{name:'PLAN DANCE舞蹈（冉家坝店）',area:'新光天地',addr:'新南路爱融荟城A区5层',url:'https://m.dianping.com',xhs:'',note:'4.7分330条 · 冉家坝站100m！超近 · 10:00-22:00',guide:'【PLAN DANCE 冉家坝店】\n📍 新南路爱融荟城A区5层\n🚇 冉家坝站3口100m！超近\n⏰ 10:00-22:00 · ⭐ 4.7分330条\n\n【团购💰】\n🎵 零基础爵士舞体验 ¥7.9（原¥100）\n🎵 寒暑月卡 ¥560（原¥880）9种舞种',myNotes:'',done:false}],note:'',pts:15},
-  {id:'climb',title:'攀岩',cat:'exp',appt:false,type:'check',shops:[{name:'山石攀岩',area:'待定',url:'https://m.dianping.com',note:'单人私教课',guide:'',done:false}],note:'',pts:15},
-  {id:'drums',title:'架子鼓',cat:'exp',appt:true,type:'check',shops:[{name:'待找琴行',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
   {id:'paint',title:'画室画画',cat:'exp',appt:false,type:'check',shops:[{name:'待找画室',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
   {id:'latte',title:'咖啡拉花',cat:'exp',appt:true,type:'check',shops:[{name:'寻咖食客精品咖啡学院',area:'龙湖',addr:'龙湖新壹街A馆1栋17楼24号',url:'https://m.dianping.com',xhs:'',note:'4.8分195条 · 3/6号线红旗河沟站1口820m · 09:30-22:00 · 兴趣生活好评榜第2',guide:'🏷 团购搜：小班咖啡拉花4课时零基础入门\n\n【寻咖食客精品咖啡学院】\n📍 龙湖新壹街A馆1栋17楼24号\n🚇 3/6号线红旗河沟站1口820m\n⏰ 09:30-22:00\n⭐ 4.8分195条 · 146人预约\n🏆 重庆兴趣生活好评榜第2名\n承接团建聚会 · 免费重学 · 推荐就业 · 创业指导\n\n【入门推荐🔥】\n☕ 小班咖啡拉花4课时 ¥398（原¥1980，2.1折）\n零基础入门 · 4节×45分钟 · 100%好评\n需预约 · 购后30天有效\n课程：咖啡机原理→磨豆机原理→浓缩咖啡标准制作→高品质奶泡打发→咖啡拉花训练\n\n【进阶课程】\n☕ 专业意式拉花15课时 ¥980（原¥1980）6个款式\n☕ 专业冲煮课15课时 ¥980\n☕ 少儿咖啡拉花 ¥798（6-15岁）\n☕ 咖啡夜校12节 ¥999\n\n💡 ¥398四节课入门，100%好评',myNotes:'',done:false}],note:'',pts:15},
   {id:'glass',title:'做玻璃',cat:'exp',appt:true,type:'check',shops:[{name:'待找工坊',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
@@ -429,7 +604,7 @@ const ITEMS=[
   {id:'lrt',title:'李若桃酸奶',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'🥛 李若桃酸奶\n尤其是原味超好喝！\n可点外卖到家🛵\n\n💡 不用出门，外卖直接送',pts:8},
 ];
 
-const SK='recharge_v28',PK='recharge_plan_v28';
+const SK='recharge_v37',PK='recharge_plan_v37';
 
 // === LIFE ZONES (生活圈) ===
 // Each zone has a center coord and a list of area names that belong to it
@@ -536,29 +711,246 @@ function updateE(){
     document.getElementById('dim'+C).textContent=p+'%';
     document.getElementById('bar'+C).style.width=p+'%';
   });
+  // Update collapsed bar
+  const totalDone=items.filter(i=>isDone(i)).length;
+  const totalItems=items.length;
+  document.getElementById('ecCount').innerHTML=`${totalDone}<small>/${totalItems}</small>`;
+  // Mini bars: 5 cells per category, fill = completion ratio
+  const cats=[
+    {k:'body',e:'💪'},
+    {k:'look',e:'✨'},
+    {k:'exp',e:'🎭'},
+    {k:'kids',e:'👦'},
+    {k:'food',e:'🍜'}
+  ];
+  let mb='';
+  cats.forEach(c=>{
+    const total=items.filter(i=>i.cat===c.k).length;
+    const done=items.filter(i=>i.cat===c.k&&isDone(i)).length;
+    const ratio=total>0?done/total:0;
+    const cells=5;
+    const filled=Math.round(ratio*cells);
+    mb+=`<div class="ec-mini"><span class="ec-mini-emoji">${c.e}</span>`;
+    for(let i=0;i<cells;i++){
+      mb+=`<div class="ec-mini-cell ${c.k} ${i<filled?'fill':''}"></div>`;
+    }
+    mb+=`</div>`;
+  });
+  document.getElementById('ecMiniBars').innerHTML=mb;
+}
+
+// Day counter
+function updateDayCounter(){
+  const start=new Date('2026-06-08');
+  const end=new Date('2026-06-22');
+  const today=new Date();
+  today.setHours(0,0,0,0);start.setHours(0,0,0,0);end.setHours(0,0,0,0);
+  let label='— Chongqing · Jun 7-22 —';
+  if(today<start){
+    const days=Math.ceil((start-today)/(1000*60*60*24));
+    label=`— ${days} Days to Chongqing ✈ —`;
+  }else if(today>end){
+    label='— Trip Ended · Home —';
+  }else{
+    const day=Math.floor((today-start)/(1000*60*60*24))+1;
+    label=`— Chongqing · Day ${day} of 15 —`;
+  }
+  document.getElementById('dayCounter').textContent=label;
+}
+
+// Toggle energy expanded/collapsed
+function toggleEnergy(){
+  const exp=document.getElementById('energyExpanded');
+  const tog=document.getElementById('ecToggle');
+  if(exp.style.display==='none'){
+    exp.style.display='block';tog.classList.add('open');
+  }else{
+    exp.style.display='none';tog.classList.remove('open');
+  }
+}
+
+// Today widget
+function renderToday(){
+  const w=document.getElementById('todayWidget');
+  const today=new Date();
+  const pad=n=>String(n).padStart(2,'0');
+  const ymd=`${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
+  const todayItems=items.filter(i=>i.apptDate===ymd);
+  if(!todayItems.length){w.style.display='none';return}
+  w.style.display='block';
+  const m=today.getMonth()+1,d=today.getDate();
+  document.getElementById('twCount').textContent=`— ${m}月${d}日 · ${todayItems.length} 件事`;
+  const list=document.getElementById('twItems');
+  list.innerHTML=todayItems.map(it=>{
+    const done=isDone(it);
+    return `<div class="tw-item"><div class="tw-dot" style="background:var(--${it.cat==='body'?'sage':it.cat==='look'?'coral':it.cat==='exp'?'plum':it.cat==='kids'?'sky':'orange'})"></div><span class="tw-name ${done?'done':''}">${it.title}</span><button class="tw-check ${done?'checked':''}" onclick="quickCheck('${it.id}')">${done?'✓':''}</button></div>`;
+  }).join('');
+}
+function toggleToday(){
+  const items=document.getElementById('twItems');
+  const tog=document.getElementById('twToggle');
+  if(items.style.display==='none'){
+    items.style.display='block';tog.classList.add('open');
+  }else{
+    items.style.display='none';tog.classList.remove('open');
+  }
+}
+function quickCheck(id){
+  const it=items.find(i=>i.id===id);
+  if(!it)return;
+  if(it.type==='check'){
+    if(it.cat==='food'){
+      togFood(id);
+    }else{
+      // Toggle first shop
+      if(it.shops&&it.shops[0]){
+        it.shops[0].done=!it.shops[0].done;
+        save();render();renderToday();
+      }
+    }
+  }
 }
 
 function buildChips(){
-  const el=document.getElementById('areaFilters');
-  let h=`<div class="chip ${areaFilter==='all'?'a-all':''}" data-area="all">全部</div>`;
+  const el=document.getElementById('areaFilter');
+  let h=`<option value="all">📍 全部商圈</option>`;
   Object.keys(LIFE_ZONES).forEach(zn=>{
-    h+=`<div class="chip ${areaFilter===zn?'a-area':''}" data-area="${zn}">${zn}</div>`;
+    h+=`<option value="${zn}" ${areaFilter===zn?'selected':''}>📍 ${zn}</option>`;
   });
   el.innerHTML=h;
 }
 
-// Tomorrow
-function renderTmrw(){
-  const w=document.getElementById('tmrw'),l=document.getElementById('tmrwItems');
-  if(!planned.length){w.classList.remove('has-items');return}
-  w.classList.add('has-items');
-  l.innerHTML=planned.map(pid=>{const it=items.find(i=>i.id===pid);if(!it)return'';return`<div class="tomorrow-item"><div class="t-dot ${it.cat}"></div><span class="t-name">${it.title}</span><button class="t-remove" onclick="removePlan('${pid}')">✕</button></div>`}).join('');
+function setTab(cat){
+  catFilter=cat;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===cat));
+  render();
 }
-function togglePlan(id){const i=planned.indexOf(id);if(i>=0)planned.splice(i,1);else planned.push(id);savePlan();renderTmrw();render()}
-function removePlan(id){planned=planned.filter(p=>p!==id);savePlan();renderTmrw();render()}
-function clearTmrw(){planned=[];savePlan();renderTmrw();render()}
 
-function setTab(cat){catFilter=cat;document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===cat));render()}
+// View switching for bottom nav
+let currentView='projects';
+function switchView(view){
+  currentView=view;
+  document.getElementById('bnProj').classList.toggle('active',view==='projects');
+  document.getElementById('bnCal').classList.toggle('active',view==='calendar');
+  const calView=document.getElementById('calView');
+  const content=document.getElementById('content');
+  const tabsWrap=document.querySelector('.tabs-wrap');
+  if(view==='calendar'){
+    calView.classList.add('show');
+    content.style.display='none';
+    if(tabsWrap)tabsWrap.style.display='none';
+    renderCalendar();
+  }else{
+    calView.classList.remove('show');
+    content.style.display='';
+    if(tabsWrap)tabsWrap.style.display='';
+  }
+}
+
+// === DATE PICKER ===
+let dpItemId='';
+function openDatePicker(id){
+  dpItemId=id;
+  const it=items.find(i=>i.id===id);
+  document.getElementById('dpTitle').textContent='📅 '+it.title;
+  document.getElementById('dpDate').value=it.apptDate||'';
+  document.getElementById('datePicker').classList.add('show');
+}
+function closeDatePicker(){document.getElementById('datePicker').classList.remove('show');dpItemId=''}
+function saveApptDate(){
+  const it=items.find(i=>i.id===dpItemId);
+  if(it){it.apptDate=document.getElementById('dpDate').value;save();render();renderCalendar()}
+  closeDatePicker();
+}
+function clearApptDate(){
+  const it=items.find(i=>i.id===dpItemId);
+  if(it){it.apptDate='';save();render();renderCalendar()}
+  closeDatePicker();
+}
+
+// === CALENDAR VIEW ===
+// Calendar - shows only the 16 Chongqing days (June 7-22, 2026)
+const TRIP_START='2026-06-08';
+const TRIP_END='2026-06-22';
+function renderCalendar(){
+  const el=document.getElementById('calView');
+  if(!el.classList.contains('show'))return;
+
+  const start=new Date(TRIP_START+'T00:00:00');
+  const end=new Date(TRIP_END+'T00:00:00');
+  const today=new Date();today.setHours(0,0,0,0);
+  // Use local YYYY-MM-DD format
+  const pad=n=>String(n).padStart(2,'0');
+  const todayYMD=`${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
+
+  // Build all days
+  const days=[];
+  const cur=new Date(start);
+  while(cur<=end){
+    days.push(new Date(cur));
+    cur.setDate(cur.getDate()+1);
+  }
+
+  // Get appointments per day
+  const apptsByDay={};
+  items.forEach(it=>{
+    if(it.apptDate){
+      if(!apptsByDay[it.apptDate])apptsByDay[it.apptDate]=[];
+      apptsByDay[it.apptDate].push({title:it.title,cat:it.cat,id:it.id,done:isDone(it)});
+    }
+  });
+
+  // Header
+  let h=`<div class="cal-header"><span class="cal-title">重庆 · 15天</span><span style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-light);letter-spacing:1px">JUN 8 — JUN 22</span></div>`;
+
+  // Day strip - vertical list, each day is a row
+  h+=`<div class="cal-strip">`;
+  days.forEach((d,idx)=>{
+    const ymd=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    const dayNum=d.getDate();
+    const dayOfWeek=['日','一','二','三','四','五','六'][d.getDay()];
+    const isToday=ymd===todayYMD;
+    const isPast=d<today;
+    const dayLabel=`Day ${idx+1}`;
+    const dayAppts=apptsByDay[ymd]||[];
+    
+    let stateClass='';
+    if(isToday)stateClass='today';
+    else if(isPast)stateClass='past';
+    
+    h+=`<div class="cal-row ${stateClass}" onclick="openDayDetail('${ymd}')">
+      <div class="cal-row-date">
+        <div class="cal-row-day">${dayNum}</div>
+        <div class="cal-row-meta">${dayLabel} · 周${dayOfWeek}${isToday?' · 今天':''}</div>
+      </div>
+      <div class="cal-row-content">`;
+    
+    if(dayAppts.length){
+      dayAppts.forEach(a=>{
+        const colors={body:'var(--sage)',look:'var(--coral)',exp:'var(--plum)',kids:'var(--sky)',food:'var(--orange)'};
+        h+=`<div class="cal-row-item ${a.done?'done':''}"><div class="cal-row-dot" style="background:${colors[a.cat]}"></div><span>${a.title}</span></div>`;
+      });
+    }else{
+      h+=`<div class="cal-row-empty">— 还没有安排 —</div>`;
+    }
+    
+    h+=`</div></div>`;
+  });
+  h+=`</div>`;
+
+  el.innerHTML=h;
+}
+
+function openDayDetail(ymd){
+  // Show items scheduled for this day, with option to add more
+  const dayAppts=items.filter(it=>it.apptDate===ymd);
+  if(!dayAppts.length){
+    // Could open an "add appointment" dialog here, for now do nothing
+    return;
+  }
+  // For now, just allow editing the first one's date by opening date picker
+  // (User can also tap each project card directly to add date)
+}
 
 function sortProx(arr,area){
   if(!area)return arr;
@@ -595,12 +987,22 @@ function render(){
     const isNear=itemDist<3;
     const autoOpen=forceOpen||false;
     let tags='';
-    if(kidsArea&&isNear)tags+=`<span class="tag tag-nearby">📍${itemDist<0.5?'很近':itemDist<1?'<1km':itemDist.toFixed(1)+'km'}</span>`;
-    if(it.appt)tags+=`<span class="tag tag-appt">🔖预约</span>`;
-    if(it.eventDate)tags+=`<span class="tag tag-date">📅${it.eventDate}</span>`;
-    if(!it.appt&&!it.eventDate)tags+=`<span class="tag tag-walk">随时去</span>`;
+    if(kidsArea&&isNear)tags+=`<span class="tag tag-nearby">📍 ${itemDist<0.5?'NEAR':itemDist<1?'<1KM':itemDist.toFixed(1)+'KM'}</span>`;
+    if(it.appt)tags+=`<span class="tag tag-appt">RSVP</span>`;
+    if(it.eventDate)tags+=`<span class="tag tag-date">📅 ${it.eventDate}</span>`;
+    if(!it.appt&&!it.eventDate)tags+=`<span class="tag tag-walk">FREE</span>`;
 
-    let right=`<button class="s-link-edit" onclick="event.stopPropagation();openEditItem('${it.id}')" style="font-size:12px;padding:2px 4px" title="编辑项目">⚙️</button><button class="g-plan-btn ${pl?'planned':''}" onclick="event.stopPropagation();togglePlan('${it.id}')">📋</button>`;
+    // Appointment date button
+    const apptDate=it.apptDate||'';
+    let apptLabel='+ DATE';
+    if(apptDate){
+      const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      const d=new Date(apptDate);
+      apptLabel=`${months[d.getMonth()]} ${d.getDate()}`;
+    }
+    const dateBtn=`<button class="g-date-btn ${apptDate?'has-date':''}" onclick="event.stopPropagation();openDatePicker('${it.id}')">${apptLabel}</button>`;
+
+    let right=dateBtn;
     // Food items: direct check on item level
     if(it.cat==='food'&&it.type==='check'){
       right=`<button class="s-check ${done?'checked':''}" onclick="event.stopPropagation();togFood('${it.id}')" style="width:32px;height:32px">${done?'✓':''}</button>`+right;
@@ -656,6 +1058,7 @@ function render(){
 
     const showAllBtn=showOnlyClosest?`<button class="add-shop-btn" style="border-style:solid;font-size:11px;padding:8px" onclick="event.stopPropagation();showAllShops(this)">查看全部 ${sortedShops.length} 家 ▾</button>`:'';
     const addBtn=`<button class="add-shop-btn" onclick="event.stopPropagation();openAdd('${it.id}')">+ 添加店铺</button>`;
+    const editBtn=`<button class="add-shop-btn" style="font-size:12px;padding:8px;margin-top:4px;border-style:solid;color:var(--text-light);border-color:var(--card-border)" onclick="event.stopPropagation();openEditItem('${it.id}')">⚙️ 编辑项目</button>`;
 
     let noteH='';
     if(it.note)noteH=`<div class="g-note"><div class="note-saved">"${it.note}"</div><button class="note-toggle" onclick="event.stopPropagation();openN('${it.id}')">✏️编辑</button><textarea class="note-input" id="n-${it.id}" rows="2" placeholder="感受…" onblur="saveN('${it.id}')">${it.note}</textarea></div>`;
@@ -687,7 +1090,7 @@ function render(){
       return`<div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ${autoOpen?'open':''}">▸</span><div class="g-dot ${it.cat}"></div><div class="g-title ${done?'done-t':''}">${it.title}</div><div class="g-tags">${tags}</div><div class="g-actions">${right}</div></div><div class="shops-wrap ${autoOpen?'open':''}">${foodContent}${noteH}</div></div>`;
     }
 
-    return`<div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ${autoOpen?'open':''}">▸</span><div class="g-dot ${it.cat}"></div><div class="g-title ${done?'done-t':''}">${it.title}<span class="g-count-label"> · ${it.shops.length}家</span></div><div class="g-tags">${tags}</div><div class="g-actions">${right}</div></div><div class="shops-wrap ${autoOpen?'open':''}">${sc}${showAllBtn}${addBtn}${noteH}</div></div>`;
+    return`<div class="group"><div class="group-head" onclick="togGrp(this)"><span class="g-exp ${autoOpen?'open':''}">▸</span><div class="g-dot ${it.cat}"></div><div class="g-title ${done?'done-t':''}">${it.title}<span class="g-count-label"> · ${it.shops.length}家</span></div><div class="g-tags">${tags}</div><div class="g-actions">${right}</div></div><div class="shops-wrap ${autoOpen?'open':''}">${sc}${showAllBtn}${addBtn}${editBtn}${noteH}</div></div>`;
   }
 
   let h='';
@@ -924,16 +1327,16 @@ function openEditItem(id){
 function delItem(){
   if(!confirm('确定删除这个项目？所有店铺和打卡记录都会丢失。'))return;
   items=items.filter(i=>i.id!==editItemId);
-  planned=planned.filter(p=>p!==editItemId);
-  save();savePlan();closeItemPanel();renderTmrw();render();
+  save();closeItemPanel();render();
 }
 
 // === FILTER EVENTS ===
-document.getElementById('areaFilters').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;areaFilter=c.dataset.area;buildChips();render()});
+// Area filter handled by dropdown onchange
 document.getElementById('kidsAct').addEventListener('change',e=>{
   kidsArea=e.target.value||'';
-  myGPS=null; // clear GPS when switching to preset
-  document.getElementById('geoBtn').textContent='📍 我的位置';
+  myGPS=null;
+  document.getElementById('geoBtn').textContent='📍 定位';
+  document.getElementById('geoBtn').classList.remove('active');
   render();
 });
 
@@ -945,14 +1348,13 @@ function getMyLocation(){
   if(!navigator.geolocation){btn.textContent='不支持定位';btn.classList.remove('loading');return}
   navigator.geolocation.getCurrentPosition(pos=>{
     myGPS=[pos.coords.latitude,pos.coords.longitude];
-    btn.classList.remove('loading');btn.textContent='📍 已定位';
-    // Clear preset selection
+    btn.classList.remove('loading');btn.classList.add('active');btn.textContent='📍 已定位';
     document.getElementById('kidsAct').value='';
     kidsArea='__gps__';
     render();
   },err=>{
     btn.classList.remove('loading');btn.textContent='📍 定位失败';
-    setTimeout(()=>{btn.textContent='📍 我的位置'},2000);
+    setTimeout(()=>{btn.textContent='📍 定位'},2000);
   },{enableHighAccuracy:true,timeout:10000});
 }
 
@@ -973,17 +1375,15 @@ closestShopDist=function(item,targetArea){
   return _origClosest(item,targetArea);
 };
 
-// Register Service Worker for offline support
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('./sw.js').catch(()=>{});
-}
-
 // === SEARCH ===
 let searchQuery='';
 function onSearch(val){
   searchQuery=val.trim().toLowerCase();
   document.getElementById('searchClear').classList.toggle('show',searchQuery.length>0);
   render();
+  if(searchQuery){
+    setTimeout(()=>{const c=document.getElementById('content');if(c&&c.firstElementChild)c.firstElementChild.scrollIntoView({behavior:'smooth',block:'start'})},100);
+  }
 }
 function clearSearch(){
   searchQuery='';
@@ -1014,7 +1414,14 @@ function matchesSearch(it){
   return false;
 }
 
-buildChips();renderTmrw();render();
+updateDayCounter();
+buildChips();
+renderToday();
+render();
+// Register Service Worker
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
 </script>
 </body>
 </html>
