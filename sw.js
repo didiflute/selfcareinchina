@@ -1,4 +1,4 @@
-const CACHE_NAME = 'recharge-v44';
+const CACHE_NAME = 'recharge-v52';
 const ASSETS = [
   './',
   './index.html',
