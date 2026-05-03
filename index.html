@@ -247,28 +247,64 @@ body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--text);mi
 .dp-cancel{background:var(--bg-warm);color:var(--text-dim)}
 .dp-clear{background:var(--coral-soft);color:var(--coral)}
 .dp-save{background:var(--plum);color:white}
+.dp-wd{padding:6px 10px;border:1px solid var(--line);background:white;color:var(--text-dim);border-radius:var(--r-sm);font-family:'Noto Serif SC';font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.dp-wd:active{transform:scale(.95)}
+.dp-wd.sel{background:var(--plum);color:white;border-color:var(--plum)}
 
 /* Calendar - 16-day Chongqing strip view */
 .cal-view{margin:var(--s-3) var(--s-5) var(--s-3);display:none}
 .cal-view.show{display:block}
 .cal-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:var(--s-4);padding-bottom:var(--s-3);border-bottom:1px solid var(--line)}
 .cal-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;font-style:italic;color:var(--text)}
-.cal-strip{display:flex;flex-direction:column;background:white;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
-.cal-row{display:flex;gap:var(--s-3);padding:var(--s-3) var(--s-4);border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s;align-items:flex-start}
+
+/* Column title row - sticky-feeling header */
+.cal-col-titles{display:grid;grid-template-columns:64px 1fr 1fr;gap:0;padding:0;background:white;border:1px solid var(--line);border-radius:var(--r-md) var(--r-md) 0 0;border-bottom:none;overflow:hidden}
+.cal-col-title-spacer{padding:8px 12px}
+.cal-col-title{font-family:'Inter',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;padding:8px 10px;text-align:center;border-left:1px solid var(--line)}
+.cal-col-title-me{background:rgba(216,133,106,0.08);color:var(--coral)}
+.cal-col-title-kids{background:rgba(126,154,175,0.08);color:var(--sky)}
+
+.cal-strip{display:flex;flex-direction:column;background:white;border:1px solid var(--line);border-radius:0 0 var(--r-md) var(--r-md);overflow:hidden;border-top:none}
+.cal-row{display:grid;grid-template-columns:64px 1fr 1fr;gap:0;border-bottom:1px solid var(--line);transition:background .15s;align-items:stretch;min-height:56px}
 .cal-row:last-child{border-bottom:none}
-.cal-row:active{background:rgba(0,0,0,0.02)}
-.cal-row.today{background:var(--coral-soft)}
 .cal-row.past{opacity:.55}
-.cal-row-date{flex-shrink:0;width:80px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding-top:2px}
+
+.cal-row-date{padding:var(--s-3) var(--s-2) var(--s-3) var(--s-3);display:flex;flex-direction:column;align-items:flex-start;gap:2px;justify-content:flex-start}
 .cal-row-day{font-family:'Playfair Display',serif;font-size:24px;font-weight:500;color:var(--text);line-height:1}
-.cal-row.today .cal-row-day{color:var(--coral)}
 .cal-row-meta{font-family:'Inter',sans-serif;font-size:9px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;font-weight:500}
-.cal-row.today .cal-row-meta{color:var(--coral);font-weight:600}
-.cal-row-content{flex:1;display:flex;flex-direction:column;gap:6px;padding-top:4px}
-.cal-row-item{display:flex;align-items:center;gap:var(--s-2);font-family:'Noto Serif SC';font-size:14px;color:var(--text-mid)}
-.cal-row-item.done{text-decoration:line-through;color:var(--text-light)}
-.cal-row-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.cal-row-empty{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--text-light);padding-top:2px}
+
+/* Today row - whole row coral tint, strong day number */
+.cal-row.today .cal-row-date{background:var(--coral)}
+.cal-row.today .cal-row-day{color:white}
+.cal-row.today .cal-row-meta{color:rgba(255,255,255,0.9);font-weight:600}
+.cal-row.today .cal-col-me{background:rgba(216,133,106,0.10)}
+.cal-row.today .cal-col-kids{background:rgba(126,154,175,0.10)}
+
+/* Holiday row */
+.cal-row.holiday .cal-row-date{background:rgba(192,138,85,0.12)}
+.cal-row.today.holiday .cal-row-date{background:var(--coral)}
+.cal-holiday{font-family:'Noto Serif SC';font-size:10px;color:var(--orange);font-weight:500;letter-spacing:0.3px;padding:1px 5px;background:rgba(192,138,85,0.18);border-radius:3px;display:inline-block;margin-top:4px}
+.cal-row.today .cal-holiday{background:rgba(255,255,255,0.25);color:white}
+
+/* Columns */
+.cal-col{padding:var(--s-3) var(--s-2);display:flex;flex-direction:column;gap:4px;min-width:0;border-left:1px solid var(--line)}
+.cal-col-me{background:rgba(216,133,106,0.03)}
+.cal-col-kids{background:rgba(126,154,175,0.03)}
+
+.cal-row-item{display:flex;align-items:flex-start;gap:6px;font-family:'Noto Serif SC';font-size:13px;color:var(--text-mid);padding:4px 6px;border-radius:var(--r-sm);transition:background .15s;line-height:1.4}
+.cal-row-item:hover{background:rgba(0,0,0,0.03)}
+.cal-row-item.done{opacity:.6}
+.cal-row-item.done .cal-name{text-decoration:line-through;color:var(--text-light)}
+.cal-row-item-text{flex:1;display:flex;align-items:flex-start;gap:6px;cursor:pointer;flex-wrap:wrap;min-width:0}
+.cal-row-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.cal-time{font-family:'Inter',sans-serif;font-size:10px;color:var(--text-light);background:rgba(0,0,0,0.04);padding:1px 5px;border-radius:3px;font-weight:500;letter-spacing:0.3px;flex-shrink:0;margin-top:2px}
+.cal-row.today .cal-time{background:rgba(216,133,106,0.20);color:var(--coral)}
+.cal-name{flex:1;min-width:0;word-break:break-word}
+.cal-repeat{display:inline-block;font-family:'Inter';font-size:10px;color:var(--plum);margin-left:4px;font-weight:600;opacity:.7}
+.cal-check{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--text-light);background:white;color:transparent;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;transition:all .15s;padding:0;font-family:inherit}
+.cal-check:active{transform:scale(.9)}
+.cal-check.checked{background:var(--sage);border-color:var(--sage);color:white}
+.cal-row-empty{font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:var(--text-light);padding:4px 6px}
 
 /* === NEW v2.0 STYLES === */
 
@@ -531,8 +567,26 @@ body{padding-bottom:80px !important}
   <div class="date-picker">
     <h3 id="dpTitle">📅 预约日期</h3>
     <input type="date" id="dpDate" min="2026-06-08" max="2026-06-22">
+    <div style="margin-top:10px;display:flex;align-items:center;gap:8px">
+      <label style="font-family:'Inter';font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;flex-shrink:0">时间（可选）</label>
+      <input type="text" id="dpTime" inputmode="numeric" pattern="[0-9]{1,2}:[0-9]{2}" placeholder="HH:MM" maxlength="5" style="flex:1;padding:8px 10px;border:1.5px solid var(--line);border-radius:var(--r-sm);font-size:14px;font-family:'Inter';outline:none;text-align:center;letter-spacing:1px">
+      <button onclick="document.getElementById('dpTime').value=''" style="background:none;border:none;color:var(--text-light);font-size:12px;cursor:pointer;font-family:inherit;padding:4px">清除</button>
+    </div>
+    <div style="margin-top:14px">
+      <div style="font-family:'Inter';font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">每周重复（可选）</div>
+      <div id="dpWeekdays" style="display:flex;gap:6px;flex-wrap:wrap">
+        <button type="button" class="dp-wd" data-wd="0" onclick="toggleWd(this)">周日</button>
+        <button type="button" class="dp-wd" data-wd="1" onclick="toggleWd(this)">周一</button>
+        <button type="button" class="dp-wd" data-wd="2" onclick="toggleWd(this)">周二</button>
+        <button type="button" class="dp-wd" data-wd="3" onclick="toggleWd(this)">周三</button>
+        <button type="button" class="dp-wd" data-wd="4" onclick="toggleWd(this)">周四</button>
+        <button type="button" class="dp-wd" data-wd="5" onclick="toggleWd(this)">周五</button>
+        <button type="button" class="dp-wd" data-wd="6" onclick="toggleWd(this)">周六</button>
+      </div>
+      <div style="font-family:'Noto Serif SC';font-size:11px;color:var(--text-light);margin-top:6px;font-style:italic">选了周几，每周这天都会显示在日历里</div>
+    </div>
     <div class="date-picker-actions">
-      <button class="dp-clear" onclick="clearApptDate()">清除</button>
+      <button class="dp-clear" onclick="clearApptDate()">清除日期</button>
       <button class="dp-cancel" onclick="closeDatePicker()">取消</button>
       <button class="dp-save" onclick="saveApptDate()">确定</button>
     </div>
@@ -560,7 +614,7 @@ const ITEMS=[
   // 体验 pts:15
   {id:'hiphop',title:'街舞课',cat:'exp',appt:true,type:'check',shops:[{name:'YASAKI国际舞蹈中心（爱琴海店）',area:'爱琴海',addr:'金开大道爱琴海购物广场玫瑰天街B1栋11F',url:'https://m.dianping.com',xhs:'',note:'4.8分1171条 · 好评榜第2 · 09:00-23:30 · 免费停车',guide:'【YASAKI 爱琴海店】\n📍 金开大道爱琴海购物广场玫瑰天街B1栋11F\n🚇 5号线重光站3A口1.5km\n⏰ 09:00-23:30 · 收录8年 · 免费停车\n⭐ 4.8分1171条 · 两江新区舞蹈好评榜第2名\n\n【团购超值🔥】\n🎵 JAZZ入门大班 ¥0.8！（原¥288）年售3000+\n🎵 社恐i人零基础小班 ¥18.9（原¥520）复购第1名\n🎵 KPOP韩舞 ¥2.6（原¥99）年售500+',myNotes:'',done:false},{name:'阁楼街舞（财富中心店）',area:'观音桥',addr:'财富中心财富MALL A区二楼C20/21号',url:'https://m.dianping.com',xhs:'',note:'4.6分432条 · 洪湖东路站460m · 10:00-22:00',guide:'【阁楼街舞 财富中心店】\n📍 财富MALL A区二楼C20/21号\n🚇 环线洪湖东路站1A口460m\n⏰ 10:00-22:00 · ⭐ 4.6分432条\n\n【团购💰】\n🎵 成人街舞爵士舞1节 ¥6.9（原¥300）年售600+\n🎵 街舞爵士舞2节 ¥20.9 8种舞种任选\n🎵 少儿街舞3.5-12岁 ¥19.9 7种舞种\n💡 有少儿班，可以跟娃一起！',myNotes:'',done:false},{name:'PLAN DANCE舞蹈（冉家坝店）',area:'新光天地',addr:'新南路爱融荟城A区5层',url:'https://m.dianping.com',xhs:'',note:'4.7分330条 · 冉家坝站100m！超近 · 10:00-22:00',guide:'【PLAN DANCE 冉家坝店】\n📍 新南路爱融荟城A区5层\n🚇 冉家坝站3口100m！超近\n⏰ 10:00-22:00 · ⭐ 4.7分330条\n\n【团购💰】\n🎵 零基础爵士舞体验 ¥7.9（原¥100）\n🎵 寒暑月卡 ¥560（原¥880）9种舞种',myNotes:'',done:false}],note:'',pts:15},
   {id:'paint',title:'画室画画',cat:'exp',appt:false,type:'check',shops:[{name:'待找画室',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
-  {id:'latte',title:'咖啡拉花',cat:'exp',appt:true,type:'check',shops:[{name:'寻咖食客精品咖啡学院',area:'龙湖',addr:'龙湖新壹街A馆1栋17楼24号',url:'https://m.dianping.com',xhs:'',note:'4.8分195条 · 3/6号线红旗河沟站1口820m · 09:30-22:00 · 兴趣生活好评榜第2',guide:'🏷 团购搜：小班咖啡拉花4课时零基础入门\n\n【寻咖食客精品咖啡学院】\n📍 龙湖新壹街A馆1栋17楼24号\n🚇 3/6号线红旗河沟站1口820m\n⏰ 09:30-22:00\n⭐ 4.8分195条 · 146人预约\n🏆 重庆兴趣生活好评榜第2名\n承接团建聚会 · 免费重学 · 推荐就业 · 创业指导\n\n【入门推荐🔥】\n☕ 小班咖啡拉花4课时 ¥398（原¥1980，2.1折）\n零基础入门 · 4节×45分钟 · 100%好评\n需预约 · 购后30天有效\n课程：咖啡机原理→磨豆机原理→浓缩咖啡标准制作→高品质奶泡打发→咖啡拉花训练\n\n【进阶课程】\n☕ 专业意式拉花15课时 ¥980（原¥1980）6个款式\n☕ 专业冲煮课15课时 ¥980\n☕ 少儿咖啡拉花 ¥798（6-15岁）\n☕ 咖啡夜校12节 ¥999\n\n💡 ¥398四节课入门，100%好评',myNotes:'',done:false}],note:'',pts:15},
+  {id:'latte',title:'咖啡拉花',cat:'exp',appt:true,type:'check',shops:[{name:'寻咖食客精品咖啡学院',area:'龙湖',addr:'龙湖新壹街A馆1栋17楼24号',url:'https://m.dianping.com',xhs:'',note:'⚠️ 课时3小时连上，9:30-12:30或13:30-16:30 · 6/19-6/21端午休 · 6/8那周提前约 · 4.8分195条 · 红旗河沟站1口820m',guide:'⏰ 课时安排（重要！）\n• 每节课3小时连上\n• 上午班 09:30 - 12:30\n• 下午班 13:30 - 16:30\n• 6/19-6/21 端午节不排课\n• 6/8 那周提前预约！\n\n🏷 团购搜：小班咖啡拉花4课时零基础入门\n\n【寻咖食客精品咖啡学院】\n📍 龙湖新壹街A馆1栋17楼24号\n🚇 3/6号线红旗河沟站1口820m\n⏰ 09:30-22:00\n⭐ 4.8分195条 · 146人预约\n🏆 重庆兴趣生活好评榜第2名\n承接团建聚会 · 免费重学 · 推荐就业 · 创业指导\n\n【入门推荐🔥】\n☕ 小班咖啡拉花4课时 ¥398（原¥1980，2.1折）\n零基础入门 · 4节×45分钟 · 100%好评\n需预约 · 购后30天有效\n课程：咖啡机原理→磨豆机原理→浓缩咖啡标准制作→高品质奶泡打发→咖啡拉花训练\n\n【进阶课程】\n☕ 专业意式拉花15课时 ¥980（原¥1980）6个款式\n☕ 专业冲煮课15课时 ¥980\n☕ 少儿咖啡拉花 ¥798（6-15岁）\n☕ 咖啡夜校12节 ¥999\n\n💡 ¥398四节课入门，100%好评',myNotes:'',done:false}],note:'',pts:15},
   {id:'glass',title:'做玻璃',cat:'exp',appt:true,type:'check',shops:[{name:'待找工坊',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
   {id:'bake',title:'西点培训',cat:'exp',appt:true,type:'check',shops:[{name:'待找烘焙教室',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
   {id:'concert',title:'演唱会',cat:'exp',appt:false,type:'check',eventDate:'查到后填入',shops:[{name:'待查演出',area:'待定',url:'',note:'',guide:'',done:false}],note:'',pts:15},
@@ -604,7 +658,7 @@ const ITEMS=[
   {id:'lrt',title:'李若桃酸奶',cat:'food',appt:false,type:'check',shops:[],note:'',foodGuide:'🥛 李若桃酸奶\n尤其是原味超好喝！\n可点外卖到家🛵\n\n💡 不用出门，外卖直接送',pts:8},
 ];
 
-const SK='recharge_v37',PK='recharge_plan_v37';
+const SK='recharge_v44',PK='recharge_plan_v44';
 
 // === LIFE ZONES (生活圈) ===
 // Each zone has a center coord and a list of area names that belong to it
@@ -773,18 +827,68 @@ function toggleEnergy(){
 function renderToday(){
   const w=document.getElementById('todayWidget');
   const today=new Date();
+  const todayWd=today.getDay();
   const pad=n=>String(n).padStart(2,'0');
   const ymd=`${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
-  const todayItems=items.filter(i=>i.apptDate===ymd);
-  if(!todayItems.length){w.style.display='none';return}
+  const todayAppts=[];
+  // Helper: does an appt apply today?
+  function applyTo(appt){
+    if(appt.apptDate===ymd)return true;
+    if(appt.apptWeekdays&&appt.apptWeekdays.length&&appt.apptWeekdays.includes(todayWd)){
+      // Repeat applies only from start date forward
+      if(appt.apptDate){
+        const start=new Date(appt.apptDate+'T00:00:00');
+        const t=new Date(today);t.setHours(0,0,0,0);
+        return t>=start;
+      }
+      return true;
+    }
+    return false;
+  }
+  items.forEach(it=>{
+    const isFood=it.cat==='food';
+    if(isFood){
+      if(applyTo(it)){
+        const checkedDates=it.checkedDates||{};
+        todayAppts.push({title:it.title,subtitle:'',cat:it.cat,id:it.id,shopIdx:-1,time:it.apptTime||'',done:!!checkedDates[ymd],isRepeat:!!(it.apptWeekdays&&it.apptWeekdays.length),ymd});
+      }
+    }else{
+      let hasShopAppt=false;
+      it.shops.forEach((s,sIdx)=>{
+        if(applyTo(s)){
+          hasShopAppt=true;
+          const checkedDates=s.checkedDates||{};
+          todayAppts.push({title:it.title,subtitle:s.name,cat:it.cat,id:it.id,shopIdx:sIdx,time:s.apptTime||'',done:!!checkedDates[ymd],isRepeat:!!(s.apptWeekdays&&s.apptWeekdays.length),ymd});
+        }
+      });
+      if(applyTo(it)&&!hasShopAppt){
+        const checkedDates=it.checkedDates||{};
+        todayAppts.push({title:it.title,subtitle:'',cat:it.cat,id:it.id,shopIdx:-1,time:it.apptTime||'',done:!!checkedDates[ymd],isRepeat:!!(it.apptWeekdays&&it.apptWeekdays.length),ymd});
+      }
+    }
+  });
+  todayAppts.sort((a,b)=>(a.time||'24:00').localeCompare(b.time||'24:00'));
+  if(!todayAppts.length){w.style.display='none';return}
   w.style.display='block';
   const m=today.getMonth()+1,d=today.getDate();
-  document.getElementById('twCount').textContent=`— ${m}月${d}日 · ${todayItems.length} 件事`;
+  document.getElementById('twCount').textContent=`— ${m}月${d}日 · ${todayAppts.length} 件事`;
   const list=document.getElementById('twItems');
-  list.innerHTML=todayItems.map(it=>{
-    const done=isDone(it);
-    return `<div class="tw-item"><div class="tw-dot" style="background:var(--${it.cat==='body'?'sage':it.cat==='look'?'coral':it.cat==='exp'?'plum':it.cat==='kids'?'sky':'orange'})"></div><span class="tw-name ${done?'done':''}">${it.title}</span><button class="tw-check ${done?'checked':''}" onclick="quickCheck('${it.id}')">${done?'✓':''}</button></div>`;
+  list.innerHTML=todayAppts.map(a=>{
+    const titleHTML=a.subtitle?`${a.title} · <span style="color:var(--text-light);font-size:13px">${a.subtitle}</span>`:a.title;
+    const timeHTML=a.time?`<span style="font-family:'Inter';font-size:11px;color:var(--text-light);background:rgba(0,0,0,0.04);padding:1px 6px;border-radius:3px;margin-right:6px;font-weight:500">${a.time}</span>`:'';
+    const repeatHTML=a.isRepeat?`<span style="font-family:'Inter';font-size:10px;color:var(--plum);margin-left:4px;font-weight:600">↻</span>`:'';
+    return `<div class="tw-item"><div class="tw-dot" style="background:var(--${a.cat==='body'?'sage':a.cat==='look'?'coral':a.cat==='exp'?'plum':a.cat==='kids'?'sky':'orange'})"></div>${timeHTML}<span class="tw-name ${a.done?'done':''}" onclick="jumpToProject('${a.id}')" style="cursor:pointer">${titleHTML}${repeatHTML}</span><button class="tw-check ${a.done?'checked':''}" onclick="toggleApptDone('${a.id}',${a.shopIdx},'${a.ymd}')">${a.done?'✓':''}</button></div>`;
   }).join('');
+}
+function quickCheckAppt(id,shopIdx){
+  const it=items.find(i=>i.id===id);
+  if(!it)return;
+  if(shopIdx>=0&&it.shops[shopIdx]){
+    it.shops[shopIdx].done=!it.shops[shopIdx].done;
+    save();render();renderToday();renderCalendar();
+  }else if(it.cat==='food'){
+    togFood(id);
+  }
 }
 function toggleToday(){
   const items=document.getElementById('twItems');
@@ -848,24 +952,161 @@ function switchView(view){
 }
 
 // === DATE PICKER ===
-let dpItemId='';
+let dpItemId='',dpShopIdx=-1;
+
+function toggleWd(btn){
+  btn.classList.toggle('sel');
+}
+function setDpWeekdays(arr){
+  document.querySelectorAll('.dp-wd').forEach(btn=>{
+    const wd=parseInt(btn.dataset.wd,10);
+    btn.classList.toggle('sel',(arr||[]).includes(wd));
+  });
+}
+function getDpWeekdays(){
+  const arr=[];
+  document.querySelectorAll('.dp-wd.sel').forEach(btn=>arr.push(parseInt(btn.dataset.wd,10)));
+  return arr.sort();
+}
+
+// Auto-format time input as user types
+function formatTimeInput(el){
+  let v=el.value.replace(/[^0-9:]/g,'');
+  if(v.length>=3&&!v.includes(':')){
+    v=v.substring(0,2)+':'+v.substring(2,4);
+  }
+  if(v.length>5)v=v.substring(0,5);
+  el.value=v;
+}
+function validateTimeInput(el){
+  let v=el.value.trim();
+  if(!v)return;
+  if(!v.includes(':')){
+    if(v.length<=2){
+      v=v.padStart(2,'0')+':00';
+    }
+  }else{
+    const parts=v.split(':');
+    let h=parts[0]||'';
+    let m=parts[1]||'00';
+    h=h.padStart(2,'0').substring(0,2);
+    m=m.padEnd(2,'0').substring(0,2);
+    const hn=parseInt(h,10),mn=parseInt(m,10);
+    if(isNaN(hn)||hn>23||isNaN(mn)||mn>59){el.value='';return;}
+    v=h+':'+m;
+  }
+  el.value=v;
+}
 function openDatePicker(id){
-  dpItemId=id;
+  dpItemId=id;dpShopIdx=-1;
   const it=items.find(i=>i.id===id);
   document.getElementById('dpTitle').textContent='📅 '+it.title;
   document.getElementById('dpDate').value=it.apptDate||'';
+  document.getElementById('dpTime').value=(it.apptTime||'').substring(0,5);
+  setDpWeekdays(it.apptWeekdays||[]);
   document.getElementById('datePicker').classList.add('show');
 }
-function closeDatePicker(){document.getElementById('datePicker').classList.remove('show');dpItemId=''}
+function openDatePickerProj(id){
+  const it=items.find(i=>i.id===id);
+  if(!it)return;
+  if(it.shops&&it.shops.length){
+    if(it.shops.length===1){
+      openShopDate(id,0);
+    }else{
+      openShopChooser(id);
+    }
+  }else{
+    dpItemId=id;dpShopIdx=-1;
+    document.getElementById('dpTitle').textContent='📅 '+it.title;
+    document.getElementById('dpDate').value=it.apptDate||'';
+    document.getElementById('dpTime').value=(it.apptTime||'').substring(0,5);
+    setDpWeekdays(it.apptWeekdays||[]);
+    document.getElementById('datePicker').classList.add('show');
+  }
+}
+function openShopDate(id,idx){
+  dpItemId=id;dpShopIdx=idx;
+  const it=items.find(i=>i.id===id);
+  if(!it||!it.shops[idx])return;
+  const s=it.shops[idx];
+  document.getElementById('dpTitle').textContent='📅 '+it.title+' · '+s.name;
+  document.getElementById('dpDate').value=s.apptDate||'';
+  document.getElementById('dpTime').value=(s.apptTime||'').substring(0,5);
+  setDpWeekdays(s.apptWeekdays||[]);
+  document.getElementById('datePicker').classList.add('show');
+}
+function closeDatePicker(){document.getElementById('datePicker').classList.remove('show');dpItemId='';dpShopIdx=-1}
 function saveApptDate(){
   const it=items.find(i=>i.id===dpItemId);
-  if(it){it.apptDate=document.getElementById('dpDate').value;save();render();renderCalendar()}
+  if(it){
+    const dateVal=document.getElementById('dpDate').value;
+    const tEl=document.getElementById('dpTime');
+    validateTimeInput(tEl);
+    const timeVal=tEl.value;
+    const wdArr=getDpWeekdays();
+    if(dpShopIdx>=0&&it.shops[dpShopIdx]){
+      it.shops[dpShopIdx].apptDate=dateVal;
+      it.shops[dpShopIdx].apptTime=timeVal;
+      it.shops[dpShopIdx].apptWeekdays=wdArr;
+    }else{
+      it.apptDate=dateVal;
+      it.apptTime=timeVal;
+      it.apptWeekdays=wdArr;
+    }
+    save();render();renderCalendar();renderToday();
+  }
   closeDatePicker();
 }
 function clearApptDate(){
   const it=items.find(i=>i.id===dpItemId);
-  if(it){it.apptDate='';save();render();renderCalendar()}
+  if(it){
+    if(dpShopIdx>=0&&it.shops[dpShopIdx]){
+      it.shops[dpShopIdx].apptDate='';
+      it.shops[dpShopIdx].apptTime='';
+      it.shops[dpShopIdx].apptWeekdays=[];
+      it.shops[dpShopIdx].checkedDates={};
+    }else{
+      it.apptDate='';
+      it.apptTime='';
+      it.apptWeekdays=[];
+      it.checkedDates={};
+    }
+    save();render();renderCalendar();renderToday();
+  }
   closeDatePicker();
+}
+
+// Shop chooser modal - simple inline implementation
+function openShopChooser(id){
+  const it=items.find(i=>i.id===id);
+  if(!it)return;
+  const overlay=document.createElement('div');
+  overlay.className='date-picker-wrap show';
+  overlay.style.zIndex='201';
+  const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  let html=`<div class="date-picker"><h3>${it.title} · 选择店铺预约</h3><div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;max-height:60vh;overflow-y:auto">`;
+  it.shops.forEach((s,idx)=>{
+    let dateBadge='';
+    const hasRepeat=s.apptWeekdays&&s.apptWeekdays.length>0;
+    if(s.apptDate||hasRepeat){
+      let txt='';
+      if(s.apptDate){
+        const d=new Date(s.apptDate+'T00:00:00');
+        txt=`${months[d.getMonth()]} ${d.getDate()}`;
+      }
+      if(hasRepeat)txt=(txt?'↻ '+txt:'↻ 每周');
+      dateBadge=`<span style="font-family:'Inter';font-size:10px;background:var(--text-mid);color:white;padding:2px 6px;border-radius:4px;letter-spacing:0.5px">${txt}</span>`;
+    }
+    html+=`<button onclick="closeShopChooser();openShopDate('${id}',${idx})" style="text-align:left;padding:10px 12px;background:white;border:1px solid var(--line);border-radius:var(--r-sm);font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px"><span style="flex:1;font-family:'Noto Serif SC';font-size:14px;color:var(--text-mid)">${s.name}</span>${dateBadge}</button>`;
+  });
+  html+=`</div><div class="date-picker-actions"><button class="dp-cancel" onclick="closeShopChooser()">取消</button></div></div>`;
+  overlay.innerHTML=html;
+  overlay.id='shopChooser';
+  document.body.appendChild(overlay);
+}
+function closeShopChooser(){
+  const o=document.getElementById('shopChooser');
+  if(o)o.remove();
 }
 
 // === CALENDAR VIEW ===
@@ -891,20 +1132,94 @@ function renderCalendar(){
     cur.setDate(cur.getDate()+1);
   }
 
-  // Get appointments per day
+  // Get appointments per day - collect from both project-level (food) and shop-level
+  // For each day in the trip, check which appointments fall on it (single date OR weekday match)
   const apptsByDay={};
-  items.forEach(it=>{
-    if(it.apptDate){
-      if(!apptsByDay[it.apptDate])apptsByDay[it.apptDate]=[];
-      apptsByDay[it.apptDate].push({title:it.title,cat:it.cat,id:it.id,done:isDone(it)});
+  // Helper: does an appt apply to a given date?
+  function applyApptToDate(appt,dateObj,ymd){
+    // Single date match
+    if(appt.apptDate===ymd)return true;
+    // Weekday repeat match (only if weekdays selected)
+    if(appt.apptWeekdays&&appt.apptWeekdays.length){
+      // Repeat applies from the first set apptDate forward (or all trip days if no apptDate)
+      if(appt.apptDate){
+        const startDate=new Date(appt.apptDate+'T00:00:00');
+        if(dateObj<startDate)return false;
+      }
+      return appt.apptWeekdays.includes(dateObj.getDay());
     }
+    return false;
+  }
+  
+  days.forEach(dateObj=>{
+    const ymd=`${dateObj.getFullYear()}-${pad(dateObj.getMonth()+1)}-${pad(dateObj.getDate())}`;
+    items.forEach(it=>{
+      const isFood=it.cat==='food';
+      if(isFood){
+        if(applyApptToDate(it,dateObj,ymd)){
+          if(!apptsByDay[ymd])apptsByDay[ymd]=[];
+          const checkedDates=it.checkedDates||{};
+          apptsByDay[ymd].push({
+            title:it.title,subtitle:'',cat:it.cat,id:it.id,shopIdx:-1,
+            time:it.apptTime||'',
+            done:!!checkedDates[ymd],
+            isRepeat:!!(it.apptWeekdays&&it.apptWeekdays.length),
+            ymd:ymd
+          });
+        }
+      }else{
+        let hasShopAppt=false;
+        it.shops.forEach((s,sIdx)=>{
+          if(applyApptToDate(s,dateObj,ymd)){
+            hasShopAppt=true;
+            if(!apptsByDay[ymd])apptsByDay[ymd]=[];
+            const checkedDates=s.checkedDates||{};
+            apptsByDay[ymd].push({
+              title:it.title,subtitle:s.name,cat:it.cat,id:it.id,shopIdx:sIdx,
+              time:s.apptTime||'',
+              done:!!checkedDates[ymd],
+              isRepeat:!!(s.apptWeekdays&&s.apptWeekdays.length),
+              ymd:ymd
+            });
+          }
+        });
+        if(applyApptToDate(it,dateObj,ymd)&&!hasShopAppt){
+          if(!apptsByDay[ymd])apptsByDay[ymd]=[];
+          const checkedDates=it.checkedDates||{};
+          apptsByDay[ymd].push({
+            title:it.title,subtitle:'',cat:it.cat,id:it.id,shopIdx:-1,
+            time:it.apptTime||'',
+            done:!!checkedDates[ymd],
+            isRepeat:!!(it.apptWeekdays&&it.apptWeekdays.length),
+            ymd:ymd
+          });
+        }
+      }
+    });
+  });
+  // Sort each day's appointments by time
+  Object.keys(apptsByDay).forEach(k=>{
+    apptsByDay[k].sort((a,b)=>(a.time||'24:00').localeCompare(b.time||'24:00'));
   });
 
   // Header
   let h=`<div class="cal-header"><span class="cal-title">重庆 · 15天</span><span style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-light);letter-spacing:1px">JUN 8 — JUN 22</span></div>`;
 
+  // Column titles (sticky at top of strip)
+  h+=`<div class="cal-col-titles">
+    <div class="cal-col-title-spacer"></div>
+    <div class="cal-col-title cal-col-title-me">我的</div>
+    <div class="cal-col-title cal-col-title-kids">娃的</div>
+  </div>`;
+
   // Day strip - vertical list, each day is a row
   h+=`<div class="cal-strip">`;
+  // Holiday markers
+  const HOLIDAYS={
+    '2026-06-19':'端午节 · 第一天',
+    '2026-06-20':'端午节',
+    '2026-06-21':'端午节 · 最后一天'
+  };
   days.forEach((d,idx)=>{
     const ymd=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
     const dayNum=d.getDate();
@@ -913,28 +1228,30 @@ function renderCalendar(){
     const isPast=d<today;
     const dayLabel=`Day ${idx+1}`;
     const dayAppts=apptsByDay[ymd]||[];
+    const holiday=HOLIDAYS[ymd];
+    
+    // Split into mine vs kids
+    const myAppts=dayAppts.filter(a=>a.cat!=='kids');
+    const kidsAppts=dayAppts.filter(a=>a.cat==='kids');
     
     let stateClass='';
     if(isToday)stateClass='today';
     else if(isPast)stateClass='past';
+    if(holiday)stateClass+=' holiday';
     
-    h+=`<div class="cal-row ${stateClass}" onclick="openDayDetail('${ymd}')">
+    h+=`<div class="cal-row ${stateClass}">
       <div class="cal-row-date">
         <div class="cal-row-day">${dayNum}</div>
         <div class="cal-row-meta">${dayLabel} · 周${dayOfWeek}${isToday?' · 今天':''}</div>
+        ${holiday?`<div class="cal-holiday">🎏 ${holiday}</div>`:''}
       </div>
-      <div class="cal-row-content">`;
-    
-    if(dayAppts.length){
-      dayAppts.forEach(a=>{
-        const colors={body:'var(--sage)',look:'var(--coral)',exp:'var(--plum)',kids:'var(--sky)',food:'var(--orange)'};
-        h+=`<div class="cal-row-item ${a.done?'done':''}"><div class="cal-row-dot" style="background:${colors[a.cat]}"></div><span>${a.title}</span></div>`;
-      });
-    }else{
-      h+=`<div class="cal-row-empty">— 还没有安排 —</div>`;
-    }
-    
-    h+=`</div></div>`;
+      <div class="cal-col cal-col-me">
+        ${renderApptList(myAppts)}
+      </div>
+      <div class="cal-col cal-col-kids">
+        ${renderApptList(kidsAppts)}
+      </div>
+    </div>`;
   });
   h+=`</div>`;
 
@@ -945,11 +1262,84 @@ function openDayDetail(ymd){
   // Show items scheduled for this day, with option to add more
   const dayAppts=items.filter(it=>it.apptDate===ymd);
   if(!dayAppts.length){
-    // Could open an "add appointment" dialog here, for now do nothing
     return;
   }
-  // For now, just allow editing the first one's date by opening date picker
-  // (User can also tap each project card directly to add date)
+}
+
+// Helper: render appointment list for a calendar column
+function renderApptList(appts){
+  if(!appts.length)return `<div class="cal-row-empty">—</div>`;
+  const colors={body:'var(--sage)',look:'var(--coral)',exp:'var(--plum)',kids:'var(--sky)',food:'var(--orange)'};
+  return appts.map(a=>{
+    const timeStr=a.time?`<span class="cal-time">${a.time}</span>`:'';
+    const subtitleStr=a.subtitle?` · <span style="color:var(--text-light);font-size:12px">${a.subtitle}</span>`:'';
+    const repeatBadge=a.isRepeat?`<span class="cal-repeat" title="每周重复">↻</span>`:'';
+    const checkBtn=`<button class="cal-check ${a.done?'checked':''}" onclick="event.stopPropagation();toggleApptDone('${a.id}',${a.shopIdx},'${a.ymd}')">${a.done?'✓':''}</button>`;
+    return `<div class="cal-row-item ${a.done?'done':''}">${checkBtn}<div class="cal-row-item-text" onclick="jumpToProject('${a.id}')"><div class="cal-row-dot" style="background:${colors[a.cat]}"></div>${timeStr}<span class="cal-name">${a.title}${subtitleStr}${repeatBadge}</span></div></div>`;
+  }).join('');
+}
+
+// Toggle done for a specific date (uses checkedDates map)
+function toggleApptDone(id,shopIdx,ymd){
+  const it=items.find(i=>i.id===id);
+  if(!it)return;
+  let target;
+  if(shopIdx>=0&&it.shops[shopIdx]){
+    target=it.shops[shopIdx];
+  }else{
+    target=it;
+  }
+  if(!target.checkedDates)target.checkedDates={};
+  if(target.checkedDates[ymd]){
+    delete target.checkedDates[ymd];
+  }else{
+    target.checkedDates[ymd]=true;
+  }
+  // Also update counter for counter-type items based on number of checked dates
+  if(it.type==='counter'&&shopIdx<0){
+    it.count=Object.keys(it.checkedDates||{}).length;
+  }
+  save();renderCalendar();renderToday();render();
+}
+
+// Jump from calendar to a project card
+function jumpToProject(id){
+  // Switch to projects view
+  switchView('projects');
+  // Reset filters so the item is visible
+  catFilter='all';areaFilter='all';
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab==='all'));
+  document.getElementById('areaFilter').value='all';
+  if(searchQuery){searchQuery='';document.getElementById('searchInput').value='';document.getElementById('searchClear').classList.remove('show');}
+  render();
+  // Scroll to the project card and expand it
+  setTimeout(()=>{
+    const groups=document.querySelectorAll('.group');
+    for(const g of groups){
+      const head=g.querySelector('.group-head');
+      // Find by checking if the item's title is in the head
+      const it=items.find(i=>i.id===id);
+      if(!it)return;
+      if(g.querySelector('.g-title')&&g.querySelector('.g-title').textContent.includes(it.title)){
+        // Expand
+        const wrap=g.querySelector('.shops-wrap');
+        if(wrap&&!wrap.classList.contains('open')){
+          wrap.classList.add('open');
+          const exp=g.querySelector('.g-exp');
+          if(exp)exp.classList.add('open');
+        }
+        // Scroll into view
+        setTimeout(()=>{
+          g.scrollIntoView({behavior:'smooth',block:'center'});
+          // Highlight briefly
+          g.style.transition='box-shadow 0.3s';
+          g.style.boxShadow='0 0 0 2px var(--coral)';
+          setTimeout(()=>{g.style.boxShadow=''},1500);
+        },50);
+        break;
+      }
+    }
+  },80);
 }
 
 function sortProx(arr,area){
@@ -992,15 +1382,43 @@ function render(){
     if(it.eventDate)tags+=`<span class="tag tag-date">📅 ${it.eventDate}</span>`;
     if(!it.appt&&!it.eventDate)tags+=`<span class="tag tag-walk">FREE</span>`;
 
-    // Appointment date button
-    const apptDate=it.apptDate||'';
-    let apptLabel='+ DATE';
-    if(apptDate){
-      const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-      const d=new Date(apptDate);
-      apptLabel=`${months[d.getMonth()]} ${d.getDate()}`;
+    // Appointment dates
+    // For food items: only project-level apptDate
+    // For others: collect all shop apptDates
+    const isFood=it.cat==='food';
+    let allDates=[];
+    let hasRepeat=false;
+    if(isFood){
+      if(it.apptDate)allDates=[it.apptDate];
+      if(it.apptWeekdays&&it.apptWeekdays.length)hasRepeat=true;
+    }else{
+      // Collect from shops
+      it.shops.forEach((s,sIdx)=>{
+        if(s.apptDate)allDates.push(s.apptDate);
+        if(s.apptWeekdays&&s.apptWeekdays.length)hasRepeat=true;
+      });
+      // Also include legacy project-level apptDate
+      if(it.apptDate&&!allDates.includes(it.apptDate))allDates.push(it.apptDate);
+      if(it.apptWeekdays&&it.apptWeekdays.length)hasRepeat=true;
     }
-    const dateBtn=`<button class="g-date-btn ${apptDate?'has-date':''}" onclick="event.stopPropagation();openDatePicker('${it.id}')">${apptLabel}</button>`;
+    allDates.sort();
+    
+    let apptLabel='+ DATE';
+    if(hasRepeat&&allDates.length===0){
+      apptLabel='↻ 每周';
+    }else if(hasRepeat&&allDates.length>=1){
+      const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      const d=new Date(allDates[0]+'T00:00:00');
+      apptLabel=`↻ ${months[d.getMonth()]} ${d.getDate()}`;
+    }else if(allDates.length===1){
+      const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      const d=new Date(allDates[0]+'T00:00:00');
+      apptLabel=`${months[d.getMonth()]} ${d.getDate()}`;
+    }else if(allDates.length>1){
+      apptLabel=`📅 ${allDates.length}个`;
+    }
+    const hasAny=allDates.length>0||hasRepeat;
+    const dateBtn=`<button class="g-date-btn ${hasAny?'has-date':''}" onclick="event.stopPropagation();${isFood?`openDatePicker('${it.id}')`:`openDatePickerProj('${it.id}')`}">${apptLabel}</button>`;
 
     let right=dateBtn;
     // Food items: direct check on item level
@@ -1053,7 +1471,24 @@ function render(){
         }
       }
       const notesSection=`<div style="margin-top:${hg?'8':'0'}px"><div style="font-size:12px;color:var(--text-dim);margin-bottom:4px">${hg?'✏️ 我的笔记：':''}  </div><textarea placeholder="写你自己的笔记…" onblur="saveNotes('${it.id}',${idx},this)">${mn}</textarea></div>`;
-      return`<div class="sub-card ${sd?'done-c':''} ${isClose?'nearby-highlight':''}" ${hidden}><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">${s.name}</span><span class="s-area">${s.area}</span>${distLabel}<button class="s-link-edit" onclick="event.stopPropagation();openEdit('${it.id}',${idx})">✏️</button></div>${sn}${links}</div>${ck}</div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>${hg?'📝攻略/笔记':'📝写笔记'}</button><div class="s-guide">${guideSection}${notesSection}</div></div>`;
+      // Shop date button
+      const sApptDate=s.apptDate||'';
+      const sHasRepeat=s.apptWeekdays&&s.apptWeekdays.length>0;
+      let sApptLabel='+📅';
+      if(sHasRepeat&&!sApptDate){
+        sApptLabel='↻ 每周';
+      }else if(sHasRepeat&&sApptDate){
+        const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+        const d=new Date(sApptDate+'T00:00:00');
+        sApptLabel=`↻ ${months[d.getMonth()]} ${d.getDate()}`;
+      }else if(sApptDate){
+        const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+        const d=new Date(sApptDate+'T00:00:00');
+        sApptLabel=`${months[d.getMonth()]} ${d.getDate()}`;
+      }
+      const sHasAny=sApptDate||sHasRepeat;
+      const sDateBtn=`<button class="g-date-btn ${sHasAny?'has-date':''}" onclick="event.stopPropagation();openShopDate('${it.id}',${idx})" style="font-size:9px;padding:3px 7px">${sApptLabel}</button>`;
+      return`<div class="sub-card ${sd?'done-c':''} ${isClose?'nearby-highlight':''}" ${hidden}><div class="sub-top"><div class="sub-info"><div class="s-name-row"><span class="s-name">${s.name}</span><span class="s-area">${s.area}</span>${distLabel}${sDateBtn}<button class="s-link-edit" onclick="event.stopPropagation();openEdit('${it.id}',${idx})">✏️</button></div>${sn}${links}</div>${ck}</div><button class="s-expand-btn" onclick="event.stopPropagation();togGuide(this)"><span class="arr">▸</span>${hg?'📝攻略/笔记':'📝写笔记'}</button><div class="s-guide">${guideSection}${notesSection}</div></div>`;
     }).join('');
 
     const showAllBtn=showOnlyClosest?`<button class="add-shop-btn" style="border-style:solid;font-size:11px;padding:8px" onclick="event.stopPropagation();showAllShops(this)">查看全部 ${sortedShops.length} 家 ▾</button>`:'';
@@ -1339,6 +1774,13 @@ document.getElementById('kidsAct').addEventListener('change',e=>{
   document.getElementById('geoBtn').classList.remove('active');
   render();
 });
+
+// Time input - auto-format as user types and validate on blur
+const dpTimeEl=document.getElementById('dpTime');
+if(dpTimeEl){
+  dpTimeEl.addEventListener('input',e=>formatTimeInput(e.target));
+  dpTimeEl.addEventListener('blur',e=>validateTimeInput(e.target));
+}
 
 // === GEOLOCATION ===
 let myGPS=null;
