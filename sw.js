@@ -1,14 +1,13 @@
-const CACHE_NAME = 'recharge-v29';
+const CACHE_NAME = 'recharge-v37';
 const ASSETS = [
   './',
   './index.html',
-  './bg.png',
   './manifest.json',
   './apple-touch-icon.png',
   'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap'
 ];
 
-// Install: cache all assets
+// Install: cache all assets and immediately take over
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
@@ -16,18 +15,30 @@ self.addEventListener('install', e => {
   self.skipWaiting();
 });
 
-// Activate: clean old caches
+// Activate: aggressively clean ALL old caches and claim clients
 self.addEventListener('activate', e => {
   e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
+    Promise.all([
+      caches.keys().then(keys =>
+        Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+      ),
+      self.clients.claim()
+    ]).then(() => {
+      // Force all clients to reload to get fresh content
+      return self.clients.matchAll({ type: 'window' }).then(clients => {
+        clients.forEach(client => {
+          if (client.url && 'navigate' in client) {
+            client.navigate(client.url).catch(() => {});
+          }
+        });
+      });
+    })
   );
-  self.clients.claim();
 });
 
-// Fetch: network first, fallback to cache
+// Fetch: network first, fallback to cache (skip for non-GET)
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
   e.respondWith(
     fetch(e.request)
       .then(res => {
