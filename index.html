@@ -732,6 +732,31 @@ function closestShopDist(item,targetArea){
 let items,planned,catFilter='all',areaFilter='all',kidsArea='';
 
 function cp(i){return{...i,shops:i.shops.map(s=>({...s}))}}
+// Migration: if current key is empty but older versions have data, migrate forward
+function migrateStorage(){
+  // Find any old recharge_v* / recharge_plan_v* keys with data and migrate to current
+  if(!localStorage.getItem(SK)){
+    // Find newest old data key
+    let bestData=null,bestVer=-1;
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      const m=k&&k.match(/^recharge_v(\d+)$/);
+      if(m){const v=+m[1];if(v>bestVer&&localStorage.getItem(k)){bestVer=v;bestData=localStorage.getItem(k)}}
+    }
+    if(bestData){localStorage.setItem(SK,bestData);console.log('Migrated data from older version to '+SK)}
+  }
+  if(!localStorage.getItem(PK)){
+    let bestData=null,bestVer=-1;
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      const m=k&&k.match(/^recharge_plan_v(\d+)$/);
+      if(m){const v=+m[1];if(v>bestVer&&localStorage.getItem(k)){bestVer=v;bestData=localStorage.getItem(k)}}
+    }
+    if(bestData){localStorage.setItem(PK,bestData);console.log('Migrated plan from older version to '+PK)}
+  }
+}
+migrateStorage();
+
 function loadData(){try{const s=localStorage.getItem(SK);if(s){const p=JSON.parse(s);
   // Merge defaults with saved
   const merged=ITEMS.map(def=>{const sv=p.find(x=>x.id===def.id);if(!sv)return cp(def);const ms=def.shops.map((d,i)=>{const ss=sv.shops&&sv.shops[i];return ss?{...d,...ss}:{...d}});if(sv.shops&&sv.shops.length>def.shops.length)for(let i=def.shops.length;i<sv.shops.length;i++)ms.push(sv.shops[i]);return{...def,...sv,shops:ms}});
